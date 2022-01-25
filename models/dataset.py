@@ -19,7 +19,7 @@ class DatasetMeta(BaseModel):
 
 class Dataset(BaseModel, DatasetNetCDFMixin):
     class Config:
-        title = 'Dataset Schema'
+        title = 'FAAM Dataset Schema'
 
     meta: DatasetMeta
     attributes: GlobalAttributes

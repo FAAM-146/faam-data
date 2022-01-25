@@ -25,3 +25,5 @@ class Group(BaseModel, GroupNetCDFMixin):
     dimensions: Optional[list[Dimension]]
     groups: Optional[list[Group]]
     variables: list[Variable]
+
+Group.update_forward_refs()
