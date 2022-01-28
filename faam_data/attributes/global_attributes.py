@@ -386,7 +386,7 @@ class GlobalAttributes(BaseModel):
         example='a.n.other@institute.ac.uk'
     )
 
-    project_princpial_investigator_url: Optional[str] = Field(
+    project_principal_investigator_url: Optional[str] = Field(
         description='ORCID URL(s) of project PIs. Comma separated if more than one',
         example='https://orcid.org/0000-0000-0000-0000'
     )
