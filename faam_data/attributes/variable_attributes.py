@@ -15,7 +15,7 @@ class VariableAttributes(BaseModel):
 
     FillValue: Union[int, float] = Field(
         description='The prefill/missing data value',
-        example=-9999
+        example=-9999, ppodd_default=-9999
     )
 
     coverage_content_type: str = Field(
@@ -45,8 +45,9 @@ class VariableAttributes(BaseModel):
     )
 
     actual_range: Optional[list[Numeric]] = Field(
-        description='A length 2 array, of the same datatype as the variable, giving the maximum and minimum valid values',# min_items=2, max_items=2,
-        example=[0, 1]
+        description='A length 2 array, of the same datatype as the variable, giving the maximum and minimum valid values',
+        example=[0, 1],
+        ppodd_default='<call range>'
     )
 
     add_offset: Optional[Numeric] = Field(
