@@ -7,7 +7,7 @@ setup(
     author='Dave Sproson',
     author_email='dave.sproson@faam.ac.uk',
     url='https://github.com/FAAM-146/faam-data',
-    packages=['faam_data'],
+    packages=['faam_data', 'faam_data.attributes'],
     install_requires=[
         'pydantic'
     ]
