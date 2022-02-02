@@ -15,12 +15,13 @@ class VariableAttributes(BaseModel):
 
     FillValue: Union[int, float] = Field(
         description='The prefill/missing data value',
+        alias='_FillValue',
         example=-9999, ppodd_default=-9999
     )
 
     coverage_content_type: str = Field(
         description=f'ISO 19115-1 code. One of {", ".join(COVERAGE_CONTENT_TYPES)}',
-        example=COVERAGE_CONTENT_TYPES[2]
+        example=COVERAGE_CONTENT_TYPES[2], ppodd_default='physicalMeasurement'
     )
 
     frequency: int = Field(
