@@ -12,6 +12,7 @@ class VariableAttributes(BaseModel):
     class Config:
         # Configuration options here
         title = 'Variable Attributes'
+        allow_population_by_field_name=True
 
     FillValue: Union[int, float] = Field(
         description='The prefill/missing data value',
@@ -88,7 +89,7 @@ class VariableAttributes(BaseModel):
 
     coordinates: Optional[str] = Field(
         description='Blank separated list of coordinate variables',
-        example=['latitude longitude altitude time']
+        example='latitude longitude altitude time'
     )
 
     flag_masks: Optional[Union[list[int], int]] = Field(
@@ -139,6 +140,27 @@ class VariableAttributes(BaseModel):
     instrument_software_version: Optional[str] = Field(
         description='Where all data in the group are from a single instrument. Version of software deployed on instrument',
         example='v1.2.3'
+    )
+
+    sensor_manufacturer: Optional[str] = Field(
+        description='Similar to instrument_manufacturer, but where the item is more accurately described as a sensor',
+        example='Sensor Manufacturing Ltd.'
+    )
+
+    sensor_model: Optional[str] = Field(
+        description='Similar to instrument_model, but where the item is more accurately described as a sensor',
+        example='Model 1.2.3'
+    )
+
+    sensor_serial_number: Optional[str] = Field(
+        description='Where variable is derived from a single sensor, similar to instrument_serial_number. Sensor serial number.',
+        example='SN123'
+    )
+
+    sensor_type: Optional[str] = Field(
+        description=('The type of sensor fitted, where different sensor types may be used to produce the same measurement. '
+                     'A canonical example of this is the type of temperature sensor in the Rosemount housings.'),
+        example='plate'
     )
 
     positive: Optional[str] = Field(
