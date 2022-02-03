@@ -53,7 +53,7 @@ default_global_attrs = {
 }
 
 default_variable_attrs = {
-    'FillValue': -9999,
+    '_FillValue': -9999.,
     'coverage_content_type': DerivedString,
     'frequency': DerivedInteger32,
     'long_name': DerivedString,
