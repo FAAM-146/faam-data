@@ -91,7 +91,7 @@ class VariableAttributes(BaseModel):
         example=['latitude longitude altitude time']
     )
 
-    flag_masks: Optional[list[Numeric]] = Field(
+    flag_masks: Optional[Union[list[int], int]] = Field(
         description='Allowed flag mask values. Required for bitmask style flags',
         example=[1, 2, 4]
     )
@@ -101,7 +101,7 @@ class VariableAttributes(BaseModel):
         example='data_good possible_minor_issue possible_major_issue'
     )
 
-    flag_values: Optional[list[Numeric]] = Field(
+    flag_values: Optional[Union[list[int], int]] = Field(
         description='Allowed flag values. Required for classic flags',
         example=[0, 1, 2]
     )

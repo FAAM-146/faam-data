@@ -1,6 +1,6 @@
 import datetime
 from uuid import UUID
-from typing import Optional
+from typing import Optional, Union
 
 from pydantic import Field, BaseModel
 from pydantic import root_validator
@@ -204,7 +204,7 @@ class GlobalAttributes(BaseModel):
         example='https://www.faam.ac.uk https://www.ceda.ac.uk'
     )
 
-    revision_date: datetime.datetime = Field(
+    revision_date: Union[datetime.datetime, datetime.date] = Field(
         description='The date this revision created. Analogous to date_created',
         example='1970-01-01T06:00:00Z'
     )
