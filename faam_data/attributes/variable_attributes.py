@@ -64,7 +64,7 @@ class VariableAttributes(BaseModel):
 
     calendar: Optional[str] = Field(
         description=f'Required for the time coordinate variable. Should be one of {", ".join(ALLOWED_CALENDARS)}',
-        exmaple=ALLOWED_CALENDARS[0]
+        example=ALLOWED_CALENDARS[0]
     )
 
     calibration_date: Optional[datetime.date] = Field(
