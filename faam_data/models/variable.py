@@ -13,6 +13,7 @@ from attributes import VariableAttributes
 class VariableMeta(BaseModel):
     datatype: str = Field(description='The type of the data')
     name: str
+    required: bool = True
 
 
 class Variable(BaseModel, VariableNetCDFMixin):
