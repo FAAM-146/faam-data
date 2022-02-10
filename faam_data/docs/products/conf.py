@@ -25,7 +25,7 @@ def setup(app):
 
 # -- Project information -----------------------------------------------------
 
-project = 'FAAM Data: Attribute Conventions'
+project = 'FAAM Data Products'
 copyright = f'{datetime.datetime.now().year}, FAAM'
 author = 'FAAM'
 release = f'{__version__}'
