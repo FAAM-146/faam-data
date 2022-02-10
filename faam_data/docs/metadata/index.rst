@@ -1,6 +1,6 @@
-===============
-DECADES-PPandas
-===============
+====================================
+FAAM Attribute Metadata Conventions
+====================================
 
 .. toctree::
     :glob:
