@@ -1,0 +1,3355 @@
+meta:
+  file_pattern: core_faam_[0-9]{8}_v005_r[0-9]+_[c-z][0-9]{3}_1hz.nc
+  canonical_name: FAAM Core (DECADES) data, full resolution
+  description: >-
+    This dataset contains core data, primarily from the DECADES data system on 
+    the FAAM aircraft. This covers meteorological, chemistry, aerosol, inertial,
+    and airframe measurements.
+  references:
+      - ['Met Handbook', 'https://www.faam.ac.uk/sphinx/met-handbook']
+      - ['Decades-PPandas Repository', 'https://github.com/FAAM-146/decades-ppandas']
+attributes:
+  comment: '<str: derived_from_file>'
+  constants_file: '<str: derived_from_file>'
+  creator_url: https://www.faam.ac.uk
+  processing_software_commit: '<str: derived_from_file>'
+  processing_software_doi: '<str: derived_from_file>'
+  processing_software_url: https://github.com/faam-146/decades-ppandas
+  processing_software_version: '<str: derived_from_file>'
+  project_acronym: '<str: derived_from_file>'
+  project_name: '<str: derived_from_file>'
+  project_principal_investigator: '<str: derived_from_file>'
+  project_principal_investigator_email: '<str: derived_from_file>'
+  project_principal_investigator_url: '<str: derived_from_file>'
+variables:
+  - meta:
+      name: Time
+      datatype: <int32>
+    dimensions:
+      - Time
+    attributes:
+      long_name: Time of measurement
+      standard_name: time
+      calendar: gregorian
+      coverage_content_type: coordinate
+      frequency: 1
+      units: '<str: derived_from_file>'
+  - meta:
+      name: P10_STAT
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: P10_STAT_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      long_name: Static pressure from S10 fuselage ports
+      sensor_manufacturer: Rosemount Aerospace Inc.
+      sensor_model: 1201F2
+      sensor_serial_number: '<str: derived_from_file>'
+      standard_name: air_pressure
+      units: hPa
+    dimensions:
+      - Time
+  - meta:
+      name: P10_STAT_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for P10_STAT
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: SOL_ZEN
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: SOL_ZEN_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      long_name: Solar zenith derived from aircraft position and time
+      standard_name: solar_zenith_angle
+      units: degree
+    dimensions:
+      - Time
+  - meta:
+      name: SOL_ZEN_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      coverage_content_type: qualityInformation
+      standard_name: status_flag
+      long_name: Data quality flag for SOL_ZEN
+      _FillValue: -128
+      flag_values: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: SOL_AZIM
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: SOL_AZIM_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      long_name: Solar azimuth derived from aircraft position and time
+      standard_name: solar_azimuth_angle
+      units: degree
+    dimensions:
+      - Time
+  - meta:
+      name: SOL_AZIM_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      coverage_content_type: qualityInformation
+      standard_name: status_flag
+      long_name: Data quality flag for SOL_AZIM
+      _FillValue: -128
+      flag_values: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: BTHEIM_U
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: BTHEIM_U_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: Heitronics
+      instrument_model: KT19.82
+      instrument_serial_number: '<str: derived_from_file>'
+      long_name: Uncorrected brightness temperature from the Heimann radiometer
+      units: K
+    dimensions:
+      - Time
+  - meta:
+      name: BTHEIM_U_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for BTHEIM_U
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: EXX_JCI
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: EXX_JCI_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      long_name: Raw data from the Fwd Core Console JCI static monitor, static signal
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: EXX_JCI_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      coverage_content_type: qualityInformation
+      standard_name: status_flag
+      long_name: Data quality flag for EXX_JCI
+      _FillValue: -128
+      flag_values: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: TAT_ND_R_CU
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: TAT_ND_R_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: auxiliaryInformation
+      frequency: 1
+      long_name: Combined uncertainty estimate for TAT_ND_R
+      units: K
+    dimensions:
+      - Time
+  - meta:
+      name: TAT_DI_R_CU
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: TAT_DI_R_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: auxiliaryInformation
+      frequency: 1
+      long_name: Combined uncertainty estimate for TAT_DI_R
+      units: K
+    dimensions:
+      - Time
+  - meta:
+      name: IAS_RVSM
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: IAS_RVSM_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      long_name: Indicated air speed from the aircraft RVSM (air data) system
+      units: m s-1
+    dimensions:
+      - Time
+  - meta:
+      name: IAS_RVSM_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for IAS_RVSM
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: TAS_RVSM
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: TAS_RVSM_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      long_name: True air speed from the aircraft RVSM (air data) system and deiced
+        temperature
+      standard_name: platform_speed_wrt_air
+      units: m s-1
+    dimensions:
+      - Time
+  - meta:
+      name: TAS_RVSM_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for TAS_RVSM
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: SW_DN_C
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: SW_DN_C_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: Kipp and Zonen
+      instrument_serial_number: '<str: derived_from_file>'
+      long_name: Corrected downward short wave irradiance, clear dome
+      standard_name: downwelling_shortwave_flux_in_air
+      units: W m-2
+    dimensions:
+      - Time
+  - meta:
+      name: SW_DN_C_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for SW_DN_C
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: SW_UP_C
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: SW_UP_C_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: Kipp and Zonen
+      instrument_serial_number: '<str: derived_from_file>'
+      long_name: Corrected upward short wave irradiance, clear dome
+      standard_name: upwelling_shortwave_flux_in_air
+      units: W m-2
+    dimensions:
+      - Time
+  - meta:
+      name: SW_UP_C_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for SW_UP_C
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: RED_DN_C
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: RED_DN_C_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: Kipp and Zonen
+      instrument_serial_number: '<str: derived_from_file>'
+      long_name: Corrected downward short wave irradiance, red dome
+      units: W m-2
+    dimensions:
+      - Time
+  - meta:
+      name: RED_DN_C_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for RED_DN_C
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: RED_UP_C
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: RED_UP_C_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: Kipp and Zonen
+      instrument_serial_number: '<str: derived_from_file>'
+      long_name: Corrected upward short wave irradiance, red dome
+      units: W m-2
+    dimensions:
+      - Time
+  - meta:
+      name: RED_UP_C_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for RED_UP_C
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: LAT_GIN
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: LAT_GIN_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: Applanix
+      instrument_model: POS AV 410
+      long_name: Latitude from POS AV 410 GPS-aided Inertial Navigation unit
+      standard_name: latitude
+      units: degree_north
+    dimensions:
+      - Time
+  - meta:
+      name: LAT_GIN_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for LAT_GIN
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: LON_GIN
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: LON_GIN_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: Applanix
+      instrument_model: POS AV 410
+      long_name: Longitude from POS AV 410 GPS-aided Inertial Navigation unit
+      standard_name: longitude
+      units: degree_east
+    dimensions:
+      - Time
+  - meta:
+      name: LON_GIN_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for LON_GIN
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: ALT_GIN
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: ALT_GIN_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: Applanix
+      instrument_model: POS AV 410
+      long_name: Altitude from POS AV 410 GPS-aided Inertial Navigation unit
+      standard_name: altitude
+      units: m
+    dimensions:
+      - Time
+  - meta:
+      name: ALT_GIN_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for ALT_GIN
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: VELN_GIN
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: VELN_GIN_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: Applanix
+      instrument_model: POS AV 410
+      long_name: Aircraft velocity north from POS AV 410 GPS-aided Inertial Navigation
+        unit
+      units: m s-1
+    dimensions:
+      - Time
+  - meta:
+      name: VELN_GIN_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for VELN_GIN
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: VELE_GIN
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: VELE_GIN_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: Applanix
+      instrument_model: POS AV 410
+      long_name: Aircraft velocity east from POS AV 410 GPS-aided Inertial Navigation
+        unit
+      units: m s-1
+    dimensions:
+      - Time
+  - meta:
+      name: VELE_GIN_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for VELE_GIN
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: VELD_GIN
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: VELD_GIN_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: Applanix
+      instrument_model: POS AV 410
+      long_name: Aircraft velocity down from POS AV 410 GPS-aided Inertial Navigation
+        unit
+      units: m s-1
+    dimensions:
+      - Time
+  - meta:
+      name: VELD_GIN_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for VELD_GIN
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: ROLL_GIN
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: ROLL_GIN_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: Applanix
+      instrument_model: POS AV 410
+      long_name: Roll angle from POS AV 410 GPS-aided Inertial Navigation unit
+      standard_name: platform_roll_angle
+      units: degree
+    dimensions:
+      - Time
+  - meta:
+      name: ROLL_GIN_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for ROLL_GIN
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: PTCH_GIN
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: PTCH_GIN_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: Applanix
+      instrument_model: POS AV 410
+      long_name: Pitch angle from POS AV 410 GPS-aided Inertial Navigation unit
+      standard_name: platform_pitch_angle
+      units: degree
+    dimensions:
+      - Time
+  - meta:
+      name: PTCH_GIN_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for PTCH_GIN
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: HDG_GIN
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: HDG_GIN_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: Applanix
+      instrument_model: POS AV 410
+      long_name: Heading from POS AV 410 GPS-aided Inertial Navigation unit
+      standard_name: platform_yaw_angle
+      units: degree
+    dimensions:
+      - Time
+  - meta:
+      name: HDG_GIN_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for HDG_GIN
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: WAND_GIN
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: WAND_GIN_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: Applanix
+      instrument_model: POS AV 410
+      long_name: Wander angle from POS AV 410 GPS-aided Inertial Navigation unit
+      units: degree s-1
+    dimensions:
+      - Time
+  - meta:
+      name: WAND_GIN_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for WAND_GIN
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: TRCK_GIN
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: TRCK_GIN_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: Applanix
+      instrument_model: POS AV 410
+      long_name: Aircraft track angle from POS AV 410 GPS-aided Inertial Navigation
+        unit
+      standard_name: platform_course
+      units: degree
+    dimensions:
+      - Time
+  - meta:
+      name: TRCK_GIN_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for TRCK_GIN
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: GSPD_GIN
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: GSPD_GIN_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: Applanix
+      instrument_model: POS AV 410
+      long_name: Groundspeed from POS AV 410 GPS-aided Inertial Navigation unit
+      standard_name: platform_speed_wrt_ground
+      units: m s-1
+    dimensions:
+      - Time
+  - meta:
+      name: GSPD_GIN_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for GSPD_GIN
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: ROLR_GIN
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: ROLR_GIN_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: Applanix
+      instrument_model: POS AV 410
+      long_name: Rate-of-change of roll angle from POS AV 410 GPS-aided Inertial Navigation
+        unit
+      standard_name: platform_roll_rate
+      units: degree s-1
+    dimensions:
+      - Time
+  - meta:
+      name: ROLR_GIN_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for ROLR_GIN
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: PITR_GIN
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: PITR_GIN_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: Applanix
+      instrument_model: POS AV 410
+      long_name: Rate-of-change of pitch angle from POS AV 410 GPS-aided Inertial
+        Navigation unit
+      standard_name: platform_pitch_rate
+      units: degree s-1
+    dimensions:
+      - Time
+  - meta:
+      name: PITR_GIN_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for PITR_GIN
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: HDGR_GIN
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: HDGR_GIN_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: Applanix
+      instrument_model: POS AV 410
+      long_name: Rate-of-change of heading from POS AV 410 GPS-aided Inertial Navigation
+        unit
+      standard_name: platform_yaw_rate
+      units: degree s-1
+    dimensions:
+      - Time
+  - meta:
+      name: HDGR_GIN_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for HDGR_GIN
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: ACLF_GIN
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: ACLF_GIN_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: Applanix
+      instrument_model: POS AV 410
+      long_name: Acceleration along the aircraft longitudinal axis from POS AV 410
+        GPS-aided Inertial Navigation unit (positive forward)
+      units: m s-2
+    dimensions:
+      - Time
+  - meta:
+      name: ACLF_GIN_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for ACLF_GIN
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: ACLS_GIN
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: ACLS_GIN_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: Applanix
+      instrument_model: POS AV 410
+      long_name: Acceleration along the aircraft transverse axis from POS AV 410 GPS-aided
+        Inertial Navigation unit (positive starboard)
+      units: m s-2
+    dimensions:
+      - Time
+  - meta:
+      name: ACLS_GIN_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for ACLS_GIN
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: ACLD_GIN
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: ACLD_GIN_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: Applanix
+      instrument_model: POS AV 410
+      long_name: Acceleration along the aircraft vertical axis from POS AV 410 GPS-aided
+        Inertial Navigation unit (positive down)
+      units: m s-2
+    dimensions:
+      - Time
+  - meta:
+      name: ACLD_GIN_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for ACLD_GIN
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: STATUS_GIN
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: STATUS_GIN_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: Applanix
+      instrument_model: POS AV 410
+      long_name: Solution status from POS AV 410 GPS-aided Inertial Navigation unit
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: STATUS_GIN_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for STATUS_GIN
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: TAT_ND_R
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: TAT_ND_R_FLAG
+      comment: Sensor housed in Rosemount Aerospace Inc. Type 102 non-deiced Total
+        Temperature Housing
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      long_name: True air temperature from the Rosemount non-deiced temperature sensor
+      sensor_serial_number: '<str: derived_from_file>'
+      sensor_type: '<str: derived_from_file>'
+      standard_name: air_temperature
+      units: K
+    dimensions:
+      - Time
+  - meta:
+      name: TAT_ND_R_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for TAT_ND_R
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: TAT_DI_R
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: TAT_DI_R_FLAG
+      comment: Sensor housed in Rosemount Aerospace Inc. Type 102 deiced Total Temperature
+        Housing
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      long_name: True air temperature from the Rosemount deiced temperature sensor
+      sensor_serial_number: '<str: derived_from_file>'
+      sensor_type: '<str: derived_from_file>'
+      standard_name: air_temperature
+      units: K
+    dimensions:
+      - Time
+  - meta:
+      name: TAT_DI_R_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for TAT_DI_R
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: CPC_CNTS
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: CPC_CNTS_FLAG
+      comment: Sampled through a modified Rosemount Aerospace Inc. Type 102 Total
+        Temperature Housing.
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: TSI Incorporated
+      instrument_model: Modified Water Filled 3786 Condensation Particle Counter
+      instrument_serial_number: '<str: derived_from_file>'
+      long_name: Condensation Particle Counts measured by the TSI 3786
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: CPC_CNTS_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for CPC_CNTS
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: WVSS2F_VMR_U
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: WVSS2F_VMR_U_FLAG
+      comment: WVSS-II measurements rely on manufacturer calibrations, and are not
+        tracable to national standards
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: SpectraSensors
+      long_name: Water Vapour Measurement from WVSS2F linearly interpolated to 1 Hz
+      units: ppmv
+    dimensions:
+      - Time
+  - meta:
+      name: WVSS2F_VMR_U_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for WVSS2F_VMR_U
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: WVSS2F_PRESS_U
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: WVSS2F_PRESS_U_FLAG
+      comment: WVSS-II measurements rely on manufacturer calibrations, and are not
+        tracable to national standards
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: SpectraSensors
+      long_name: Pressure inside WVSS2F sample cell linearly interpolated to 1 Hz
+      units: hPa
+    dimensions:
+      - Time
+  - meta:
+      name: WVSS2F_PRESS_U_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for WVSS2F_PRESS_U
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: WVSS2R_VMR_U
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: WVSS2R_VMR_U_FLAG
+      comment: WVSS-II measurements rely on manufacturer calibrations, and are not
+        tracable to national standards
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: SpectraSensors
+      long_name: Water Vapour Measurement from WVSS2R linearly interpolated to 1 Hz
+      units: ppmv
+    dimensions:
+      - Time
+  - meta:
+      name: WVSS2R_VMR_U_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for WVSS2R_VMR_U
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: WVSS2R_PRESS_U
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: WVSS2R_PRESS_U_FLAG
+      comment: WVSS-II measurements rely on manufacturer calibrations, and are not
+        tracable to national standards
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: SpectraSensors
+      long_name: Pressure inside WVSS2R sample cell linearly interpolated to 1 Hz
+      units: hPa
+    dimensions:
+      - Time
+  - meta:
+      name: WVSS2R_PRESS_U_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for WVSS2R_PRESS_U
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: CAB_PRES
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: CAB_PRES_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      long_name: Cabin Pressure
+      sensor_manufacturer: Rosemount Aerospace Inc.
+      sensor_model: 1201F2
+      sensor_serial_number: '<str: derived_from_file>'
+      units: hPa
+    dimensions:
+      - Time
+  - meta:
+      name: CAB_PRES_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      coverage_content_type: qualityInformation
+      standard_name: status_flag
+      long_name: Data quality flag for CAB_PRES
+      _FillValue: -128
+      flag_values: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: O3_TECO
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: O3_TECO_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: Thermo Fisher Scientific, Inc.
+      instrument_model: 49i IV absorption ozone photometer
+      long_name: Mole fraction of Ozone in air from the TECO 49 instrument
+      standard_name: mole_fraction_of_ozone_in_air
+      units: ppb
+    dimensions:
+      - Time
+  - meta:
+      name: O3_TECO_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for O3_TECO
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: U_NOTURB
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: U_NOTURB_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      long_name: Eastward wind component derived from aircraft instruments and GIN
+      standard_name: eastward_wind
+      units: m s-1
+    dimensions:
+      - Time
+  - meta:
+      name: U_NOTURB_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for U_NOTURB
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: V_NOTURB
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: V_NOTURB_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      long_name: Northward wind component derived from aircraft instruments and GIN
+      standard_name: northward_wind
+      units: m s-1
+    dimensions:
+      - Time
+  - meta:
+      name: V_NOTURB_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for V_NOTURB
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: HGT_RADR
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: HGT_RADR_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: Thales
+      instrument_model: AVH16 Radar Altimeter
+      long_name: Radar height from the aircraft radar altimeter
+      standard_name: height
+      units: m
+    dimensions:
+      - Time
+  - meta:
+      name: HGT_RADR_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for HGT_RADR
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: P9_STAT
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: P9_STAT_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      long_name: Static pressure from S9 fuselage ports
+      sensor_manufacturer: Rosemount Aerospace Inc.
+      sensor_model: 1201F2
+      sensor_serial_number: '<str: derived_from_file>'
+      standard_name: air_pressure
+      units: hPa
+    dimensions:
+      - Time
+  - meta:
+      name: P9_STAT_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for P9_STAT
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: IR_UP_C
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: IR_UP_C_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: Kipp and Zonen
+      instrument_model: CR4
+      instrument_serial_number: '<str: derived_from_file>'
+      long_name: Corrected upward longwave irradiance
+      units: W m-2
+    dimensions:
+      - Time
+  - meta:
+      name: IR_UP_C_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for IR_UP_C
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: IR_DN_C
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: IR_DN_C_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: Kipp and Zonen
+      instrument_model: CR4
+      instrument_serial_number: '<str: derived_from_file>'
+      long_name: Corrected downward longwave irradiance
+      units: W m-2
+    dimensions:
+      - Time
+  - meta:
+      name: IR_DN_C_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for IR_DN_C
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: SEA_TWC_021
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: SEA_TWC_021_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: Science Engineering Associates, Inc.
+      instrument_model: WCM-2000
+      instrument_serial_number: '<str: derived_from_file>'
+      long_name: Total water content from the SEA WCM-2000 probe, element 021
+      units: g m-3
+    dimensions:
+      - Time
+  - meta:
+      name: SEA_TWC_021_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for SEA_TWC_021
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: SEA_TWC_083
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: SEA_TWC_083_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: Science Engineering Associates, Inc.
+      instrument_model: WCM-2000
+      instrument_serial_number: '<str: derived_from_file>'
+      long_name: Total water content from the SEA WCM-2000 probe, element 083
+      units: g m-3
+    dimensions:
+      - Time
+  - meta:
+      name: SEA_TWC_083_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for SEA_TWC_083
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: SEA_LWC_021
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: SEA_LWC_021_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: Science Engineering Associates, Inc.
+      instrument_model: WCM-2000
+      instrument_serial_number: '<str: derived_from_file>'
+      long_name: Liquid water content from the SEA WCM-2000 probe, element 021
+      standard_name: mass_concentration_of_liquid_water_in_air
+      units: g m-3
+    dimensions:
+      - Time
+  - meta:
+      name: SEA_LWC_021_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for SEA_LWC_021
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: SEA_LWC_083
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: SEA_LWC_083_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: Science Engineering Associates, Inc.
+      instrument_model: WCM-2000
+      instrument_serial_number: '<str: derived_from_file>'
+      long_name: Liquid water content from the SEA WCM-2000 probe, element 083
+      standard_name: mass_concentration_of_liquid_water_in_air
+      units: g m-3
+    dimensions:
+      - Time
+  - meta:
+      name: SEA_LWC_083_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for SEA_LWC_083
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: TSC_BLUU
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: TSC_BLUU_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: TSI
+      instrument_model: '3563'
+      long_name: Uncorrected blue total scattering coefficient from TSI 3563 Nephelometer
+      units: m-1
+    dimensions:
+      - Time
+  - meta:
+      name: TSC_BLUU_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      coverage_content_type: qualityInformation
+      standard_name: status_flag
+      long_name: Data quality flag for TSC_BLUU
+      _FillValue: -128
+      flag_values: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: TSC_GRNU
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: TSC_GRNU_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: TSI
+      instrument_model: '3563'
+      long_name: Uncorrected red total scattering coefficient from TSI 3563 Nephelometer
+      units: m-1
+    dimensions:
+      - Time
+  - meta:
+      name: TSC_GRNU_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      coverage_content_type: qualityInformation
+      standard_name: status_flag
+      long_name: Data quality flag for TSC_GRNU
+      _FillValue: -128
+      flag_values: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: TSC_REDU
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: TSC_REDU_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: TSI
+      instrument_model: '3563'
+      long_name: Uncorrected red total scattering coefficient from TSI 3563 Nephelometer
+      units: m-1
+    dimensions:
+      - Time
+  - meta:
+      name: TSC_REDU_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      coverage_content_type: qualityInformation
+      standard_name: status_flag
+      long_name: Data quality flag for TSC_REDU
+      _FillValue: -128
+      flag_values: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: BSC_BLUU
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: BSC_BLUU_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: TSI
+      instrument_model: '3563'
+      long_name: Uncorrected blue back scattering coefficient from TSI 3563 Nephelometer
+      units: m-1
+    dimensions:
+      - Time
+  - meta:
+      name: BSC_BLUU_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      coverage_content_type: qualityInformation
+      standard_name: status_flag
+      long_name: Data quality flag for BSC_BLUU
+      _FillValue: -128
+      flag_values: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: BSC_GRNU
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: BSC_GRNU_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: TSI
+      instrument_model: '3563'
+      long_name: Uncorrected green back scattering coefficient from TSI 3563 Nephelometer
+      units: m-1
+    dimensions:
+      - Time
+  - meta:
+      name: BSC_GRNU_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      coverage_content_type: qualityInformation
+      standard_name: status_flag
+      long_name: Data quality flag for BSC_GRNU
+      _FillValue: -128
+      flag_values: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: BSC_REDU
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: BSC_REDU_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: TSI
+      instrument_model: '3563'
+      long_name: Uncorrected red back scattering coefficient from TSI 3563 Nephelometer
+      units: m-1
+    dimensions:
+      - Time
+  - meta:
+      name: BSC_REDU_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      coverage_content_type: qualityInformation
+      standard_name: status_flag
+      long_name: Data quality flag for BSC_REDU
+      _FillValue: -128
+      flag_values: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: NEPH_PR
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: NEPH_PR_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: TSI
+      instrument_model: '3563'
+      long_name: Internal sample pressure of the Nephelometer
+      units: hPa
+    dimensions:
+      - Time
+  - meta:
+      name: NEPH_PR_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      coverage_content_type: qualityInformation
+      standard_name: status_flag
+      long_name: Data quality flag for NEPH_PR
+      _FillValue: -128
+      flag_values: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: NEPH_T
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: NEPH_T_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: TSI
+      instrument_model: '3563'
+      long_name: Internal sample temperature of the Nephelometer
+      units: K
+    dimensions:
+      - Time
+  - meta:
+      name: NEPH_T_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      coverage_content_type: qualityInformation
+      standard_name: status_flag
+      long_name: Data quality flag for NEPH_T
+      _FillValue: -128
+      flag_values: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: NEPH_RH
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: NEPH_RH_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: TSI
+      instrument_model: '3563'
+      long_name: Relative humidity from TSI 3563 Nephelometer
+      units: '%'
+    dimensions:
+      - Time
+  - meta:
+      name: NEPH_RH_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      coverage_content_type: qualityInformation
+      standard_name: status_flag
+      long_name: Data quality flag for NEPH_RH
+      _FillValue: -128
+      flag_values: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: VMR_CR2
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: VMR_CR2_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: Buck Research Instruments
+      instrument_model: CR2 Chilled Mirror Hygrometer
+      instrument_serial_number: '<str: derived_from_file>'
+      long_name: Water vapour volume mixing ratio measured by the Buck CR2
+      units: ppmv
+    dimensions:
+      - Time
+  - meta:
+      name: VMR_CR2_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      coverage_content_type: qualityInformation
+      standard_name: status_flag
+      long_name: Data quality flag for VMR_CR2
+      _FillValue: -128
+      flag_values: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: VMR_C_U
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: VMR_C_U_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: auxiliaryInformation
+      frequency: 1
+      instrument_manufacturer: Buck Research Instruments
+      instrument_model: CR2 Chilled Mirror Hygrometer
+      instrument_serial_number: '<str: derived_from_file>'
+      long_name: Combined uncertainty estimate for water vapour volume mixing ratio
+        measured by the Buck CR2
+      units: ppmv
+    dimensions:
+      - Time
+  - meta:
+      name: VMR_C_U_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      coverage_content_type: qualityInformation
+      standard_name: status_flag
+      long_name: Data quality flag for VMR_C_U
+      _FillValue: -128
+      flag_values: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: TDEW_CR2
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: TDEW_CR2_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: Buck Research Instruments
+      instrument_model: CR2 Chilled Mirror Hygrometer
+      instrument_serial_number: '<str: derived_from_file>'
+      long_name: Mirror Temperature measured by the Buck CR2 Hygrometer
+      standard_name: dew_point_temperature
+      units: degK
+    dimensions:
+      - Time
+  - meta:
+      name: TDEW_CR2_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      coverage_content_type: qualityInformation
+      standard_name: status_flag
+      long_name: Data quality flag for TDEW_CR2
+      _FillValue: -128
+      flag_values: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: TDEW_C_U
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: TDEW_C_U_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: auxiliaryInformation
+      frequency: 1
+      instrument_manufacturer: Buck Research Instruments
+      instrument_model: CR2 Chilled Mirror Hygrometer
+      instrument_serial_number: '<str: derived_from_file>'
+      long_name: Combined uncertainty estimate for Buck CR2 Mirror Temperature
+      units: degK
+    dimensions:
+      - Time
+  - meta:
+      name: TDEW_C_U_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      coverage_content_type: qualityInformation
+      standard_name: status_flag
+      long_name: Data quality flag for TDEW_C_U
+      _FillValue: -128
+      flag_values: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: TDEWCR2C
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: TDEWCR2C_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: Buck Research Instruments
+      instrument_model: CR2 Chilled Mirror Hygrometer
+      instrument_serial_number: '<str: derived_from_file>'
+      long_name: Corrected dew point temperature measured by the Buck CR2 Hygrometer
+      standard_name: dew_point_temperature
+      units: degK
+    dimensions:
+      - Time
+  - meta:
+      name: TDEWCR2C_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      coverage_content_type: qualityInformation
+      standard_name: status_flag
+      long_name: Data quality flag for TDEWCR2C
+      _FillValue: -128
+      flag_values: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: NV_TWC_U
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: NV_TWC_U_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: Sky Phys Tech Inc.
+      instrument_model: 1T2L1R
+      instrument_serial_number: '<str: derived_from_file>'
+      long_name: Uncorrected total condensed water content from the Nevzorov probe
+      units: gram m-3
+    dimensions:
+      - Time
+  - meta:
+      name: NV_TWC_U_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for NV_TWC_U
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: NV_LWC1_U
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: NV_LWC1_U_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: Sky Phys Tech Inc.
+      instrument_model: 1T2L1R
+      instrument_serial_number: '<str: derived_from_file>'
+      long_name: Uncorrected liquid water content from the Nevzorov probe (1st collector)
+      units: gram m-3
+    dimensions:
+      - Time
+  - meta:
+      name: NV_LWC1_U_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for NV_LWC1_U
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: NV_LWC2_U
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: NV_LWC2_U_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: Sky Phys Tech Inc.
+      instrument_model: 1T2L1R
+      instrument_serial_number: '<str: derived_from_file>'
+      long_name: Uncorrected liquid water content from the Nevzorov probe (2nd collector)
+      units: gram m-3
+    dimensions:
+      - Time
+  - meta:
+      name: NV_LWC2_U_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for NV_LWC2_U
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: WOW_IND
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      long_name: Weight on wheels indicator
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: RH_ICE
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: RH_ICE_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      long_name: Relative humidity wrt ice water, derived from corrected WVSS-II VMR
+        and Rosemount temperatures
+      standard_name: relative_humidity
+      units: '%'
+    dimensions:
+      - Time
+  - meta:
+      name: RH_ICE_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for RH_ICE
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: RH_LIQ
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: RH_LIQ_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      long_name: Relative humidity wrt liquid water, derived from corrected WVSS-II
+        VMR and Rosemount temperatures
+      standard_name: relative_humidity
+      units: '%'
+    dimensions:
+      - Time
+  - meta:
+      name: RH_LIQ_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for RH_LIQ
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: RH_ICE_CU
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: RH_ICE_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: auxiliaryInformation
+      frequency: 1
+      long_name: Combined uncertainty estimate for RH_ICE
+      units: '%'
+    dimensions:
+      - Time
+  - meta:
+      name: RH_LIQ_CU
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: RH_LIQ_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: auxiliaryInformation
+      frequency: 1
+      long_name: Combined uncertainty estimate for RH_LIQ
+      units: '%'
+    dimensions:
+      - Time
+  - meta:
+      name: TAS
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: TAS_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      long_name: True airspeed (dry-air) from turbulence probe
+      standard_name: platform_speed_wrt_air
+      units: m s-1
+    dimensions:
+      - Time
+  - meta:
+      name: TAS_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for TAS
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: AOA
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: AOA_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      long_name: Angle of attack from the turbulence probe (positive, flow upwards
+        wrt a/c axes)
+      units: degree
+    dimensions:
+      - Time
+  - meta:
+      name: AOA_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for AOA
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: AOSS
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: AOSS_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      long_name: Angle of sideslip from the turbulence probe (positive, flow from
+        left)
+      units: degree
+    dimensions:
+      - Time
+  - meta:
+      name: AOSS_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for AOSS
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: PSP_TURB
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: PSP_TURB_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      long_name: Pitot-static pressure from centre-port measurements corrrected for
+        AoA and AoSS
+      units: hPa
+    dimensions:
+      - Time
+  - meta:
+      name: PSP_TURB_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for PSP_TURB
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: U_C
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: U_C_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      long_name: Eastward wind component from turbulence probe and GIN
+      standard_name: eastward_wind
+      units: m s-1
+    dimensions:
+      - Time
+  - meta:
+      name: U_C_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for U_C
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: V_C
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: V_C_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      long_name: Northward wind component from turbulence probe and GIN
+      standard_name: northward_wind
+      units: m s-1
+    dimensions:
+      - Time
+  - meta:
+      name: V_C_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for V_C
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: W_C
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: W_C_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      long_name: Vertical wind component from turbulence probe and GIN
+      standard_name: upward_air_velocity
+      units: m s-1
+    dimensions:
+      - Time
+  - meta:
+      name: W_C_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for W_C
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: WVSS2F_VMR_C
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: WVSS2F_VMR_C_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: SpectraSensors
+      instrument_serial_number: '<str: derived_from_file>'
+      long_name: Calibrated volume mixing ratio from WVSS2F
+      units: ppm
+    dimensions:
+      - Time
+  - meta:
+      name: WVSS2F_VMR_C_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for WVSS2F_VMR_C
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: WVSS2F_VMR_C_CU
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: WVSS2F_VMR_C_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: auxiliaryInformation
+      frequency: 1
+      instrument_manufacturer: SpectraSensors
+      instrument_serial_number: '<str: derived_from_file>'
+      long_name: Uncertainty estimate for calibrated volume mixing ratio from WVSS2F
+      units: ppm
+    dimensions:
+      - Time
+  - meta:
+      name: PSAP_FLO
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: PSAP_FLO_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: Radiance Research
+      long_name: PSAP Flow
+      units: l min-1
+    dimensions:
+      - Time
+  - meta:
+      name: PSAP_FLO_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for PSAP_FLO
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: PSAP_LIN
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: PSAP_LIN_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: Radiance Research
+      long_name: Uncorrected absorbtion coefficient at 565nm, linear, from PSAP
+      units: m-1
+    dimensions:
+      - Time
+  - meta:
+      name: PSAP_LIN_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for PSAP_LIN
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: PSAP_LOG
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: PSAP_LOG_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: Radiance Research
+      long_name: Uncorrected absorption coefficient at 565nm, log, from PSAP
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: PSAP_LOG_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for PSAP_LOG
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: PSAP_TRA
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: PSAP_TRA_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: Radiance Research
+      long_name: PSAP Transmittance
+      units: percent
+    dimensions:
+      - Time
+  - meta:
+      name: PSAP_TRA_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for PSAP_TRA
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: CAB_TEMP
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: CAB_TEMP_FLAG
+      comment: Should be considered a qualitative measure only, due to lack of calibration
+        and proximity to the core console
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      long_name: Cabin temperature at the core consoles
+      units: degC
+    dimensions:
+      - Time
+  - meta:
+      name: CAB_TEMP_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      coverage_content_type: qualityInformation
+      standard_name: status_flag
+      long_name: Data quality flag for CAB_TEMP
+      _FillValue: -128
+      flag_values: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: P0_S10
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: P0_S10_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      long_name: Calibrated differential pressure between centre (P0) port and S10
+        static
+      sensor_manufacturer: Rosemount Aerospace. Inc.
+      sensor_model: 1221F2
+      sensor_serial_number: '<str: derived_from_file>'
+      units: hPa
+    dimensions:
+      - Time
+  - meta:
+      name: P0_S10_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      coverage_content_type: qualityInformation
+      standard_name: status_flag
+      long_name: Data quality flag for P0_S10
+      _FillValue: -128
+      flag_values: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: PA_TURB
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: PA_TURB_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      long_name: Calibrated differential pressure between turbulence probe vertical
+        ports
+      sensor_manufacturer: Rosemount Aerospace. Inc.
+      sensor_model: 1221F2
+      sensor_serial_number: '<str: derived_from_file>'
+      units: hPa
+    dimensions:
+      - Time
+  - meta:
+      name: PA_TURB_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      coverage_content_type: qualityInformation
+      standard_name: status_flag
+      long_name: Data quality flag for PA_TURB
+      _FillValue: -128
+      flag_values: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: PB_TURB
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: PB_TURB_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      long_name: Calibrated differential pressure between turbulence probe horizontal
+        ports
+      sensor_manufacturer: Rosemount Aerospace. Inc.
+      sensor_model: 1221F2
+      sensor_serial_number: '<str: derived_from_file>'
+      units: hPa
+    dimensions:
+      - Time
+  - meta:
+      name: PB_TURB_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      coverage_content_type: qualityInformation
+      standard_name: status_flag
+      long_name: Data quality flag for PB_TURB
+      _FillValue: -128
+      flag_values: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: SO2_TECO
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: SO2_TECO_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: Thermo Fisher Scientific, Inc.
+      instrument_model: 43i TLE pulsed fluorescence SO2 spectrometer
+      long_name: Mole fraction of Sulphur Dioxide in air from TECO 43 instrument
+      standard_name: mole_fraction_of_sulfur_dioxide_in_air
+      units: ppb
+    dimensions:
+      - Time
+  - meta:
+      name: SO2_TECO_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for SO2_TECO
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: TDEW_GE
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: TDEW_GE_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: General Eastern Instruments
+      instrument_model: 1011B Chilled Mirror Hygrometer
+      instrument_serial_number: '<str: derived_from_file>'
+      long_name: Dew Point from the General Eastern instrument
+      standard_name: dew_point_temperature
+      units: degK
+    dimensions:
+      - Time
+  - meta:
+      name: TDEW_GE_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for TDEW_GE
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: PS_RVSM
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: PS_RVSM_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: BAE Systems
+      long_name: Static pressure from the aircraft RVSM (air data) system
+      standard_name: air_pressure
+      units: hPa
+    dimensions:
+      - Time
+  - meta:
+      name: PS_RVSM_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for PS_RVSM
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: PALT_RVS
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: PALT_RVS_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: BAE Systems
+      long_name: Pressure altitude from the aircraft RVSM (air data) system
+      standard_name: barometric_altitude
+      units: m
+    dimensions:
+      - Time
+  - meta:
+      name: PALT_RVS_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for PALT_RVS
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+  - meta:
+      name: Q_RVSM
+      datatype: <float32>
+      required: false
+    attributes:
+      _FillValue: -9999
+      actual_range:
+        - '<float32: derived_from_file>'
+        - '<float32: derived_from_file>'
+      ancillary_variables: Q_RVSM_FLAG
+      coordinates: '<str: derived_from_file>'
+      coverage_content_type: physicalMeasurement
+      frequency: 1
+      instrument_manufacturer: BAE Systems
+      long_name: Pitot static pressure inverted from RVSM (air data) system indicated
+        airspeed
+      units: hPa
+    dimensions:
+      - Time
+  - meta:
+      name: Q_RVSM_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for Q_RVSM
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+    dimensions:
+      - Time
+dimensions:
+  - name: Time
+    size:
