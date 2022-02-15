@@ -1,0 +1,1195 @@
+{
+  "title": "FAAM Dataset Schema",
+  "type": "object",
+  "properties": {
+    "meta": {
+      "$ref": "#/definitions/DatasetMeta"
+    },
+    "attributes": {
+      "$ref": "#/definitions/GlobalAttributes"
+    },
+    "dimensions": {
+      "title": "Dimensions",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Dimension"
+      }
+    },
+    "groups": {
+      "title": "Groups",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Group"
+      }
+    },
+    "variables": {
+      "title": "Variables",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Variable"
+      }
+    }
+  },
+  "required": [
+    "meta",
+    "attributes",
+    "dimensions",
+    "variables"
+  ],
+  "definitions": {
+    "DatasetMeta": {
+      "title": "DatasetMeta",
+      "type": "object",
+      "properties": {
+        "file_pattern": {
+          "title": "File Pattern",
+          "description": "Canonical filename pattern for this dataset",
+          "type": "string"
+        },
+        "canonical_name": {
+          "title": "Canonical Name",
+          "default": "Canonical name of this dataset",
+          "type": "string"
+        },
+        "description": {
+          "title": "Description",
+          "description": "Description of the dataset",
+          "type": "string"
+        },
+        "references": {
+          "title": "References",
+          "description": "References for this dataset",
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "string"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "file_pattern"
+      ]
+    },
+    "GlobalAttributes": {
+      "title": "FAAM Global Metadata Schema",
+      "type": "object",
+      "properties": {
+        "Conventions": {
+          "title": "Conventions",
+          "description": "The conventions followed by this data",
+          "example": "CF-1.9 ACDD-1.3",
+          "type": "string"
+        },
+        "acknowledgement": {
+          "title": "Acknowledgement",
+          "description": "The acknowledgement for use of this data. Should read: Airborne data was obtained using the BAe-146-301 Atmospheric Research Aircraft [ARA] flown by Airtask Ltd and managed by FAAM Airborne Laboratory, jointly operated by UKRI and the University of Leeds for FAAM data.",
+          "example": "Airborne data was obtained using the BAe-146-301 Atmospheric Research Aircraft [ARA] flown by Airtask Ltd and managed by FAAM Airborne Laboratory, jointly operated by UKRI and the University of Leeds",
+          "type": "string"
+        },
+        "creator_address": {
+          "title": "Creator Address",
+          "description": "The address of the FAAM offices. Should read: Building 146, Cranfield University, College Road, Cranfield, Bedford. MK43 0AL. UK. for FAAM data.",
+          "example": "Building 146, Cranfield University, College Road, Cranfield, Bedford. MK43 0AL. UK.",
+          "type": "string"
+        },
+        "creator_email": {
+          "title": "Creator Email",
+          "description": "The email address of the data creator, or a generic FAAM email.",
+          "example": "creator@faam.ac.uk",
+          "type": "string"
+        },
+        "creator_institution": {
+          "title": "Creator Institution",
+          "description": "The institute responsible for the creation of the data. Should read: FAAM Airborne Laboratory for FAAM data",
+          "example": "FAAM Airborne Laboratory",
+          "type": "string"
+        },
+        "creator_name": {
+          "title": "Creator Name",
+          "description": "The name of the person or institute responsible for this data",
+          "example": "A. N. Other",
+          "type": "string"
+        },
+        "creator_type": {
+          "title": "Creator Type",
+          "description": "The type of creator. Should be one of person, institution, position",
+          "example": "person",
+          "type": "string"
+        },
+        "date": {
+          "title": "Date",
+          "description": "Date of the flight",
+          "example": "1970-01-01",
+          "type": "string",
+          "format": "date"
+        },
+        "date_created": {
+          "title": "Date Created",
+          "description": "ISO:8601 date/time file created, ideally yyyy-mm-ddTHH:MM:SSZ. Equivalent to revision_date.",
+          "example": "1970-01-01T06:00:00Z",
+          "type": "string",
+          "format": "date-time"
+        },
+        "flight_date": {
+          "title": "Flight Date",
+          "description": "Date of the flight",
+          "example": "1970-01-01",
+          "type": "string",
+          "format": "date"
+        },
+        "flight_number": {
+          "title": "Flight Number",
+          "description": "The flight number",
+          "pattern": "[a-z][0-9]{3}",
+          "example": "a001",
+          "type": "string"
+        },
+        "geospatial_bounds": {
+          "title": "Geospatial Bounds",
+          "description": "A well-known text representation of the flight envelope",
+          "example": "",
+          "type": "string"
+        },
+        "geospatial_bounds_crs": {
+          "title": "Geospatial Bounds Crs",
+          "description": "Coordinate reference system for geospatial attributes.",
+          "pattern": "EPSG:[0-9]+",
+          "example": "EPSG:4979",
+          "type": "string"
+        },
+        "geospatial_lat_max": {
+          "title": "Geospatial Lat Max",
+          "description": "Maximum latitude of the flight.",
+          "minimum": -90,
+          "maximum": 90,
+          "example": 60.0,
+          "type": "number"
+        },
+        "geospatial_lat_min": {
+          "title": "Geospatial Lat Min",
+          "description": "Minimum latitude of the flight.",
+          "minimum": -90,
+          "maximum": 90,
+          "example": 50.0,
+          "type": "number"
+        },
+        "geospatial_lat_units": {
+          "title": "Geospatial Lat Units",
+          "description": "The units for geospatial_lat_* attributes",
+          "example": "degree_north",
+          "type": "string"
+        },
+        "geospatial_lon_max": {
+          "title": "Geospatial Lon Max",
+          "description": "Maximum longitude of the flight",
+          "exclusiveMinimum": -360,
+          "exclusiveMaximum": 360,
+          "example": 10.0,
+          "type": "number"
+        },
+        "geospatial_lon_min": {
+          "title": "Geospatial Lon Min",
+          "description": "Minimum longitude of the flight",
+          "exclusiveMinimum": -360,
+          "maximum": 360,
+          "example": -10.0,
+          "type": "number"
+        },
+        "geospatial_lon_units": {
+          "title": "Geospatial Lon Units",
+          "description": "The units for geospatial_lon_* attributes",
+          "example": "degree_east",
+          "type": "string"
+        },
+        "geospatial_vertical_max": {
+          "title": "Geospatial Vertical Max",
+          "description": "The maximum altitude of the flight",
+          "example": 10000.0,
+          "type": "number"
+        },
+        "geospatial_vertical_min": {
+          "title": "Geospatial Vertical Min",
+          "description": "The minimum altitude of the flight",
+          "example": 100.0,
+          "type": "number"
+        },
+        "geospatial_vertical_units": {
+          "title": "Geospatial Vertical Units",
+          "description": "Vertical units associated with geospatial_vertical_* attributes",
+          "example": "m",
+          "type": "string"
+        },
+        "geospatial_vertical_positive": {
+          "title": "Geospatial Vertical Positive",
+          "description": "Positive direction of geospatial_vertical_* attributes",
+          "example": "up",
+          "type": "string"
+        },
+        "id": {
+          "title": "Id",
+          "description": "filename without extension, needs to be globally unique w/ naming_authority",
+          "example": "core[-type]_faam_<yyyymmdd>[_vNNN]_rN[_Nhz]",
+          "type": "string"
+        },
+        "institution": {
+          "title": "Institution",
+          "description": "The institute responsible for the creation of this data. Should read: FAAM Airborne Laboratory for FAAM data.",
+          "example": "FAAM Airborne Laboratory",
+          "type": "string"
+        },
+        "keywords": {
+          "title": "Keywords",
+          "description": "A comma separated list of keywords from the GCMD",
+          "example": "keyword1, keyword2",
+          "type": "string"
+        },
+        "keywords_vocabulary": {
+          "title": "Keywords Vocabulary",
+          "description": "Controlled vocabulary for keywords. Should read Global Change Master Directory (GCMD)",
+          "example": "Global Change Master Directory (GCMD)",
+          "type": "string"
+        },
+        "license": {
+          "title": "License",
+          "description": "The license for this data. Should read: UK Government Open Licence agreement - http://www.nationalarchives.gov.uk/doc/open-government-licence",
+          "example": "UK Government Open Licence agreement - http://www.nationalarchives.gov.uk/doc/open-government-licence",
+          "type": "string"
+        },
+        "metadata_link": {
+          "title": "Metadata Link",
+          "description": "A link to a release of a controlled vocabulary of metadata attributes",
+          "example": "https://github.com/FAAM-146/faam-data/releases/tag/vX.Y",
+          "type": "string"
+        },
+        "naming_authority": {
+          "title": "Naming Authority",
+          "description": "The authority responsible for naming this data. Should read uk.ac.faam",
+          "example": "uk.ac.faam",
+          "type": "string"
+        },
+        "platform": {
+          "title": "Platform",
+          "description": "Platform name of the FAAM aircraft. Should read: FAAM BAe-146-301 Atmospheric Research Aircraft",
+          "example": "FAAM BAe-146-301 Atmospheric Research Aircraft",
+          "type": "string"
+        },
+        "platform_type": {
+          "title": "Platform Type",
+          "description": "Platform type: aircraft",
+          "example": "aircraft",
+          "type": "string"
+        },
+        "project": {
+          "title": "Project",
+          "description": "The project a flight was for. Expected to be of the form <project_acronym> - <project_name>",
+          "example": "PROJECT: A project with a long title",
+          "type": "string"
+        },
+        "publisher_email": {
+          "title": "Publisher Email",
+          "description": "The email address of the data publisher",
+          "example": "support@ceda.ac.uk",
+          "type": "string"
+        },
+        "publisher_institution": {
+          "title": "Publisher Institution",
+          "description": "The institution responsible for publishing data. Should read: CEDA",
+          "example": "CEDA",
+          "type": "string"
+        },
+        "publisher_type": {
+          "title": "Publisher Type",
+          "description": "Type of entity responsible for publishing data. Should be institution",
+          "example": "institution",
+          "type": "string"
+        },
+        "publisher_url": {
+          "title": "Publisher Url",
+          "description": "The URL of the data publisher. Should be https://www.ceda.ac.uk",
+          "example": "https://www.ceda.ac.uk",
+          "type": "string"
+        },
+        "references": {
+          "title": "References",
+          "description": "A list of references relevant to the file",
+          "example": "https://www.faam.ac.uk https://www.ceda.ac.uk",
+          "type": "string"
+        },
+        "revision_date": {
+          "title": "Revision Date",
+          "description": "The date this revision created. Analogous to date_created",
+          "example": "1970-01-01T06:00:00Z",
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "string",
+              "format": "date"
+            }
+          ]
+        },
+        "revision_number": {
+          "title": "Revision Number",
+          "description": "The revision number of the dataset. Starts at 0, increments by 1 for each revision",
+          "minimum": 0,
+          "example": 0,
+          "type": "integer"
+        },
+        "source": {
+          "title": "Source",
+          "description": "A description of the source of the data. An instrument where this makes sense, otherwise a description of how data obtained",
+          "example": "description of how data obtained",
+          "type": "string"
+        },
+        "standard_name_vocabulary": {
+          "title": "Standard Name Vocabulary",
+          "description": "A vocabulary of standard names. Expected to be a CF standard name table, e.g. CF Standard Name Table v78",
+          "pattern": "CF Standard Name Table v[0-9]+",
+          "example": "CF Standard Name Table v7",
+          "type": "string"
+        },
+        "summary": {
+          "title": "Summary",
+          "description": "A brief summary of the data",
+          "example": "Data obtained on FAAM aircraft during flight a001",
+          "type": "string"
+        },
+        "time_coverage_duration": {
+          "title": "Time Coverage Duration",
+          "description": "The duration of the data, in ISO8601 duration format",
+          "example": "PT1H",
+          "type": "number",
+          "format": "time-delta"
+        },
+        "time_coverage_start": {
+          "title": "Time Coverage Start",
+          "description": "The start time of the data in the file, in ISO8601 format",
+          "example": "1970-01-01T00:00:00Z",
+          "type": "string",
+          "format": "date-time"
+        },
+        "time_coverage_end": {
+          "title": "Time Coverage End",
+          "description": "The end time of the data in the file, in ISO8601 format",
+          "example": "1970-01-01T01:00:00Z",
+          "type": "string",
+          "format": "date-time"
+        },
+        "title": {
+          "title": "Title",
+          "description": "A brief title for the dataset",
+          "example": "Data from flight a001",
+          "type": "string"
+        },
+        "uuid": {
+          "title": "Uuid",
+          "description": "V3 UUID: MD5 hash of id+date_created",
+          "example": "9bceaff5-9991-85c6-bca5-d8c0393dc60d",
+          "type": "string",
+          "format": "uuid"
+        },
+        "calibration_date": {
+          "title": "Calibration Date",
+          "description": "Calibration date, where this applies to all file contents",
+          "example": "1970-01-01",
+          "type": "string",
+          "format": "date"
+        },
+        "calibration_information": {
+          "title": "Calibration Information",
+          "description": "Calibration information, where this applies all file contents",
+          "example": "Calibrated at lab X using method Y",
+          "type": "string"
+        },
+        "calibration_url": {
+          "title": "Calibration Url",
+          "description": "Permanent URI or DOI linking to calibration info, where this applies to all file contents",
+          "example": "dx.doi.org/00.0000/0000000",
+          "type": "string"
+        },
+        "comment": {
+          "title": "Comment",
+          "description": "Comment about data",
+          "example": "A comment about the data",
+          "type": "string"
+        },
+        "constants_file": {
+          "title": "Constants File",
+          "description": "Name of external file providing input to processing software",
+          "example": "flight-cst_faam_19700101_r0_a001.yaml",
+          "type": "string"
+        },
+        "creator_url": {
+          "title": "Creator Url",
+          "description": "Institutional URL or researcher ORCID URL",
+          "example": "https://orcid.org/0000-0000-0000-0000",
+          "type": "string"
+        },
+        "deployment_mode": {
+          "title": "Deployment Mode",
+          "description": "Mode of deployment. Should always be \"air\"",
+          "example": "air",
+          "type": "string"
+        },
+        "external_variables": {
+          "title": "External Variables",
+          "description": "Blank separated list of variables used from an external file",
+          "example": "PS_RVSM TAT_DI_R",
+          "type": "string"
+        },
+        "history": {
+          "title": "History",
+          "description": "Logs modifications to file since production",
+          "example": "1970-01-01T00:00:00Z some_prog -i myfile -o myfile",
+          "type": "string"
+        },
+        "instrument": {
+          "title": "Instrument",
+          "description": "Where all data id from a single instrument. Currently freeform, controlled instrument vocab to follow",
+          "example": "Some instrument",
+          "type": "string"
+        },
+        "instrument_description": {
+          "title": "Instrument Description",
+          "description": "Where all data are from a single instrument. Textual description.",
+          "example": "X type instrument, measuring Y using method Z",
+          "type": "string"
+        },
+        "instrument_location": {
+          "title": "Instrument Location",
+          "description": "Where all data are from a single instrument. Location of instrument on aircraft",
+          "example": "Instrument location",
+          "type": "string"
+        },
+        "instrument_manufacturer": {
+          "title": "Instrument Manufacturer",
+          "description": "Where all data are from a single instrument. Instrument manufacturer",
+          "example": "Instrument Manufacturing Ltd.",
+          "type": "string"
+        },
+        "instrument_model": {
+          "title": "Instrument Model",
+          "description": "Where all data are from a single instrument. Instrument model",
+          "example": "Model 1.2.3",
+          "type": "string"
+        },
+        "instrument_serial_number": {
+          "title": "Instrument Serial Number",
+          "description": "Where all data are from a single instrument. Instrument serial number",
+          "example": "SN123",
+          "type": "string"
+        },
+        "instrument_software": {
+          "title": "Instrument Software",
+          "description": "Where all data are from a single instrument. Name of software deployed on instrument",
+          "example": "Instrument software name",
+          "type": "string"
+        },
+        "instrument_software_version": {
+          "title": "Instrument Software Version",
+          "description": "Where all data are from a single instrument. Version of software deployed on instrument",
+          "example": "v1.2.3",
+          "type": "string"
+        },
+        "notes": {
+          "title": "Notes",
+          "description": "Notes on this data file. For more detailed info than comment",
+          "example": "Some longer form notes about this file",
+          "type": "string"
+        },
+        "processing_software_commit": {
+          "title": "Processing Software Commit",
+          "description": "Commit hash for processing software in vcs",
+          "example": "2a83fc2394b",
+          "type": "string"
+        },
+        "processing_software_doi": {
+          "title": "Processing Software Doi",
+          "description": "DOI of the processing doftware release, if available",
+          "example": "dx.doi.org/00.0000/0000000",
+          "type": "string"
+        },
+        "processing_software_url": {
+          "title": "Processing Software Url",
+          "description": "URL pointing to processing software source code, if available",
+          "example": "https://github.com/my-user/my_repo",
+          "type": "string"
+        },
+        "processing_software_version": {
+          "title": "Processing Software Version",
+          "description": "Version of processing software",
+          "example": "v1.2.3",
+          "type": "string"
+        },
+        "project_acronym": {
+          "title": "Project Acronym",
+          "description": "Project acronym",
+          "example": "PROJECT",
+          "type": "string"
+        },
+        "project_name": {
+          "title": "Project Name",
+          "description": "Full project name",
+          "example": "A long project name",
+          "type": "string"
+        },
+        "project_principal_investigator": {
+          "title": "Project Principal Investigator",
+          "description": "Name(s) of project PIs. Comma separated if more than one",
+          "example": "A. N. Other",
+          "type": "string"
+        },
+        "project_principal_investigator_email": {
+          "title": "Project Principal Investigator Email",
+          "description": "Email address(es) of project PIs. Comma separated if more than one",
+          "example": "a.n.other@institute.ac.uk",
+          "type": "string"
+        },
+        "project_principal_investigator_url": {
+          "title": "Project Principal Investigator Url",
+          "description": "ORCID URL(s) of project PIs. Comma separated if more than one",
+          "example": "https://orcid.org/0000-0000-0000-0000",
+          "type": "string"
+        },
+        "revision_comment": {
+          "title": "Revision Comment",
+          "description": "Brief description of changes between revisions",
+          "example": "Corrected processing of variable X by doing Y",
+          "type": "string"
+        },
+        "source_files": {
+          "title": "Source Files",
+          "description": "List of source files used in the processing of this data product",
+          "example": "file1.ext file2.ext",
+          "type": "string"
+        },
+        "time_coverage_resolution": {
+          "title": "Time Coverage Resolution",
+          "description": "Resolution of data, where this is uniform across the file",
+          "example": "1S",
+          "type": "string"
+        },
+        "processing_level": {
+          "title": "Processing Level",
+          "description": "Processing level of data, where it is uniform for all data in the file",
+          "example": 2,
+          "type": "string"
+        }
+      },
+      "required": [
+        "Conventions",
+        "acknowledgement",
+        "creator_address",
+        "creator_email",
+        "creator_institution",
+        "creator_name",
+        "creator_type",
+        "date",
+        "date_created",
+        "flight_date",
+        "flight_number",
+        "geospatial_bounds",
+        "geospatial_bounds_crs",
+        "geospatial_lat_max",
+        "geospatial_lat_min",
+        "geospatial_lat_units",
+        "geospatial_lon_max",
+        "geospatial_lon_min",
+        "geospatial_lon_units",
+        "geospatial_vertical_max",
+        "geospatial_vertical_min",
+        "geospatial_vertical_units",
+        "geospatial_vertical_positive",
+        "id",
+        "institution",
+        "keywords",
+        "keywords_vocabulary",
+        "license",
+        "metadata_link",
+        "naming_authority",
+        "platform",
+        "platform_type",
+        "project",
+        "publisher_email",
+        "publisher_institution",
+        "publisher_type",
+        "publisher_url",
+        "references",
+        "revision_date",
+        "revision_number",
+        "source",
+        "standard_name_vocabulary",
+        "summary",
+        "time_coverage_duration",
+        "time_coverage_start",
+        "time_coverage_end",
+        "title",
+        "uuid"
+      ]
+    },
+    "Dimension": {
+      "title": "Dimension",
+      "type": "object",
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "size": {
+          "title": "Size",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "GroupMeta": {
+      "title": "Group Metadata",
+      "type": "object",
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "GroupAttributes": {
+      "title": "FAAM Group Attributes",
+      "type": "object",
+      "properties": {
+        "calibration_date": {
+          "title": "Calibration Date",
+          "description": "Calibration date, where this applies to whole group",
+          "example": "1970-01-01",
+          "type": "string",
+          "format": "date"
+        },
+        "calibration_information": {
+          "title": "Calibration Information",
+          "description": "Calibration information, where this applies whole group",
+          "example": "Calibrated at lab X using method Y",
+          "type": "string"
+        },
+        "calibration_url": {
+          "title": "Calibration Url",
+          "description": "Permanent URI or DOI linking to calibration info, where this applies to whole group",
+          "example": "dx.doi.org/00.0000/0000000",
+          "type": "string"
+        },
+        "comment": {
+          "title": "Comment",
+          "description": "Comment about data",
+          "example": "A comment about the data",
+          "type": "string"
+        },
+        "instrument": {
+          "title": "Instrument",
+          "description": "Currently freeform, controlled instrument vocab to follow",
+          "example": "Some instrument",
+          "type": "string"
+        },
+        "instrument_description": {
+          "title": "Instrument Description",
+          "description": "Textual description.",
+          "example": "X type instrument, measuring Y using method Z",
+          "type": "string"
+        },
+        "instrument_location": {
+          "title": "Instrument Location",
+          "description": "Location of instrument on aircraft",
+          "example": "Instrument location",
+          "type": "string"
+        },
+        "instrument_manufacturer": {
+          "title": "Instrument Manufacturer",
+          "description": "Instrument manufacturer",
+          "example": "Instrument Manufacturing Ltd.",
+          "type": "string"
+        },
+        "instrument_model": {
+          "title": "Instrument Model",
+          "description": "Instrument model",
+          "example": "Model 1.2.3",
+          "type": "string"
+        },
+        "instrument_serial_number": {
+          "title": "Instrument Serial Number",
+          "description": "Instrument serial number",
+          "example": "SN123",
+          "type": "string"
+        },
+        "instrument_software": {
+          "title": "Instrument Software",
+          "description": "Name of softeare deployed on instrument",
+          "example": "Instrument software name",
+          "type": "string"
+        },
+        "instrument_software_version": {
+          "title": "Instrument Software Version",
+          "description": "Version of software deployed on instrument",
+          "example": "v1.2.3",
+          "type": "string"
+        },
+        "notes": {
+          "title": "Notes",
+          "description": "Notes on this group. For more detailed info than comment",
+          "example": "Some longer form notes about this file",
+          "type": "string"
+        },
+        "source_files": {
+          "title": "Source Files",
+          "description": "List of source files used in the processing of this group",
+          "example": "file1.ext file2.ext",
+          "type": "string"
+        },
+        "references": {
+          "title": "References",
+          "description": "A list of references relevant to the group",
+          "example": "https://www.faam.ac.uk https://www.ceda.ac.uk",
+          "type": "string"
+        },
+        "processing_level": {
+          "title": "Processing Level",
+          "description": "Processing level of data, where it is uniform for all data in the group",
+          "example": "2",
+          "type": "string"
+        },
+        "source": {
+          "title": "Source",
+          "description": "A description of the source of the data. An instrument where this makes sense, otherwise a description of how data obtained",
+          "example": "description of how data obtained",
+          "type": "string"
+        },
+        "summary": {
+          "title": "Summary",
+          "description": "A brief summary of the data",
+          "example": "Data obtained on FAAM aircraft during flight a001",
+          "type": "string"
+        }
+      }
+    },
+    "VariableMeta": {
+      "title": "VariableMeta",
+      "type": "object",
+      "properties": {
+        "datatype": {
+          "title": "Datatype",
+          "description": "The type of the data",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "required": {
+          "title": "Required",
+          "default": true,
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "datatype",
+        "name"
+      ]
+    },
+    "VariableAttributes": {
+      "title": "Variable Attributes",
+      "type": "object",
+      "properties": {
+        "_FillValue": {
+          "title": " Fillvalue",
+          "description": "The prefill/missing data value",
+          "example": -9999,
+          "ppodd_default": -9999,
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        },
+        "coverage_content_type": {
+          "title": "Coverage Content Type",
+          "description": "ISO 19115-1 code. One of image, thematicClassification, physicalMeasurement, auxiliaryInformation, qualityInformation, referenceInformation, modelResult, coordinate",
+          "example": "physicalMeasurement",
+          "ppodd_default": "physicalMeasurement",
+          "type": "string"
+        },
+        "frequency": {
+          "title": "Frequency",
+          "description": "The frequency of the data. Where this is >1, will typically correspond to an spsNN dimension",
+          "example": 1,
+          "type": "integer"
+        },
+        "long_name": {
+          "title": "Long Name",
+          "description": "A longer, descriptive name for the variable",
+          "example": "Temperature from deiced temperature probe",
+          "type": "string"
+        },
+        "units": {
+          "title": "Units",
+          "description": "Valid UDUNITS unit. Where a standard_name is given, must be equivalent to canonical units",
+          "example": "K",
+          "type": "string"
+        },
+        "axis": {
+          "title": "Axis",
+          "description": "Axis for coordinate variables. Should be one of X, Y, Z, T",
+          "example": "X",
+          "type": "string"
+        },
+        "actual_range": {
+          "title": "Actual Range",
+          "description": "A length 2 array, of the same datatype as the variable, giving the maximum and minimum valid values",
+          "example": [
+            0,
+            1
+          ],
+          "ppodd_default": "<call range>",
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "integer"
+              }
+            ]
+          }
+        },
+        "add_offset": {
+          "title": "Add Offset",
+          "description": "Offset for packing. Default is 0",
+          "example": 0,
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "integer"
+            }
+          ]
+        },
+        "ancillary_variables": {
+          "title": "Ancillary Variables",
+          "description": "Optional in no ancillary variables, otherwise required. Ancillary variables e.g. flags, uncertainties",
+          "example": "PS_RVSM TAT_DI_R",
+          "type": "string"
+        },
+        "calendar": {
+          "title": "Calendar",
+          "description": "Required for the time coordinate variable. Should be one of standard, gregorian",
+          "example": "standard",
+          "type": "string"
+        },
+        "calibration_date": {
+          "title": "Calibration Date",
+          "description": "Calibration date, where this applies to variable",
+          "example": "1970-01-01",
+          "type": "string",
+          "format": "date"
+        },
+        "calibration_information": {
+          "title": "Calibration Information",
+          "description": "Calibration information, where this applies variable",
+          "example": "Calibrated at lab X using method Y",
+          "type": "string"
+        },
+        "calibration_url": {
+          "title": "Calibration Url",
+          "description": "Permanent URI or DOI linking to calibration info, where this applies to variable",
+          "example": "dx.doi.org/00.0000/0000000",
+          "type": "string"
+        },
+        "comment": {
+          "title": "Comment",
+          "description": "Comment about data",
+          "example": "A comment about the data",
+          "type": "string"
+        },
+        "coordinates": {
+          "title": "Coordinates",
+          "description": "Blank separated list of coordinate variables",
+          "example": "latitude longitude altitude time",
+          "type": "string"
+        },
+        "flag_masks": {
+          "title": "Flag Masks",
+          "description": "Allowed flag mask values. Required for bitmask style flags",
+          "example": [
+            1,
+            2,
+            4
+          ],
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
+            },
+            {
+              "type": "integer"
+            }
+          ]
+        },
+        "flag_meanings": {
+          "title": "Flag Meanings",
+          "description": "Blank separated list of flag meanings. Required for flag variables",
+          "example": "data_good possible_minor_issue possible_major_issue",
+          "type": "string"
+        },
+        "flag_values": {
+          "title": "Flag Values",
+          "description": "Allowed flag values. Required for classic flags",
+          "example": [
+            0,
+            1,
+            2
+          ],
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
+            },
+            {
+              "type": "integer"
+            }
+          ]
+        },
+        "instrument_description": {
+          "title": "Instrument Description",
+          "description": "Textual description of instrument.",
+          "example": "X type instrument, measuring Y using method Z",
+          "type": "string"
+        },
+        "instrument_location": {
+          "title": "Instrument Location",
+          "description": "Where variable is derived from a single instrument. Location of instrument on aircraft",
+          "example": "Instrument location",
+          "type": "string"
+        },
+        "instrument_manufacturer": {
+          "title": "Instrument Manufacturer",
+          "description": "Where variable is derived from a single instrument. Instrument manufacturer",
+          "example": "Instrument Manufacturing Ltd.",
+          "type": "string"
+        },
+        "instrument_model": {
+          "title": "Instrument Model",
+          "description": "Where variable is derived from a single instrument. Instrument model number",
+          "example": "Model 1.2.3",
+          "type": "string"
+        },
+        "instrument_serial_number": {
+          "title": "Instrument Serial Number",
+          "description": "Where variable is derived from a single instrument. Instrument serial number",
+          "example": "SN123",
+          "type": "string"
+        },
+        "instrument_software": {
+          "title": "Instrument Software",
+          "description": "Where variable is derived from a single instrument. Name of software deploed on instrument",
+          "example": "Instrument software name",
+          "type": "string"
+        },
+        "instrument_software_version": {
+          "title": "Instrument Software Version",
+          "description": "Where all data in the group are from a single instrument. Version of software deployed on instrument",
+          "example": "v1.2.3",
+          "type": "string"
+        },
+        "sensor_manufacturer": {
+          "title": "Sensor Manufacturer",
+          "description": "Similar to instrument_manufacturer, but where the item is more accurately described as a sensor",
+          "example": "Sensor Manufacturing Ltd.",
+          "type": "string"
+        },
+        "sensor_model": {
+          "title": "Sensor Model",
+          "description": "Similar to instrument_model, but where the item is more accurately described as a sensor",
+          "example": "Model 1.2.3",
+          "type": "string"
+        },
+        "sensor_serial_number": {
+          "title": "Sensor Serial Number",
+          "description": "Where variable is derived from a single sensor, similar to instrument_serial_number. Sensor serial number.",
+          "example": "SN123",
+          "type": "string"
+        },
+        "sensor_type": {
+          "title": "Sensor Type",
+          "description": "The type of sensor fitted, where different sensor types may be used to produce the same measurement. A canonical example of this is the type of temperature sensor in the Rosemount housings.",
+          "example": "plate",
+          "type": "string"
+        },
+        "positive": {
+          "title": "Positive",
+          "description": "Applies to vertical coordinate. Should be \"up\" if included",
+          "example": "up",
+          "type": "string"
+        },
+        "scale_factor": {
+          "title": "Scale Factor",
+          "description": "Scale for packing. Default is 1",
+          "example": 1,
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "integer"
+            }
+          ]
+        },
+        "standard_name": {
+          "title": "Standard Name",
+          "description": "See CF standard names list. Should be used whenever possible",
+          "example": "air_temperature",
+          "type": "string"
+        },
+        "valid_max": {
+          "title": "Valid Max",
+          "description": "Recommended where feasible. Where both valid_min and valid_max make sense, valid_range is preferred.",
+          "example": 1,
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "integer"
+            }
+          ]
+        },
+        "valid_min": {
+          "title": "Valid Min",
+          "description": "Recommended where feasible. Where both valid_min and valid_max make sense, valid_range is preferred.",
+          "example": 0,
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "integer"
+            }
+          ]
+        },
+        "valid_range": {
+          "title": "Valid Range",
+          "description": "A length 2 array of the same datatype as the variable, giving minimum and maximum valid values",
+          "example": [
+            0,
+            1
+          ],
+          "minItems": 2,
+          "maxItems": 2,
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "integer"
+              }
+            ]
+          }
+        },
+        "processing_level": {
+          "title": "Processing Level",
+          "description": "Processing level of variable data",
+          "example": "2",
+          "type": "string"
+        }
+      },
+      "required": [
+        "_FillValue",
+        "coverage_content_type",
+        "frequency",
+        "long_name",
+        "units"
+      ]
+    },
+    "Variable": {
+      "title": "Variable",
+      "type": "object",
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/VariableMeta"
+        },
+        "dimensions": {
+          "title": "Dimensions",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "attributes": {
+          "$ref": "#/definitions/VariableAttributes"
+        }
+      },
+      "required": [
+        "meta",
+        "dimensions",
+        "attributes"
+      ]
+    },
+    "Group": {
+      "title": "Group Schema",
+      "type": "object",
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/GroupMeta"
+        },
+        "attributes": {
+          "$ref": "#/definitions/GroupAttributes"
+        },
+        "dimensions": {
+          "title": "Dimensions",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Dimension"
+          }
+        },
+        "groups": {
+          "title": "Groups",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Group"
+          }
+        },
+        "variables": {
+          "title": "Variables",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Variable"
+          }
+        }
+      },
+      "required": [
+        "meta",
+        "attributes",
+        "variables"
+      ]
+    }
+  }
+}
