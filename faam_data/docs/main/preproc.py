@@ -1,3 +1,6 @@
+import glob
+import json
+import shutil
 from typing import Mapping
 import os
 import sys
@@ -59,7 +62,7 @@ def attr_text(attr: str, properties: Mapping) -> str:
     return txt
 
 def make_global_attrs_rst() -> None:
-    with open(os.path.join(template_dir, 'globals.rst'), 'r') as global_template:
+    with open(os.path.join(dynamic_dir, 'metadata.rst'), 'r') as global_template:
         text = global_template.read()
 
     req_glob_text = ''
@@ -78,11 +81,11 @@ def make_global_attrs_rst() -> None:
     text = text.replace('TAG_REQUIRED_GLOBAL_ATTRIBUTES', req_glob_text)
     text = text.replace('TAG_OPTIONAL_GLOBAL_ATTRIBUTES', opt_glob_text)
 
-    with open(os.path.join(dynamic_dir, 'globals.rst'), 'w') as f:
+    with open(os.path.join(dynamic_dir, 'metadata.rst'), 'w') as f:
         f.write(text)
 
 def make_group_attrs_rst() -> None:
-    with open(os.path.join(template_dir, 'groups.rst'), 'r') as template:
+    with open(os.path.join(dynamic_dir, 'metadata.rst'), 'r') as template:
         text = template.read()
 
     req_text = ''
@@ -104,11 +107,11 @@ def make_group_attrs_rst() -> None:
     text = text.replace('TAG_REQUIRED_GROUP_ATTRIBUTES', req_text)
     text = text.replace('TAG_OPTIONAL_GROUP_ATTRIBUTES', opt_text)
 
-    with open(os.path.join(dynamic_dir, 'groups.rst'), 'w') as f:
+    with open(os.path.join(dynamic_dir, 'metadata.rst'), 'w') as f:
         f.write(text)
 
 def make_variable_attrs_rst() -> None:
-    with open(os.path.join(template_dir, 'variables.rst'), 'r') as template:
+    with open(os.path.join(dynamic_dir, 'metadata.rst'), 'r') as template:
         text = template.read()
 
     req_text = ''
@@ -130,12 +133,67 @@ def make_variable_attrs_rst() -> None:
     text = text.replace('TAG_REQUIRED_VARIABLE_ATTRIBUTES', req_text)
     text = text.replace('TAG_OPTIONAL_VARIABLE_ATTRIBUTES', opt_text)
 
-    with open(os.path.join(dynamic_dir, 'variables.rst'), 'w') as f:
+    with open(os.path.join(dynamic_dir, 'metadata.rst'), 'w') as f:
         f.write(text)
 
+def delete_dynamic_metadata() -> None:
+    try:
+        os.remove(os.path.join(dynamic_dir, 'metadata.rst'))
+    except Exception:
+        pass
 
-if __name__ == '__main__':
+def copy_metadata_template() -> None:
+    shutil.copy2(
+        os.path.join(template_dir, 'metadata.rst'),
+        os.path.join(dynamic_dir, 'metadata.rst'),
+    )
+
+
+def make_metadata_section() -> None:
+    delete_dynamic_metadata()
+    copy_metadata_template()
     make_global_attrs_rst()
     make_group_attrs_rst()
     make_variable_attrs_rst()
+
+def add_product(definition):
+    with open(definition, 'r') as f:
+        data = json.load(f)
+
+    with open(os.path.join(dynamic_dir, 'products.rst'), 'a') as f:
+        name = os.path.basename(definition.replace('.json', ''))
+        f.write(name + '\n')
+        f.write('-'*len(name) + '\n\n')
+        f.write(':Name: ' + data['meta']['canonical_name'] + '\n')
+        f.write(':Pattern: ``' + data['meta']['file_pattern'] + '``\n')
+        f.write(':Description: ' + data['meta']['description'] + '\n')
+        f.write(':References: ')
+        f.write(' | '.join([f'`{i[0]} <{i[1]}>`_' for i in data['meta']['references']]))
+        f.write('\n')
+        f.write(':Definition: ' + f'`{name}.json <https://github.com/FAAM-146/faam-data/tree/main/products/latest/{name}.json>`_ [on Github]')
+        f.write('\n\n')
+
+
+def make_products_section() -> None:
+    TITLE = 'FAAM Data Products'
+    definition_dir = '../../../products'
+    files = [
+        i for i in
+        glob.glob(os.path.join(definition_dir, 'latest', '*'))
+        if 'schema' not in i
+    ]
+
+    with open(os.path.join(dynamic_dir, 'products.rst'), 'w') as f:
+        f.write(f'{"="*len(TITLE)}\n')
+        f.write(f'{TITLE}\n')
+        f.write(f'{"="*len(TITLE)}\n\n')
+
+    for f in files:
+        add_product(f)
+
+
+
+if __name__ == '__main__':
+    make_metadata_section()
+    make_products_section()
 

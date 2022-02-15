@@ -12,7 +12,7 @@ PYTHON        = python
 PREPROCESSOR  = preproc.py
 
 PUBHOST       = faam-webserver
-PUBDIR        = /var/www/html/additional/sphinx/data/attributes
+PUBDIR        = /var/www/html/additional/sphinx/data/main
 
 RM            = /bin/rm
 

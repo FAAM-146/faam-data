@@ -1,10 +1,11 @@
 meta:
   file_pattern: core_faam_[0-9]{8}_v005_r[0-9]+_[c-z][0-9]{3}_1hz.nc
-  canonical_name: FAAM Core (DECADES) data, full resolution
+  canonical_name: FAAM Core (DECADES) data at 1 Hz
   description: >-
     This dataset contains core data, primarily from the DECADES data system on 
-    the FAAM aircraft. This covers meteorological, chemistry, aerosol, inertial,
-    and airframe measurements.
+    the FAAM aircraft, averaged where required to 1 Hz temporal resolution.
+    This covers meteorological, chemistry, aerosol, inertial,
+    and airframe measurements. 
   references:
       - ['Met Handbook', 'https://www.faam.ac.uk/sphinx/met-handbook']
       - ['Decades-PPandas Repository', 'https://github.com/FAAM-146/decades-ppandas']
