@@ -104,6 +104,14 @@ CF standard names should be used wherever possible. No particular release of the
 
 A comma-separated list of keywords should be provided for each data product in the ``keywords`` metadata attribute. These should be derived from the `Global Master Change Directory (GCMD) <https://earthdata.nasa.gov/earth-observation-data/find-data/idn/gcmd-keywords>`_ vocabulary, and this should be noted in the ``keywords_vocabulary`` metadata attribute.
 
+------------------------------
+Citable Documentation and Code
+------------------------------
+
+FAAM have started using `Zenodo <https://zenodo.org>`_ to provide `Digital Object Identifiers (DOIs) <https://doi.org>`_ to documentation, processing code, and calibration information. DOIs provide persistent identifiers to digital assets, and may be used to reference information in journals.
+
+FAAM assets can be found through the `FAAM Community Portal <https://zenodo.org/communities/faam-146>`_ on Zenodo.
+
 ------------------------
 Data access and archival
 ------------------------
