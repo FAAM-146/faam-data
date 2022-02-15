@@ -12,7 +12,7 @@ PYTHON        = python
 PREPROCESSOR  = preproc.py
 
 PUBHOST       = faam-webserver
-PUBDIR        = /var/www/html/additional/sphinx/data/product
+PUBDIR        = /var/www/html/additional/sphinx/data/product/$(basename $(notdir $(FAAM_PRODUCT)))
 
 RM            = /bin/rm
 
@@ -25,7 +25,7 @@ help:
 publish:
 	make html
 	ssh $(PUBHOST) mkdir -p $(PUBDIR)
-	scp -r  _build/html/* $(PUBHOST):$(PUBDIR)
+	rsync -a  _build/html/ $(PUBHOST):$(PUBDIR)
 
 # Catch-all target: route all unknown targets to Sphinx using the new
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).

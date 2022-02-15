@@ -170,6 +170,7 @@ def add_product(definition):
         f.write(':References: ')
         f.write(' | '.join([f'`{i[0]} <{i[1]}>`_' for i in data['meta']['references']]))
         f.write('\n')
+        f.write(':Details: ' + f'`{name} <https://www.faam.ac.uk/sphinx/data/product/{name}>`_\n')
         f.write(':Definition: ' + f'`{name}.json <https://github.com/FAAM-146/faam-data/tree/main/products/latest/{name}.json>`_ [on Github]')
         f.write('\n\n')
 

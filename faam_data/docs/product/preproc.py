@@ -30,6 +30,28 @@ def copy_introduction() -> None:
         os.path.join(dynamic_dir, 'introduction.rst'),
     )
 
+def populate_introduction(definition) -> None:
+    with open(definition, 'r') as f:
+        data = json.load(f)
+
+    name = os.path.basename(definition.replace('.json', ''))
+    description = data['meta']['description']
+    pattern = data['meta']['file_pattern']
+    references = data['meta']['references']
+
+    references = ' | '.join([f'`{i[0]} <{i[1]}>`_' for i in references])
+
+    with open(os.path.join(dynamic_dir, 'introduction.rst'), 'r') as f:
+        rst = f.read()
+
+    rst = rst.replace('TAG_PRODUCT_NAME', name)
+    rst = rst.replace('TAG_PRODUCT_DESCRIPTION', description)
+    rst = rst.replace('TAG_PRODUCT_FILE_PATTERN', pattern)
+    rst = rst.replace('TAG_PRODUCT_REFERENCES', references)
+
+    with open(os.path.join(dynamic_dir, 'introduction.rst'), 'w') as f:
+        f.write(rst)
+
 def copy_global_attrs() -> None:
     shutil.copy(
         os.path.join(template_dir, 'global_attributes.rst'),
@@ -95,8 +117,9 @@ def populate_variables(definition) -> None:
 
 
 if __name__ == '__main__':
-    definition = '/home/dave/vcs/faam-data/products/latest/core_faam_YYYYmmdd_v005_rN_xNNN.json'
+    definition = os.environ['FAAM_PRODUCT'] #/home/dave/vcs/faam-data/products/latest/core_faam_YYYYmmdd_v005_rN_xNNN.json'
     copy_introduction()
+    populate_introduction(definition)
     copy_global_attrs()
     populate_global_attrs(definition)
     copy_variables()

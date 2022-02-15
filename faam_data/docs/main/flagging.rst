@@ -2,10 +2,15 @@
 Quality Flagging
 ----------------
 
-Every variable has an associated flag variable named ``<variable_name>_<postfix>``, and referenced in the variable's ``ancillary_variables`` attribute, which provides some quality or situational information about the data in the variable.
-There are two different flagging strategies used in the core data file; the first is a value-based quality flag, referred to as a value-based or classic flag, and the second is a packed boolean representation.
-Flagging is largely automatic, other than the ``flagged_in_qc`` flag meaning, which indicates that in the opinion of the person performing the quality control, that data should be treated with caution.
-It is up to the user to decide whether or not to use data which has been flagged. If in doubt, users should contact FAAM for advice.
+Variables may have associated data quality variables, known as flags. These 
+variables should be named ``<variable_name>_<qcpostfix>`` where ``<qcpostfix>``
+is consistent within a data product. The data quality variable should also be referenced by name in the ``ancillary_variables`` attribute of the data variable.
+
+Flagging may be automatic, manual, or a combination of the two. Where the flagging
+is manual, further information about the reason for flagging may be added to the ``comment`` attribute of the data quality variable.
+
+Data which have been flagged should be treated with caution, and the data
+provider should be contacted if in doubt about whether data should be used.
 
 Value-based Flags
 -----------------

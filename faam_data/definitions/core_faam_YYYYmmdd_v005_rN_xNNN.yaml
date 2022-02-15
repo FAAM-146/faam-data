@@ -6,8 +6,8 @@ meta:
       the FAAM aircraft. This covers meteorological, chemistry, aerosol, inertial,
       and airframe measurements.
     references:
-        - ['Met Handbook', 'https://www.faam.ac.uk/sphinx/met-handbook']
         - ['Decades-PPandas Repository', 'https://github.com/FAAM-146/decades-ppandas']
+        - ['Met Handbook', 'https://www.faam.ac.uk/sphinx/met-handbook']
 attributes:
     comment: '<str: derived_from_file>'
     constants_file: '<str: derived_from_file>'
