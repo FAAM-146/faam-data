@@ -1181,6 +1181,9 @@ variables:
       long_name: True air temperature from the Rosemount non-deiced temperature sensor
       sensor_serial_number: '<str: derived_from_file>'
       sensor_type: '<str: derived_from_file>'
+      calibration_information: '<str: derived_from_file optional>'
+      calibration_date: '<str: derived_from_file optional>'
+      calibration_url: '<str: derived_from_file optional>'
       standard_name: air_temperature
       units: K
     dimensions:
@@ -1220,6 +1223,9 @@ variables:
       long_name: True air temperature from the Rosemount deiced temperature sensor
       sensor_serial_number: '<str: derived_from_file>'
       sensor_type: '<str: derived_from_file>'
+      calibration_information: '<str: derived_from_file optional>'
+      calibration_date: '<str: derived_from_file optional>'
+      calibration_url: '<str: derived_from_file optional>'
       standard_name: air_temperature
       units: K
     dimensions:
@@ -2191,6 +2197,9 @@ variables:
       instrument_manufacturer: Buck Research Instruments
       instrument_model: CR2 Chilled Mirror Hygrometer
       instrument_serial_number: '<str: derived_from_file>'
+      calibration_information: '<str: derived_from_file optional>'
+      calibration_date: '<str: derived_from_file optional>'
+      calibration_url: '<str: derived_from_file optional>'
       long_name: Water vapour volume mixing ratio measured by the Buck CR2
       units: ppmv
     dimensions:
@@ -2262,6 +2271,9 @@ variables:
       instrument_manufacturer: Buck Research Instruments
       instrument_model: CR2 Chilled Mirror Hygrometer
       instrument_serial_number: '<str: derived_from_file>'
+      calibration_information: '<str: derived_from_file optional>'
+      calibration_date: '<str: derived_from_file optional>'
+      calibration_url: '<str: derived_from_file optional>'
       long_name: Mirror Temperature measured by the Buck CR2 Hygrometer
       standard_name: dew_point_temperature
       units: degK
@@ -2333,6 +2345,9 @@ variables:
       instrument_manufacturer: Buck Research Instruments
       instrument_model: CR2 Chilled Mirror Hygrometer
       instrument_serial_number: '<str: derived_from_file>'
+      calibration_information: '<str: derived_from_file optional>'
+      calibration_date: '<str: derived_from_file optional>'
+      calibration_url: '<str: derived_from_file optional>'
       long_name: Corrected dew point temperature measured by the Buck CR2 Hygrometer
       standard_name: dew_point_temperature
       units: degK
@@ -3221,6 +3236,7 @@ variables:
       instrument_manufacturer: General Eastern Instruments
       instrument_model: 1011B Chilled Mirror Hygrometer
       instrument_serial_number: '<str: derived_from_file>'
+      calibration_information: This instrument cannot be calibrated
       long_name: Dew Point from the General Eastern instrument
       standard_name: dew_point_temperature
       units: degK

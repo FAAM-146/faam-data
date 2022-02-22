@@ -2,7 +2,7 @@
   "meta": {
     "file_pattern": "core_faam_[0-9]{8}_v005_r[0-9]+_[c-z][0-9]{3}_1hz.nc",
     "canonical_name": "FAAM Core (DECADES) data at 1 Hz",
-    "description": "This dataset contains core data, primarily from the DECADES data system on the FAAM aircraft, averaged where required to 1 Hz temporal resolution. This covers meteorological, chemistry, aerosol, inertial, and airframe measurements.",
+    "description": "This dataset contains core data, primarily from the DECADES data system on  the FAAM aircraft, averaged where required to 1 Hz temporal resolution. This covers meteorological, chemistry, aerosol, inertial, and airframe measurements. ",
     "references": [
       [
         "Decades-PPandas Repository",
@@ -1608,6 +1608,9 @@
         "coordinates": "<str: derived_from_file>",
         "sensor_serial_number": "<str: derived_from_file>",
         "sensor_type": "<str: derived_from_file>",
+        "calibration_information": "<str: derived_from_file optional>",
+        "calibration_date": "<str: derived_from_file optional>",
+        "calibration_url": "<str: derived_from_file optional>",
         "standard_name": "air_temperature"
       },
       "dimensions": [
@@ -1658,6 +1661,9 @@
         "coordinates": "<str: derived_from_file>",
         "sensor_serial_number": "<str: derived_from_file>",
         "sensor_type": "<str: derived_from_file>",
+        "calibration_information": "<str: derived_from_file optional>",
+        "calibration_date": "<str: derived_from_file optional>",
+        "calibration_url": "<str: derived_from_file optional>",
         "standard_name": "air_temperature"
       },
       "dimensions": [
@@ -2938,7 +2944,10 @@
         "coordinates": "<str: derived_from_file>",
         "instrument_manufacturer": "Buck Research Instruments",
         "instrument_model": "CR2 Chilled Mirror Hygrometer",
-        "instrument_serial_number": "<str: derived_from_file>"
+        "instrument_serial_number": "<str: derived_from_file>",
+        "calibration_information": "<str: derived_from_file optional>",
+        "calibration_date": "<str: derived_from_file optional>",
+        "calibration_url": "<str: derived_from_file optional>"
       },
       "dimensions": [
         "Time"
@@ -3031,6 +3040,9 @@
         "instrument_manufacturer": "Buck Research Instruments",
         "instrument_model": "CR2 Chilled Mirror Hygrometer",
         "instrument_serial_number": "<str: derived_from_file>",
+        "calibration_information": "<str: derived_from_file optional>",
+        "calibration_date": "<str: derived_from_file optional>",
+        "calibration_url": "<str: derived_from_file optional>",
         "standard_name": "dew_point_temperature"
       },
       "dimensions": [
@@ -3124,6 +3136,9 @@
         "instrument_manufacturer": "Buck Research Instruments",
         "instrument_model": "CR2 Chilled Mirror Hygrometer",
         "instrument_serial_number": "<str: derived_from_file>",
+        "calibration_information": "<str: derived_from_file optional>",
+        "calibration_date": "<str: derived_from_file optional>",
+        "calibration_url": "<str: derived_from_file optional>",
         "standard_name": "dew_point_temperature"
       },
       "dimensions": [
@@ -4298,6 +4313,7 @@
         "instrument_manufacturer": "General Eastern Instruments",
         "instrument_model": "1011B Chilled Mirror Hygrometer",
         "instrument_serial_number": "<str: derived_from_file>",
+        "calibration_information": "This instrument cannot be calibrated",
         "standard_name": "dew_point_temperature"
       },
       "dimensions": [

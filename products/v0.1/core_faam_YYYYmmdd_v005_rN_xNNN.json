@@ -1684,6 +1684,9 @@
         "coordinates": "<str: derived_from_file>",
         "sensor_serial_number": "<str: derived_from_file>",
         "sensor_type": "<str: derived_from_file>",
+        "calibration_information": "<str: derived_from_file optional>",
+        "calibration_date": "<str: derived_from_file optional>",
+        "calibration_url": "<str: derived_from_file optional>",
         "standard_name": "air_temperature"
       },
       "dimensions": [
@@ -1736,6 +1739,9 @@
         "coordinates": "<str: derived_from_file>",
         "sensor_serial_number": "<str: derived_from_file>",
         "sensor_type": "<str: derived_from_file>",
+        "calibration_information": "<str: derived_from_file optional>",
+        "calibration_date": "<str: derived_from_file optional>",
+        "calibration_url": "<str: derived_from_file optional>",
         "standard_name": "air_temperature"
       },
       "dimensions": [
@@ -3032,7 +3038,10 @@
         "coordinates": "<str: derived_from_file>",
         "instrument_manufacturer": "Buck Research Instruments",
         "instrument_model": "CR2 Chilled Mirror Hygrometer",
-        "instrument_serial_number": "<str: derived_from_file>"
+        "instrument_serial_number": "<str: derived_from_file>",
+        "calibration_information": "<str: derived_from_file optional>",
+        "calibration_date": "<str: derived_from_file optional>",
+        "calibration_url": "<str: derived_from_file optional>"
       },
       "dimensions": [
         "Time"
@@ -3125,6 +3134,9 @@
         "instrument_manufacturer": "Buck Research Instruments",
         "instrument_model": "CR2 Chilled Mirror Hygrometer",
         "instrument_serial_number": "<str: derived_from_file>",
+        "calibration_information": "<str: derived_from_file optional>",
+        "calibration_date": "<str: derived_from_file optional>",
+        "calibration_url": "<str: derived_from_file optional>",
         "standard_name": "dew_point_temperature"
       },
       "dimensions": [
@@ -3218,6 +3230,9 @@
         "instrument_manufacturer": "Buck Research Instruments",
         "instrument_model": "CR2 Chilled Mirror Hygrometer",
         "instrument_serial_number": "<str: derived_from_file>",
+        "calibration_information": "<str: derived_from_file optional>",
+        "calibration_date": "<str: derived_from_file optional>",
+        "calibration_url": "<str: derived_from_file optional>",
         "standard_name": "dew_point_temperature"
       },
       "dimensions": [
@@ -4418,6 +4433,7 @@
         "instrument_manufacturer": "General Eastern Instruments",
         "instrument_model": "1011B Chilled Mirror Hygrometer",
         "instrument_serial_number": "<str: derived_from_file>",
+        "calibration_information": "This instrument cannot be calibrated",
         "standard_name": "dew_point_temperature"
       },
       "dimensions": [
