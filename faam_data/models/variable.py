@@ -7,7 +7,7 @@ from typing import List
 
 from vocal.netcdf.mixins import VariableNetCDFMixin
 
-from attributes import VariableAttributes
+from ..attributes import VariableAttributes
 
 
 class VariableMeta(BaseModel):

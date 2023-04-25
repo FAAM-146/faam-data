@@ -6,7 +6,7 @@ from pydantic import BaseModel, Field
 
 from vocal.netcdf.mixins import DatasetNetCDFMixin
 
-from attributes import GlobalAttributes
+from ..attributes import GlobalAttributes
 
 from .dimension import Dimension
 from .group import Group
@@ -15,6 +15,9 @@ from .variable import Variable
 
 class DatasetMeta(BaseModel):
     file_pattern: str = Field(description='Canonical filename pattern for this dataset')
+    short_name: Optional[str] = Field(
+        description='A short name which can be used to uniquely identify this product'
+    )
     canonical_name: Optional[str] = Field('Canonical name of this dataset')
     description: Optional[str] = Field(description='Description of the dataset')
     references: Optional[list[tuple[str, str]]] = Field(description='References for this dataset')

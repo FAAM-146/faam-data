@@ -5,8 +5,7 @@ from typing import Optional
 from pydantic import BaseModel
 from vocal.netcdf.mixins import GroupNetCDFMixin
 
-from attributes import GroupAttributes
-
+from ..attributes import GroupAttributes
 from .dimension import Dimension
 from .variable import Variable
 

@@ -1,4 +1,4 @@
-from attributes.constants import *
+from .attributes.constants import *
 from vocal.schema_types import *
 
 default_global_attrs = {
