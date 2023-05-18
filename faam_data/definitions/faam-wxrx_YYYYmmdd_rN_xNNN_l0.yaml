@@ -1,0 +1,208 @@
+meta:
+  file_pattern: faam-wxrx_[0-9]{8}_r[0-9]+_[c-z][0-9]{3}_raw.nc
+  short_name: wxrx-raw
+  canonical_name: FAAM Weather Radar ARINC708 conversion
+  description: >-
+    This data is a netCDF representation of the raw weather data
+    from the ARINC 708 databus on the FAAM aircraft. Some minor
+    processing has taken place to decode scan angle, tilt, range
+    and gain.
+  references:
+    - ['FAAM WxRx Processing documentation', 'http://some.url/']
+attributes:
+  comment: '<str: derived_from_file>'
+  creator_url: 'https://www.faam.ac.uk'
+  processing_software_doi: '<str: derived_from_file>' 
+  processing_software_url: 'https://github.com/faam-146/faam-wxrx'
+  processing_software_version: '<str: derived_from_file>'
+  project_acronym: '<str: derived_from_file>'
+  project_name: '<str: derived_from_file>'
+  project_principal_investigator: '<str: derived_from_file>'
+  project_principal_investigator_email: '<str: derived_from_file>'
+  project_principal_investigator_url: '<str: derived_from_file>'
+dimensions:
+  - name: time
+    size:
+  - name: bins
+    size: 512
+variables:
+  - meta:
+      name: time
+      datatype: <int32>
+    dimensions:
+      - time
+    attributes:
+      _FillValue: -9999
+      long_name: Time of scan line estimated from data size
+      units: seconds since 1970-01-01 00:00:00
+      calendar: gregorian
+      coverage_content_type: coordinate
+      frequency: 0
+  - meta:
+      name: control_accept
+      datatype: <int8>
+    dimensions:
+      - time
+    attributes:
+      _FillValue: -128
+      long_name: Control Acceptance Indicator
+      valid_min: 0
+      valid_max: 3
+      coverage_content_type: auxiliaryInformation
+      frequency: 0
+      units: '1'
+  - meta:
+      name: slave
+      datatype: <int8>
+    dimensions:
+      - time
+    attributes:
+      _FillValue: -128
+      long_name: Slave Indicator
+      comment: 0=Master, 1=Slave
+      valid_min: 0
+      valid_max: 1
+      coverage_content_type: auxiliaryInformation
+      frequency: 0
+      units: '1'
+  - meta:
+      name: mode_annunciation
+      datatype: <int8>
+    dimensions:
+      - time
+    attributes:
+      _FillValue: -128
+      long_name: Mode Annunciation, packed
+      comment: Each bit represents a mode annunciation. See documentation for details.
+      valid_min: 0
+      valid_max: 31
+      coverage_content_type: auxiliaryInformation
+      frequency: 0
+      units: '1'
+  - meta:
+      name: faults
+      datatype: <int8>
+    dimensions:
+      - time
+    attributes:
+      _FillValue: -128
+      long_name: Fault Flags, packed
+      comment: Each bit represents a fault indication. See documentation for details.
+      valid_min: 0
+      valid_max: 127
+      coverage_content_type: auxiliaryInformation
+      frequency: 0
+      units: '1'
+  - meta:
+      name: stabilization
+      datatype:  <int8>
+    dimensions:
+      - time
+    attributes:
+      _FillValue: -128
+      long_name: Stabilization Indicator
+      comment: 0=Off, 1=On
+      valid_min: 0
+      valid_max: 1
+      coverage_content_type: auxiliaryInformation
+      frequency: 0
+      units: '1'
+  - meta:
+      name: operating_mode
+      datatype: <int8>
+    dimensions:
+      - time
+    attributes:
+      _FillValue: -128
+      long_name: Operating Mode
+      valid_min: 0
+      valid_max: 7
+      coverage_content_type: auxiliaryInformation
+      frequency: 0
+      units: '1'
+  - meta:
+      name: tilt
+      datatype: <float32>
+    dimensions:
+      - time
+    attributes:
+      _FillValue: -9999.
+      long_name: Radar tilt angle
+      valid_min: -16.
+      valid_max: 15.75
+      coverage_content_type: auxiliaryInformation
+      frequency: 0
+      units: 'degree'
+  - meta:
+      name: gain
+      datatype: <int8>
+    dimensions:
+      - time
+    attributes:
+      long_name: Gain
+      comment: A value of 0 indicates maximum gain. A value of 1 indicates calibration.
+      valid_min: -62
+      valid_max: 1
+      coverage_content_type: auxiliaryInformation
+      frequency: 0
+      units: 'dB'
+  - meta:
+      name: range
+      datatype: <int16>
+    dimensions:
+      - time
+    attributes:
+      _FillValue: -9999
+      long_name: Range from aircraft
+      comment: Represents the maximum range bin
+      valid_min: 5
+      valid_max: 320
+      coverage_content_type: auxiliaryInformation
+      frequency: 0
+      units: '1'
+  - meta:
+      name: data_accept
+      datatype: <int8>
+    dimensions:
+      - time
+    attributes:
+      _FillValue: -128
+      long_name: Data Accept Indicator
+      valid_min: 0
+      valid_max: 3
+      coverage_content_type: auxiliaryInformation
+      frequency: 0
+      units: '1'
+  - meta:
+      name: scan_angle
+      datatype: <float32>
+    dimensions:
+      - time
+    attributes:
+      _FillValue: -128
+      long_name: Radar Scan Angle
+      comment: The scan angle is the angle between the aircraft and the center of the radar beam.
+      valid_min: 0
+      valid_max: 359.912109375
+      coverage_content_type: auxiliaryInformation
+      frequency: 0
+      units: '1'
+  - meta:
+      name: reflectivity
+      datatype: <int8>
+    dimensions:
+      - time
+      - bins
+    attributes:
+      _FillValue: -128
+      long_name: Categorized reflectivity data
+      valid_min: 0
+      valid_max: 7
+      coverage_content_type: thematicClassification
+      frequency: 0
+      units: '1'
+
+
+
+
+      
