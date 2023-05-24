@@ -8,7 +8,7 @@ meta:
     processing has taken place to decode scan angle, tilt, range
     and gain.
   references:
-    - ['FAAM WxRx Processing documentation', 'http://some.url/']
+    - ['FAAM WxRx Processing documentation', 'https://faam.ac.uk/sphinx/rdr4b_wxrx/']
 attributes:
   comment: '<str: derived_from_file>'
   creator_url: 'https://www.faam.ac.uk'
