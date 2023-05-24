@@ -13,7 +13,7 @@ attributes:
   comment: '<str: derived_from_file>'
   creator_url: 'https://www.faam.ac.uk'
   processing_software_doi: '<str: derived_from_file>' 
-  processing_software_url: 'https://github.com/faam-146/faam-wxrx'
+  processing_software_url: 'https://github.com/FAAM-146/faam-wxrx'
   processing_software_version: '<str: derived_from_file>'
   project_acronym: '<str: derived_from_file>'
   project_name: '<str: derived_from_file>'
