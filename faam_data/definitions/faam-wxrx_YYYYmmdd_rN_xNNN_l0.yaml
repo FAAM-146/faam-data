@@ -139,6 +139,7 @@ variables:
     dimensions:
       - time
     attributes:
+      _FillValue: -128
       long_name: Gain
       comment: A value of 0 indicates maximum gain. A value of 1 indicates calibration.
       valid_min: -62
