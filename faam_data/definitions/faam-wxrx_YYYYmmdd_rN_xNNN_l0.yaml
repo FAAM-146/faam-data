@@ -1,5 +1,5 @@
 meta:
-  file_pattern: faam-wxrx_[0-9]{8}_r[0-9]+_[c-z][0-9]{3}_raw.nc
+  file_pattern: faam-wxrx_[0-9]{8}_r[0-9]+_[c-z][0-9]{3}_l0.nc
   short_name: wxrx-raw
   canonical_name: FAAM Weather Radar ARINC708 conversion
   description: >-

@@ -4,6 +4,7 @@ from vocal.schema_types import *
 default_global_attrs = {
     'Conventions': 'CF-1.9 ACDD-1.3',
     'acknowledgement': ACKNOWLEDGEMENT,
+    'comment': OptionalDerivedString,
     'creator_address': CREATOR_ADDRESS,
     'creator_email': DerivedString,
     'creator_institution': CREATOR_INSTITUTION,

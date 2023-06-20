@@ -1,6 +1,6 @@
 {
   "meta": {
-    "file_pattern": "faam-wxrx_[0-9]{8}_r[0-9]+_[c-z][0-9]{3}_raw.nc",
+    "file_pattern": "faam-wxrx_[0-9]{8}_r[0-9]+_[c-z][0-9]{3}_l0.nc",
     "short_name": "wxrx-raw",
     "canonical_name": "FAAM Weather Radar ARINC708 conversion",
     "description": "This data is a netCDF representation of the raw weather data from the ARINC 708 databus on the FAAM aircraft. Some minor processing has taken place to decode scan angle, tilt, range and gain.",
@@ -14,6 +14,7 @@
   "attributes": {
     "Conventions": "CF-1.9 ACDD-1.3",
     "acknowledgement": "Airborne data was obtained using the BAe-146-301 Atmospheric Research Aircraft [ARA] flown by Airtask Ltd and managed by FAAM Airborne Laboratory, jointly operated by UKRI and the University of Leeds",
+    "comment": "<str: derived_from_file>",
     "creator_address": "Building 146, Cranfield University, College Road, Cranfield, Bedford. MK43 0AL. UK.",
     "creator_email": "<str: derived_from_file>",
     "creator_institution": "FAAM Airborne Laboratory",
@@ -60,7 +61,6 @@
     "time_coverage_end": "<str: derived_from_file>",
     "title": "<str: derived_from_file>",
     "uuid": "<str: derived_from_file>",
-    "comment": "<str: derived_from_file>",
     "creator_url": "https://www.faam.ac.uk",
     "processing_software_doi": "<str: derived_from_file>",
     "processing_software_url": "https://github.com/FAAM-146/faam-wxrx",
