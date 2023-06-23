@@ -19,6 +19,7 @@ meta:
   - ['FAAM instrument documentation', 'https://www.faam.ac.uk/sphinx/instruments/']
   - ['SPIF standard', 'https://github.com/FAAM-146/spif']
 
+# ------------------------------------------------------------------------------
 attributes:
   title: '<str: derived_from_file>'
   summary: '<str: derived_from_file>'
@@ -64,18 +65,6 @@ attributes:
   project_principal_investigator_email: '<str: derived_from_file optional>'
   project_principal_investigator_url: '<str: derived_from_file optional>'
 
-  # instrument information <--- goes in instrument group, many of these are in standard
-  instrument_name:
-  instrument_longname:
-  instrument_description:
-  instrument_location:
-  instrument_manufacturer:
-  instrument_model:
-  instrument_serial_number:'<str: derived_from_file optional>'
-  instrument_software: '<str: derived_from_file optional>'
-  instrument_software_version: '<str: derived_from_file optional>'
-  instrument_fimware: '<str: derived_from_file optional>'
-
   # processor information
   processing_software_commit: '<str: derived_from_file optional>'
   processing_software_doi: '<str: derived_from_file optional>'
@@ -116,6 +105,114 @@ attributes:
     Airborne data was obtained using the BAe-146-301 Atmospheric Research
     Aircraft [ARA] flown by Airtask Ltd and managed by FAAM Airborne
     Laboratory, jointly operated by UKRI and the University of Leeds.
+
+variables: []
+dimensions: []
+
+# ------------------------------------------------------------------------------
+groups:
+  # instrument group
+  - meta:
+    name: CIP15
+    description: Instrument group of raw and processed data for this instrument.
+
+  attributes:
+    # instrument information
+    instrument_name: CIP15-1
+    instrument_long_name: Cloud Imaging Probe, 15 um resolution.
+    instrument_description: >-
+      Droplet Measurement Technologies Inc. Cloud Imaging Probe,
+      15 micron resolution with Grayscale and Korolev anti-shatter
+      tips (CIP-15 GS)
+    instrument_location: '<str: derived_from_file>'
+    instrument_orientation: '<str: derived_from_file>'
+    instrument_manufacturer: Droplet Measurement Technologies
+    instrument_model: CIP15
+    instrument_serial_number: '0302-002'
+    instrument_software: '<str: derived_from_file optional>'
+    instrument_software_version: '<str: derived_from_file optional>'
+    instrument_fimware: '<str: derived_from_file optional>'
+    references: >    ## Or maybe this should be FAAM instr page thing
+      https://www.dropletmeasurement.com/manual/
+      operator-manual-cloud-imaging-probe-cip/
+    raw_filenames: '<str: derived_from_file optional>'
+
+  # instrument group dimensions
+  dimensions:
+    - name: array_dimensions
+      size: 2
+    - name: pixel_colors
+      size: 3
+
+  # instrument group variables
+  variables:
+  - meta:
+      name: color_level
+      datatype: <float32>
+      required: true
+    dimensions: ['pixel_colors']
+    attributes:
+      long_name: Lower bound of obscuration/grayscale/color level
+      comment: >-
+        Obscuration/grayscale/color level corresponding to each value of
+        pixel_colors. For example, a grayscale OAP may have lower-bound shadow
+        levels of [0, 0.25, 0.5, 0.75].
+  - meta:
+      name: array_size
+      datatype: <int32>
+      required: true
+    dimensions: ['array_dimensions']
+    attributes:
+      long_name: Number of pixels in detector
+  - meta:
+      name: image_size
+      datatype: <int32>
+      required: true
+    dimensions: ['array_dimensions']
+    attributes:
+      long_name: Number of pixels across an image
+      comment: If variable size images are given then is _FillValue.
+  - meta:
+      name: resolution
+      datatype: <float32>
+      required: true
+    dimensions: ['array_dimensions']
+    attributes:
+      long_name: Pixel resolution
+      units: '<str: derived_from_file>'
+  - meta:
+      name: wavelength
+      datatype: <float32>
+      required: true
+    dimensions: []
+    attributes:
+      long_name: Wavelength of laser used for imaging particles
+      units: '<str: derived_from_file>'
+  - meta:
+      name: pathlength
+      datatype: <float32>
+      required: true
+    dimensions: []
+    attributes:
+      long_name: Optical path length of imaging region
+      comment: For OAPs the pathlength will be arm separation distance.
+      units: '<str: derived_from_file>'
+  - meta:
+      name: color_value
+      datatype: <uint8>
+      required: false
+    dimensions: ['pixel_colors']
+    attributes:
+      long_name: Byte values of image associated with each color_level value
+  - meta:
+      name: resolution_error
+      datatype: <float32>
+      required: false
+    dimensions: ['array_dimensions']
+    attributes:
+      long_name: Uncertainty of pixel resolution
+      units: '<str: derived_from_file>'
+
 
 
 
