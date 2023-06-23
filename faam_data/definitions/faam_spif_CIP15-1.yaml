@@ -1,0 +1,121 @@
+# Definition file for FAAM CIP15-1
+# Use with SPIF vocal project to create/check netCDF files
+# see;
+#    https://github.com/FAAM-146/spif
+#
+# Creates version: 1.0
+# Example filename: core-cloud-phy_faam_20230614_v100_r0_c339_cip15-1.nc
+#
+meta:
+  file_pattern: >-
+    core-cloud-phy_faam_[0-9]{8}_v100_r[0-9]+_[c-z][0-9]{3}_cip15-1.nc
+  short_name: 'spif_cip15-1'
+  canonical_name: 'Decoded image data from the CIP15-1'
+  description: >-
+    This dataset contains decoded raw image data from the DMT Cloud Imaging
+    Probe. Data is stored using the SPIF standard file structure. Higher level
+    data products, derived from the image data, may also be in this file.
+  references:
+  - ['FAAM instrument documentation', 'https://www.faam.ac.uk/sphinx/instruments/']
+  - ['SPIF standard', 'https://github.com/FAAM-146/spif']
+
+attributes:
+  title: '<str: derived_from_file>'
+  summary: '<str: derived_from_file>'
+  references: '<str: derived_from_file>'
+  comment: '<str: derived_from_file optional>'
+  history: '<str: derived_from_file>'
+  revision_date: '<datetime.date: derived_from_file>'
+  revision_number: '<int: derived_from_file>'
+  revision_comment: '<str: derived_from_file optional>'
+
+  # data creator and publisher
+  creator_name: '<str: derived_from_file>'
+  creator_institution: '<str: derived_from_file>'
+  creator_address:  '<str: derived_from_file>'
+  creator_email: '<str: derived_from_file>'
+  creator_url: '<str: derived_from_file optional>'
+  creator_type: '<str: derived_from_file>'
+  date_created: '<datetime.datetime: derived_from_file>'
+  publisher_institution: CEDA
+  publisher_type: institution
+  publisher_email: support@ceda.ac.uk
+  publisher_url: https://www.ceda.ac.uk
+
+  # data source information
+  source: CIP15-1
+  instrument: CIP15   #### this is the name of the instrument group
+  institution: FAAM Airborne Laboratory
+  address: >-
+    Building 146, Cranfield University, College Road,
+    Cranfield, Bedford. MK43 0AL. UK.
+  platform: FAAM BAe-146-301 Atmospheric Research Aircraft
+  platform_type: aircraft
+  deployment_mode: '<str: derived_from_file optional,regex=air>'
+  naming_authority: uk.ac.faam
+  id: '<str: derived_from_file>'
+  uuid: '<uuid: derived_from_file>'
+
+  # project information
+  project: '<str: derived_from_file optional>'
+  project_name: '<str: derived_from_file optional>'
+  project_acronym: '<str: derived_from_file optional>'
+  project_principal_investigator: '<str: derived_from_file optional>'
+  project_principal_investigator_email: '<str: derived_from_file optional>'
+  project_principal_investigator_url: '<str: derived_from_file optional>'
+
+  # instrument information <--- goes in instrument group, many of these are in standard
+  instrument_name:
+  instrument_longname:
+  instrument_description:
+  instrument_location:
+  instrument_manufacturer:
+  instrument_model:
+  instrument_serial_number:'<str: derived_from_file optional>'
+  instrument_software: '<str: derived_from_file optional>'
+  instrument_software_version: '<str: derived_from_file optional>'
+  instrument_fimware: '<str: derived_from_file optional>'
+
+  # processor information
+  processing_software_commit: '<str: derived_from_file optional>'
+  processing_software_doi: '<str: derived_from_file optional>'
+  processing_software_url:  '<str: derived_from_file optional>'
+  processing_software_version: '<str: derived_from_file>'
+
+  # data information
+  date: '<datetime.date: derived_from_file>'
+  flight_date: '<datetime.date: derived_from_file>'
+  flight_number: '<str: derived_from_file>'
+  time_coverage_duration: '<datetime.timedelta: derived_from_file>'
+  time_coverage_start: '<datetime.datetime: derived_from_file>'
+  time_coverage_end: '<datetime.datetime: derived_from_file>'
+  geospatial_bounds: '<str: derived_from_file>'
+  geospatial_bounds_crs: '<str: derived_from_file>'
+  geospatial_lat_max: '<float: derived_from_file>'
+  geospatial_lat_min: '<float: derived_from_file>'
+  geospatial_lat_units: '<str: derived_from_file>'
+  geospatial_lon_max: '<float: derived_from_file>'
+  geospatial_lon_min: '<float: derived_from_file>'
+  geospatial_lon_units: '<str: derived_from_file>'
+  geospatial_vertical_max: '<float: derived_from_file>'
+  geospatial_vertical_min: '<float: derived_from_file>'
+  geospatial_vertical_units: '<str: derived_from_file>'
+  geospatial_vertical_positive: '<str: derived_from_file>'
+
+  # Usage and vocab information
+  keywords: >-
+    EARTH SCIENCE > ATMOSPHERE > CLOUDS >
+    CLOUD MICROPHYSICS > CLOUD DROPLET DISTRIBUTION
+  keywords_vocabulary: 'Global Change Master Directory (GCMD)'
+  metadata_link: '<str: derived_from_file>'
+  standard_name_vocabulary: '<str: derived_from_file>'
+  license: >-
+    UK Government Open Licence agreement -
+    http://www.nationalarchives.gov.uk/doc/open-government-licence'
+  acknowledgement: >-
+    Airborne data was obtained using the BAe-146-301 Atmospheric Research
+    Aircraft [ARA] flown by Airtask Ltd and managed by FAAM Airborne
+    Laboratory, jointly operated by UKRI and the University of Leeds.
+
+
+
