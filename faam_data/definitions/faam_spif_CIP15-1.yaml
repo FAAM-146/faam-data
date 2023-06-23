@@ -144,7 +144,7 @@ groups:
     - name: pixel_colors
       size: 3
 
-  # instrument group variables
+  # instrument group mandatory variables
   variables:
   - meta:
       name: color_level
@@ -197,6 +197,7 @@ groups:
       long_name: Optical path length of imaging region
       comment: For OAPs the pathlength will be arm separation distance.
       units: '<str: derived_from_file>'
+  # instrument group optional variables
   - meta:
       name: color_value
       datatype: <uint8>
@@ -213,6 +214,82 @@ groups:
       long_name: Uncertainty of pixel resolution
       units: '<str: derived_from_file>'
 
+# ------------------------------------------------------------------------------
+  groups:
+    # instrument/core group
+    - meta:
+      name: core
+      description: Decompressed raw image data
 
+    attributes: {}
 
+    # instrument/core group dimensions. Both are UNLIMITED
+    dimensions:
+      - name: image_num
+        size: null
+      - name: pixel
+        size: null
+
+    # instrument.core group mandatory variables
+    - meta:
+        name: timestamp
+        datatype: <uint64>
+        required: true
+      dimensions: ['image_num']
+      attributes:
+        long_name: Image arrival time
+        standard_name: time
+        units: '<str: derived_from_file>'
+    - meta:
+        name: image
+        datatype: <uint8>
+        required: true
+      dimensions: ['pixel']
+      attributes:
+        long_name: 1-dimensional array of timeseries of images
+    - meta:
+        name: startpixel
+        datatype: <uint8>
+        required: true
+      dimensions: ['image_num']
+      attributes:
+        long_name: Array index for the first pixel of each image in image
+    - meta:
+        name: width
+        datatype: <uint8>
+        required: true
+      dimensions: ['image_num']
+      attributes:
+        long_name: Number of pixels across image
+    - meta:
+        name: height
+        datatype: <uint8>
+        required: true
+      dimensions: ['image_num']
+      attributes:
+        long_name: Number of slices/lines across image
+    - meta:
+        name: overload
+        datatype: <byte>
+        required: true
+      dimensions: ['image_num']
+      attributes:
+        long_name: Overload flag for each image
+    # instrument.core group optional variables
+    - meta:
+        name: timestamp_flag
+        datatype: <byte>
+        required: false
+      dimensions: ['image_num']
+      attributes:
+        long_name: Surety in determination of image arrival timestamp
+        flag_values: '<str: derived_from_file>'   ### Is this a string??
+        flag_meanings: '<str: derived_from_file>'
+
+    # instrument/level-0 group
+    - meta:
+      name: level-0
+      description: Raw particle image data
+
+    attributes: {}
 
