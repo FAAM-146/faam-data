@@ -214,23 +214,23 @@ groups:
       long_name: Uncertainty of pixel resolution
       units: '<str: derived_from_file>'
 
-# ------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
   groups:
     # instrument/core group
     - meta:
-      name: core
+      name: images
       description: Decompressed raw image data
 
     attributes: {}
 
-    # instrument/core group dimensions. Both are UNLIMITED
+    # instrument/images group dimensions. Both are UNLIMITED
     dimensions:
       - name: image_num
         size: null
       - name: pixel
         size: null
 
-    # instrument.core group mandatory variables
+    # instrument/images group mandatory variables
     - meta:
         name: timestamp
         datatype: <uint64>
@@ -246,7 +246,7 @@ groups:
         required: true
       dimensions: ['pixel']
       attributes:
-        long_name: 1-dimensional array of timeseries of images
+        long_name: 1-dimensional array of images
     - meta:
         name: startpixel
         datatype: <uint8>
@@ -275,7 +275,7 @@ groups:
       dimensions: ['image_num']
       attributes:
         long_name: Overload flag for each image
-    # instrument.core group optional variables
+    # instrument/images group optional variables
     - meta:
         name: timestamp_flag
         datatype: <byte>
@@ -285,6 +285,84 @@ groups:
         long_name: Surety in determination of image arrival timestamp
         flag_values: '<str: derived_from_file>'   ### Is this a string??
         flag_meanings: '<str: derived_from_file>'
+
+
+# -----------------------------------------------------------------------------
+  groups:
+    # instrument/particles group
+    - meta:
+      name: particles
+      description: Raw particle data
+
+    attributes: {}
+
+    # instrument/particles group dimensions. Both are UNLIMITED
+    dimensions:
+      - name: particle_num
+        size: null
+      - name: pixel
+        size: null
+
+    # instrument/particles group mandatory variables
+    - meta:
+        name: timestamp
+        datatype: <uint64>
+        required: true
+      dimensions: ['particle_num']
+      attributes:
+        long_name: Paricle arrival time
+        standard_name: time
+        units: '<str: derived_from_file>'
+    - meta:
+        name: particle
+        datatype: <uint8>
+        required: true
+      dimensions: ['pixel']
+      attributes:
+        long_name: 1-dimensional array of particles
+    - meta:
+        name: startpixel
+        datatype: <uint8>
+        required: true
+      dimensions: ['particle_num']
+      attributes:
+        long_name: Array index for the first pixel of each particle in particle
+    - meta:
+        name: width
+        datatype: <uint8>
+        required: true
+      dimensions: ['particle_num']
+      attributes:
+        long_name: Number of pixels across particle
+    - meta:
+        name: height
+        datatype: <uint8>
+        required: true
+      dimensions: ['particle_num']
+      attributes:
+        long_name: Number of slices/lines across particle
+    - meta:
+        name: overload
+        datatype: <byte>
+        required: true
+      dimensions: ['particle_num']
+      attributes:
+        long_name: Overload flag for each particle
+    # instrument/particles group optional variables
+    - meta:
+        name: timestamp_flag
+        datatype: <byte>
+        required: false
+      dimensions: ['particle_num']
+      attributes:
+        long_name: Surety in determination of particle arrival timestamp
+        flag_values: '<str: derived_from_file>'   ### Is this a string??
+        flag_meanings: '<str: derived_from_file>'
+
+
+
+
+
 
     # instrument/level-0 group
     - meta:
