@@ -111,6 +111,14 @@ dimensions: []
 
 # ------------------------------------------------------------------------------
 groups:
+
+
+  -meta:
+    name: platform
+    description: Data from platform not from the probes...
+
+  # TAS, position, etc
+
   # instrument group
   - meta:
     name: CIP15
@@ -218,6 +226,15 @@ groups:
   groups:
     # instrument/core group
     - meta:
+      name: auxillary
+      description: Other probe data, eg PAS
+
+
+
+
+
+
+    - meta:
       name: images
       description: Decompressed raw image data
 
@@ -290,6 +307,9 @@ groups:
 # -----------------------------------------------------------------------------
   groups:
     # instrument/particles group
+
+
+    ### get rid of this sub-grp
     - meta:
       name: particles
       description: Raw particle data
@@ -356,7 +376,7 @@ groups:
       dimensions: ['particle_num']
       attributes:
         long_name: Surety in determination of particle arrival timestamp
-        flag_values: '<str: derived_from_file>'   ### Is this a string??
+        flag_values: '<Array[int8]: derived_from_file>'
         flag_meanings: '<str: derived_from_file>'
 
 
