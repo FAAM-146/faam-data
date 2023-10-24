@@ -7,9 +7,10 @@ import sys
 sys.path.insert(0, '../../')
 from attributes import GlobalAttributes, GroupAttributes, VariableAttributes
 
-global_schema = GlobalAttributes.schema()
-group_schema = GroupAttributes.schema()
-variable_schema = VariableAttributes.schema()
+global_schema = GlobalAttributes.model_json_schema()
+group_schema = GroupAttributes.model_json_schema()
+variable_schema = VariableAttributes.model_json_schema()
+
 
 template_dir = os.path.join(
     os.path.dirname(__file__),

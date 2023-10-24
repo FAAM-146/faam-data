@@ -68,7 +68,7 @@ def populate_global_attrs(definition) -> None:
     for key, value in attributes.items():
         text += f'* ``{key}``: '
         text += f'**{value}** - '
-        desc =  GlobalAttributes.schema()['properties'][key]['description']
+        desc =  GlobalAttributes.model_json_schema()['properties'][key]['description']
         print(desc)
         text += desc + '\n'
     text += '\n'

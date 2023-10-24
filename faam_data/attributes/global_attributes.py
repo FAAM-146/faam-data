@@ -2,8 +2,9 @@ import datetime
 from uuid import UUID
 from typing import Optional, Union
 
-from pydantic import Field, BaseModel
-from pydantic import root_validator
+from pydantic import  BaseModel, ConfigDict
+from vocal.field import Field
+from pydantic import model_validator
 from vocal.validation import re_validator, substitute_placeholders, default_value_factory, is_in_factory
 
 
@@ -11,8 +12,9 @@ from .constants import *
 
 class GlobalAttributes(BaseModel):
 
-    class Config:
+    model_config = ConfigDict(
         title = 'FAAM Global Metadata Schema'
+    )
 
     Conventions: str = Field(
         description="The conventions followed by this data",
@@ -65,7 +67,7 @@ class GlobalAttributes(BaseModel):
     )
 
     flight_number: str = Field(
-        description='The flight number', regex='[a-z][0-9]{3}',
+        description='The flight number', pattern='[a-z][0-9]{3}',
         example='a001'
     )
 
@@ -75,7 +77,7 @@ class GlobalAttributes(BaseModel):
     )
 
     geospatial_bounds_crs: str = Field(
-        description='Coordinate reference system for geospatial attributes.', regex='EPSG:[0-9]+',
+        description='Coordinate reference system for geospatial attributes.', pattern='EPSG:[0-9]+',
         example='EPSG:4979'
     )
 
@@ -220,7 +222,7 @@ class GlobalAttributes(BaseModel):
     )
 
     standard_name_vocabulary: str = Field(
-        description='A vocabulary of standard names. Expected to be a CF standard name table, e.g. CF Standard Name Table v78', regex='CF Standard Name Table v[0-9]+',
+        description='A vocabulary of standard names. Expected to be a CF standard name table, e.g. CF Standard Name Table v78', pattern='CF Standard Name Table v[0-9]+',
         example='CF Standard Name Table v7'
     )
 
@@ -258,161 +260,192 @@ class GlobalAttributes(BaseModel):
 
     calibration_date: Optional[datetime.date] = Field(
         description='Calibration date, where this applies to all file contents',
-        example='1970-01-01'
+        example='1970-01-01',
+        default=None
     )
 
     calibration_information: Optional[str] = Field(
         description='Calibration information, where this applies all file contents',
-        example='Calibrated at lab X using method Y'
+        example='Calibrated at lab X using method Y',
+        default=None
     )
 
     calibration_url: Optional[str] = Field(
         description='Permanent URI or DOI linking to calibration info, where this applies to all file contents',
-        example='dx.doi.org/00.0000/0000000'
+        example='dx.doi.org/00.0000/0000000',
+        default=None
     )
 
     comment: Optional[str] = Field(
         description='Comment about data',
-        example='A comment about the data'
+        example='A comment about the data',
+        default=None
     )
 
     constants_file: Optional[str] = Field(
         description='Name of external file providing input to processing software',
-        example='flight-cst_faam_19700101_r0_a001.yaml'
+        example='flight-cst_faam_19700101_r0_a001.yaml',
+        default=None
     )
 
     creator_url: Optional[str] = Field(
         description='Institutional URL or researcher ORCID URL',
-        example='https://orcid.org/0000-0000-0000-0000'
+        example='https://orcid.org/0000-0000-0000-0000',
+        default=None
     )
 
     deployment_mode: Optional[str] = Field(
         description='Mode of deployment. Should always be "air"',
-        example='air'
+        example='air',
+        default=None
     )
 
     external_variables: Optional[str] = Field(
         description='Blank separated list of variables used from an external file',
-        example='PS_RVSM TAT_DI_R'
+        example='PS_RVSM TAT_DI_R',
+        default=None
     )
 
     history: Optional[str] = Field(
         description='Logs modifications to file since production',
-        example='1970-01-01T00:00:00Z some_prog -i myfile -o myfile'
+        example='1970-01-01T00:00:00Z some_prog -i myfile -o myfile',
+        default=None
     )
 
     instrument: Optional[str] = Field(
         description='Where all data id from a single instrument. Currently freeform, controlled instrument vocab to follow',
-        example='Some instrument'
+        example='Some instrument',
+        default=None
     )
 
     instrument_description: Optional[str] = Field(
         description='Where all data are from a single instrument. Textual description.',
-        example='X type instrument, measuring Y using method Z'
+        example='X type instrument, measuring Y using method Z',
+        default=None
     )
 
     instrument_location: Optional[str] = Field(
         description='Where all data are from a single instrument. Location of instrument on aircraft',
-        example='Instrument location'
+        example='Instrument location',
+        default=None
     )
 
     instrument_manufacturer: Optional[str] = Field(
         description='Where all data are from a single instrument. Instrument manufacturer',
-        example='Instrument Manufacturing Ltd.'
+        example='Instrument Manufacturing Ltd.',
+        default=None
     )
 
     instrument_model: Optional[str] = Field(
         description='Where all data are from a single instrument. Instrument model',
-        example='Model 1.2.3'
+        example='Model 1.2.3',
+        default=None
     )
 
     instrument_serial_number: Optional[str] = Field(
         description='Where all data are from a single instrument. Instrument serial number',
-        example='SN123'
+        example='SN123',
+        default=None
     )
 
     instrument_software: Optional[str] = Field(
         description='Where all data are from a single instrument. Name of software deployed on instrument',
-        example='Instrument software name'
+        example='Instrument software name',
+        default=None
     )
 
     instrument_software_version: Optional[str] = Field(
         description='Where all data are from a single instrument. Version of software deployed on instrument',
-        example='v1.2.3'
+        example='v1.2.3',
+        default=None
     )
 
     notes: Optional[str] = Field(
         description='Notes on this data file. For more detailed info than comment',
-        example='Some longer form notes about this file'
+        example='Some longer form notes about this file',
+        default=None
     )
 
     processing_software_commit: Optional[str] = Field(
         description='Commit hash for processing software in vcs',
-        example='2a83fc2394b'
+        example='2a83fc2394b',
+        default=None
     )
 
     processing_software_doi: Optional[str] = Field(
         description='DOI of the processing doftware release, if available',
-        example='dx.doi.org/00.0000/0000000'
+        example='dx.doi.org/00.0000/0000000',
+        default=None
     )
 
     processing_software_url: Optional[str] = Field(
         description='URL pointing to processing software source code, if available',
-        example='https://github.com/my-user/my_repo'
+        example='https://github.com/my-user/my_repo',
+        default=None
     )
 
     processing_software_version: Optional[str] = Field(
         description='Version of processing software',
-        example='v1.2.3'
+        example='v1.2.3',
+        default=None
     )
 
     project_acronym: Optional[str] = Field(
         description='Project acronym',
-        example='PROJECT'
+        example='PROJECT',
+        default=None
     )
 
     project_name: Optional[str] = Field(
         description='Full project name',
-        example='A long project name'
+        example='A long project name',
+        default=None
     )
 
     project_principal_investigator: Optional[str] = Field(
         description='Name(s) of project PIs. Comma separated if more than one',
-        example='A. N. Other'
+        example='A. N. Other',
+        default=None
     )
 
     project_principal_investigator_email: Optional[str] = Field(
         description='Email address(es) of project PIs. Comma separated if more than one',
-        example='a.n.other@institute.ac.uk'
+        example='a.n.other@institute.ac.uk',
+        default=None
     )
 
     project_principal_investigator_url: Optional[str] = Field(
         description='ORCID URL(s) of project PIs. Comma separated if more than one',
-        example='https://orcid.org/0000-0000-0000-0000'
+        example='https://orcid.org/0000-0000-0000-0000',
+        default=None
     )
 
     revision_comment: Optional[str] = Field(
         description='Brief description of changes between revisions',
-        example='Corrected processing of variable X by doing Y'
+        example='Corrected processing of variable X by doing Y',
+        default=None
     )
 
     source_files: Optional[str] = Field(
         description='List of source files used in the processing of this data product',
-        example='file1.ext file2.ext'
+        example='file1.ext file2.ext',
+        default=None
     )
 
     time_coverage_resolution: Optional[str] = Field(
         description='Resolution of data, where this is uniform across the file',
-        example='1S'
+        example='1S',
+        default=None
     )
 
     processing_level: Optional[str] = Field(
         description='Processing level of data, where it is uniform for all data in the file',
-        example=2
+        example=2,
+        default=None
     )
 
     # Allow the use of placeholders, which will be subbed out with examples
-    subs_placeholders = root_validator(pre=True, allow_reuse=True)(substitute_placeholders)
+    subs_placeholders = model_validator(mode='before')(substitute_placeholders)
     
     _validate_acknowledgement = re_validator('acknowledgement')(default_value_factory(ACKNOWLEDGEMENT))
     _validate_creator_address = re_validator('creator_address')(default_value_factory(CREATOR_ADDRESS))
