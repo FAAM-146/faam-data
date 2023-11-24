@@ -21,12 +21,13 @@ meta:
 
 # ------------------------------------------------------------------------------
 attributes:
+  Conventions: '<str: derived_from_file>'
   title: '<str: derived_from_file>'
   summary: '<str: derived_from_file>'
   references: '<str: derived_from_file>'
   comment: '<str: derived_from_file optional>'
   history: '<str: derived_from_file>'
-  revision_date: '<datetime.date: derived_from_file>'
+  revision_date: '<str: derived_from_file>'  #'datetime.date'
   revision_number: '<int: derived_from_file>'
   revision_comment: '<str: derived_from_file optional>'
 
@@ -37,14 +38,14 @@ attributes:
   creator_email: '<str: derived_from_file>'
   creator_url: '<str: derived_from_file optional>'
   creator_type: '<str: derived_from_file>'
-  date_created: '<datetime.datetime: derived_from_file>'
+  date_created: '<str: derived_from_file>'  #'datetime.datetime'
   publisher_institution: CEDA
   publisher_type: institution
   publisher_email: support@ceda.ac.uk
   publisher_url: https://www.ceda.ac.uk
 
   # data source information
-  source: CIP15-1
+  source: In situ probe; optical array probe.
   instrument: CIP15   #### this is the name of the instrument group
   institution: FAAM Airborne Laboratory
   address: >-
@@ -72,29 +73,28 @@ attributes:
   processing_software_version: '<str: derived_from_file>'
 
   # data information
-  date: '<datetime.date: derived_from_file>'
-  flight_date: '<datetime.date: derived_from_file>'
+  date: '<str: derived_from_file>'  #'datetime.date'
+  flight_date: '<str: derived_from_file>'  #'datetime.date'
   flight_number: '<str: derived_from_file>'
-  time_coverage_duration: '<datetime.timedelta: derived_from_file>'
-  time_coverage_start: '<datetime.datetime: derived_from_file>'
-  time_coverage_end: '<datetime.datetime: derived_from_file>'
+  time_coverage_duration: '<str: derived_from_file>'  #'datetime.timedelta'
+  time_coverage_start: '<str: derived_from_file>'  #'datetime.datetime'
+  time_coverage_end: '<str: derived_from_file>'  #'datetime.datetime'
   geospatial_bounds: '<str: derived_from_file>'
   geospatial_bounds_crs: '<str: derived_from_file>'
-  geospatial_lat_max: '<float: derived_from_file>'
-  geospatial_lat_min: '<float: derived_from_file>'
+  geospatial_lat_max: '<float32: derived_from_file>'
+  geospatial_lat_min: '<float32: derived_from_file>'
   geospatial_lat_units: '<str: derived_from_file>'
-  geospatial_lon_max: '<float: derived_from_file>'
-  geospatial_lon_min: '<float: derived_from_file>'
+  geospatial_lon_max: '<float32: derived_from_file>'
+  geospatial_lon_min: '<float32: derived_from_file>'
   geospatial_lon_units: '<str: derived_from_file>'
-  geospatial_vertical_max: '<float: derived_from_file>'
-  geospatial_vertical_min: '<float: derived_from_file>'
+  geospatial_vertical_max: '<float32: derived_from_file>'
+  geospatial_vertical_min: '<float32: derived_from_file>'
   geospatial_vertical_units: '<str: derived_from_file>'
   geospatial_vertical_positive: '<str: derived_from_file>'
 
   # Usage and vocab information
   keywords: >-
-    EARTH SCIENCE > ATMOSPHERE > CLOUDS >
-    CLOUD MICROPHYSICS > CLOUD DROPLET DISTRIBUTION
+    CLOUD DROPLET DISTRIBUTION,
   keywords_vocabulary: 'Global Change Master Directory (GCMD)'
   metadata_link: '<str: derived_from_file>'
   standard_name_vocabulary: '<str: derived_from_file>'
@@ -118,6 +118,7 @@ groups:
 
   attributes:
     # instrument information
+    instrument: '<str: derived_from_file optional>'
     instrument_name: CIP15-1
     instrument_long_name: Cloud Imaging Probe, 15 um resolution.
     instrument_description: >-
@@ -127,7 +128,7 @@ groups:
     instrument_location: '<str: derived_from_file>'
     instrument_orientation: '<str: derived_from_file>'
     instrument_manufacturer: Droplet Measurement Technologies
-    instrument_model: CIP15
+    instrument_model: CIP-15 GS
     instrument_serial_number: '0302-002'
     instrument_software: '<str: derived_from_file optional>'
     instrument_software_version: '<str: derived_from_file optional>'
@@ -163,22 +164,22 @@ groups:
       required: true
     dimensions: ['array_dimensions']
     attributes:
-      long_name: Number of pixels in detector
+      long_name: Number of pixels in detector along each array dimension
   - meta:
       name: image_size
       datatype: <int32>
       required: true
     dimensions: ['array_dimensions']
     attributes:
-      long_name: Number of pixels across an image
-      comment: If variable size images are given then is _FillValue.
+      long_name: Number of pixels across an image along each array dimension
+      comment: If variable size images are produced by probe then is _FillValue.
   - meta:
       name: resolution
       datatype: <float32>
       required: true
     dimensions: ['array_dimensions']
     attributes:
-      long_name: Pixel resolution
+      long_name: Pixel resolution along each array dimension
       units: '<str: derived_from_file>'
   - meta:
       name: wavelength
@@ -232,6 +233,15 @@ groups:
 
     # instrument.core group mandatory variables
     - meta:
+        name: image
+        datatype: <uint8>
+        required: true
+      dimensions: ['pixel']
+      attributes:
+        long_name: 1-dimensional array of series of images
+        coverage_content_type: image
+        _FillValue: 255
+    - meta:
         name: timestamp
         datatype: <uint64>
         required: true
@@ -241,33 +251,29 @@ groups:
         standard_name: time
         units: '<str: derived_from_file>'
     - meta:
-        name: image
-        datatype: <uint8>
-        required: true
-      dimensions: ['pixel']
-      attributes:
-        long_name: 1-dimensional array of timeseries of images
-    - meta:
         name: startpixel
-        datatype: <uint8>
+        datatype: <uint32>
         required: true
       dimensions: ['image_num']
       attributes:
         long_name: Array index for the first pixel of each image in image
+        _FillValue: 4294967295
     - meta:
         name: width
-        datatype: <uint8>
+        datatype: <uint2>
         required: true
       dimensions: ['image_num']
       attributes:
-        long_name: Number of pixels across image
+        long_name: Number of pixels across an image
+        _FillValue: 255
     - meta:
         name: height
-        datatype: <uint8>
+        datatype: <uint2>
         required: true
       dimensions: ['image_num']
       attributes:
-        long_name: Number of slices/lines across image
+        long_name: Number of slices/lines along an image
+        _FillValue: 255
     - meta:
         name: overload
         datatype: <byte>
@@ -275,6 +281,7 @@ groups:
       dimensions: ['image_num']
       attributes:
         long_name: Overload flag for each image
+        _FillValue: -127
     # instrument.core group optional variables
     - meta:
         name: timestamp_flag
@@ -285,6 +292,7 @@ groups:
         long_name: Surety in determination of image arrival timestamp
         flag_values: '<str: derived_from_file>'   ### Is this a string??
         flag_meanings: '<str: derived_from_file>'
+        _FillValue: -127
 
     # instrument/level-0 group
     - meta:
