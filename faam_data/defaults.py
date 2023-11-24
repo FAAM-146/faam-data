@@ -1,5 +1,5 @@
 from .attributes.constants import *
-from vocal.schema_types import *
+from vocal.types import *
 
 default_global_attrs = {
     'Conventions': 'CF-1.9 ACDD-1.3',

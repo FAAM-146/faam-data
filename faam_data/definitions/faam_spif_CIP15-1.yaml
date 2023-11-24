@@ -111,6 +111,17 @@ dimensions: []
 
 # ------------------------------------------------------------------------------
 groups:
+  # -------------------------------------------------
+  # platform group (did we confirm this was the name?)
+  -meta:
+    name: platform
+    description: Data from platform not from the probes...
+
+  # TAS, position, etc
+
+
+
+  # -------------------------------------------------
   # instrument group
   - meta:
     name: CIP15
@@ -215,23 +226,23 @@ groups:
       long_name: Uncertainty of pixel resolution
       units: '<str: derived_from_file>'
 
-# ------------------------------------------------------------------------------
+  # ---------------------------------------------------
   groups:
     # instrument/core group
     - meta:
-      name: core
+      name: images ??? or core
       description: Decompressed raw image data
 
     attributes: {}
 
-    # instrument/core group dimensions. Both are UNLIMITED
+    # instrument/images group dimensions. Both are UNLIMITED
     dimensions:
       - name: image_num
         size: null
       - name: pixel
         size: null
 
-    # instrument.core group mandatory variables
+    # instrument/images group mandatory variables
     - meta:
         name: image
         datatype: <uint8>
@@ -282,6 +293,7 @@ groups:
       attributes:
         long_name: Overload flag for each image
         _FillValue: -127
+
     # instrument.core group optional variables
     - meta:
         name: timestamp_flag
@@ -294,6 +306,20 @@ groups:
         flag_meanings: '<str: derived_from_file>'
         _FillValue: -127
 
+
+  # ---------------------------------------------------
+  groups:
+    # instrument/auxillary group
+    - meta:
+      name: auxillary
+      description: Other probe data, eg PAS
+
+
+
+
+
+  # ---------------------------------------------------
+  groups:
     # instrument/level-0 group
     - meta:
       name: level-0
