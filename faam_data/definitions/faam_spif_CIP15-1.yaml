@@ -112,13 +112,164 @@ dimensions: []
 # ------------------------------------------------------------------------------
 groups:
   # -------------------------------------------------
-  # platform group (did we confirm this was the name?)
-  -meta:
+  # platform data group (did we confirm this was the name?)
+  - meta:
     name: platform
-    description: Data from platform not from the probes...
+    description: Data from platform that is used to process image data
+  
+  attributes:
+    comment: '<str: derived_from_file>' # something like "Obtained from core file xxx
 
-  # TAS, position, etc
+  dimensions:
+    - name: Time
+      size: null
+    - name: sps32
+      size: 32
 
+  variables:
+  - meta:
+      name: Time
+      datatype: <int32>
+      required: false
+    dimensions: ['Time']
+    attributes:
+      long_name: Time of measurement
+      standard_name: time
+      calendar: gregorian
+      coverage_content_type: coordinate
+      frequency: 1
+      units: '<str: derived_from_file>'
+      _FillValue: -9999
+
+  - meta:
+      name: altitude
+      datatype: <float32>
+      required: false
+    dimensions: ['Time', 'sps32']
+    attributes:
+      long_name: '<str: derived_from_file>'
+      standard_name: altitude
+      coverage_content_type: physicalMeasurement
+      frequency: 32
+      instrument_manufacturer: '<str: derived_from_file>'
+      instrument_model: '<str: derived_from_file>'
+      units: '<str: derived_from_file>'
+      actual_range: '<float32: derived_from_file>'
+      ancillary_variables: altitude_flag
+      axis: Z
+      positive: up
+      _FillValue: -9999.
+
+  - meta:
+      name: altitude_flag
+      datatype: <byte>
+      required: false
+    dimensions: ['Time', 'sps32']
+    attributes:
+      long_name: '<str: derived_from_file>'
+      valid_range: 1B, 3B
+      flag_masks: 1B, 2B
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 32
+      units: 1
+      _FillValue: 0B
+
+  - meta:
+      name: latitude
+      datatype: <float32>
+      required: false
+    dimensions: ['Time', 'sps32']
+    attributes:
+      long_name: '<str: derived_from_file>'
+      standard_name: latitude
+      coverage_content_type: physicalMeasurement
+      frequency: 32
+      instrument_manufacturer: '<str: derived_from_file>'
+      instrument_model: '<str: derived_from_file>'
+      units: '<str: derived_from_file>'
+      actual_range: '<float32: derived_from_file>'
+      ancillary_variables: latitude_flag
+      axis: Y
+      _FillValue: -9999.
+
+  - meta:
+      name: latitude_flag
+      datatype: <byte>
+      required: false
+    dimensions: ['Time', 'sps32']
+    attributes:
+      long_name: '<str: derived_from_file>'
+      valid_range: 1B, 3B
+      flag_masks: 1B, 2B
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 32
+      units: 1
+      _FillValue: 0B
+
+  - meta:
+      name: longitude
+      datatype: <float32>
+      required: false
+    dimensions: ['Time', 'sps32']
+    attributes:
+      long_name: '<str: derived_from_file>'
+      standard_name: longitude
+      coverage_content_type: physicalMeasurement
+      frequency: 32
+      instrument_manufacturer: '<str: derived_from_file>'
+      instrument_model: '<str: derived_from_file>'
+      units: '<str: derived_from_file>'
+      actual_range: '<float32: derived_from_file>'
+      ancillary_variables: longitude_flag
+      axis: X
+      _FillValue: -9999.
+
+  - meta:
+      name: longitude_flag
+      datatype: <byte>
+      required: false
+    dimensions: ['Time', 'sps32']
+    attributes:
+      long_name: '<str: derived_from_file>'
+      valid_range: 1B, 3B
+      flag_masks: 1B, 2B
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 32
+      units: 1
+      _FillValue: 0B
+
+  - meta:
+      name: tas
+      datatype: <float32>
+      required: false
+    dimensions: ['Time', 'sps32']
+    attributes:
+      long_name: '<str: derived_from_file>'
+      standard_name: platform_speed_wrt_air
+      coverage_content_type: physicalMeasurement
+      frequency: 32
+      units: '<str: derived_from_file>'
+      actual_range: '<float32: derived_from_file>'
+      ancillary_variables: tas_flag
+      _FillValue: -9999.
+
+  - meta:
+      name: tas_flag
+      datatype: <byte>
+      required: false
+    dimensions: ['Time', 'sps32']
+    attributes:
+      long_name: '<str: derived_from_file>'
+      valid_range: 1B, 7B
+      flag_masks: 1B, 2B, 4B
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 32
+      units: 1
+      _FillValue: 0B
 
 
   # -------------------------------------------------
@@ -312,9 +463,135 @@ groups:
     # instrument/auxillary group
     - meta:
       name: auxillary
-      description: Other probe data, eg PAS
+      description: Other probe data and housekeeping from PADS
 
 
+    attributes:
+      comment: Data and housekeeping obtained from the aggregated PADS datafile/s
+
+    dimensions:
+      - name: Time
+        size: null
+
+    variables:
+    - meta:
+        name: Time
+        datatype: <int32>
+        required: false
+      dimensions: ['Time']
+      attributes:
+        long_name: Time of measurement
+        standard_name: time
+        calendar: gregorian
+        coverage_content_type: coordinate
+        frequency: 1
+        units: '<str: derived_from_file>'
+        _FillValue: -9999
+
+    - meta:
+        name: diode_01_voltage
+        datatype: <float16>
+        required: false
+      dimensions: ['Time']
+      attributes:
+        long_name: Voltage of diode 1 (lefthand side) on image array
+        coverage_content_type: physicalMeasurement
+        comment: Obtained from 'Diode 1 Voltage' column in PADS data file.
+        frequency: 1
+        units: 1
+        _FillValue: -9999.
+
+    - meta:
+        name: diode_32_voltage
+        datatype: <float16>
+        required: false
+      dimensions: ['Time']
+      attributes:
+        long_name: Voltage of diode 32 (center) on image array
+        coverage_content_type: physicalMeasurement
+        comment: Obtained from 'Diode 32 Voltage' column in PADS data file.
+        frequency: 1
+        units: 1
+        _FillValue: -9999.
+
+    - meta:
+        name: diode_64_voltage
+        datatype: <float16>
+        required: false
+      dimensions: ['Time']
+      attributes:
+        long_name: Voltage of diode 64 (righthand side) on image array
+        coverage_content_type: physicalMeasurement
+        comment: Obtained from 'Diode 64 Voltage' column in PADS data file.
+        frequency: 1
+        units: 1
+        _FillValue: -9999.
+
+    - meta:
+        name: board_temperature
+        datatype: <float16>
+        required: false
+      dimensions: ['Time']
+      attributes:
+        long_name: On-board probe temperature
+        coverage_content_type: physicalMeasurement
+        comment: Obtained from 'Board Temp (C)' column in PADS data file.
+        frequency: 1
+        units: 'degC'
+        _FillValue: -9999.
+
+    - meta:
+        name: laser_temperature
+        datatype: <float16>
+        required: false
+      dimensions: ['Time']
+      attributes:
+        long_name: Laser temperature
+        coverage_content_type: physicalMeasurement
+        comment: Obtained from 'Laser Temp (C)' column in PADS data file.
+        frequency: 1
+        units: 'degC'
+        _FillValue: -9999.
+
+    - meta:
+        name: laser_current
+        datatype: <float16>
+        required: false
+      dimensions: ['Time']
+      attributes:
+        long_name: Laser current
+        coverage_content_type: physicalMeasurement
+        comment: Obtained from 'Laser Current (mA)' column in PADS data file.
+        frequency: 1
+        units: 'mA'
+        _FillValue: -9999.
+
+    - meta:
+        name: pas
+        datatype: <float16>
+        required: false
+      dimensions: ['Time']
+      attributes:
+        long_name: Probe air speed as derived from instrument pitot tube.
+        coverage_content_type: physicalMeasurement
+        comment: Obtained from 'CIP Grayscale PAS (m/s)' column in PADS data file.
+        frequency: 1
+        units: 'ms-1'
+        _FillValue: -9999.
+
+    - meta:
+        name: number_concentration
+        datatype: <float16>
+        required: false
+      dimensions: ['Time']
+      attributes:
+        long_name: Particle number concentration derived in flight
+        coverage_content_type: physicalMeasurement
+        comment: Obtained from 'Number Conc (#/cm^3)' column in PADS data file.
+
+        frequency: 1
+        units: 'cc-1'
+        _FillValue: -9999.
 
 
 
