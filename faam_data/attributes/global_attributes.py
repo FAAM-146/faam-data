@@ -5,7 +5,7 @@ from typing import Optional, Union
 from pydantic import  BaseModel, ConfigDict
 from vocal.field import Field
 from pydantic import model_validator
-from vocal.validation import validator, substitute_placeholders, default_value, is_in
+from vocal.validation import validator, field_validator, substitute_placeholders, default_value, is_in
 
 
 from .constants import *
@@ -447,16 +447,16 @@ class GlobalAttributes(BaseModel):
     # Allow the use of placeholders, which will be subbed out with examples
     subs_placeholders = model_validator(mode='before')(substitute_placeholders)
     
-    _validate_acknowledgement = validator('acknowledgement')(default_value(ACKNOWLEDGEMENT))
-    _validate_creator_address = validator('creator_address')(default_value(CREATOR_ADDRESS))
-    _validate_creator_institution = validator('creator_institution')(default_value(CREATOR_INSTITUTION))
-    _validate_creator_type = validator('creator_type')(is_in(CREATOR_TYPES))
-    _validate_geospatial_vertical_units = validator('geospatial_vertical_units')(default_value('m'))
-    _validate_geospatial_vertical_positive = validator('geospatial_vertical_positive')(default_value('up'))
-    _validate_keywords_vocabulary = validator('keywords_vocabulary')(default_value(KEYWORDS_VOCABULARY))
-    _validate_license = validator('license')(default_value(LICENSE))
-    _validate_naming_authority = validator('naming_authority')(default_value(NAMING_AUTHORITY))
-    _validate_platform = validator('platform')(default_value(PLATFORM))
-    _validate_publisher_type = validator('publisher_type')(default_value(PUBLISHER_TYPE))
-    _validate_publisher_institution = validator('publisher_institution')(default_value(PUBLISHER_INSTITUTION))
-    _validate_publisher_url = validator('publisher_url')(default_value(PUBLISHER_URL))
+    _validate_acknowledgement = field_validator('acknowledgement')(default_value(ACKNOWLEDGEMENT))
+    _validate_creator_address = field_validator('creator_address')(default_value(CREATOR_ADDRESS))
+    _validate_creator_institution = field_validator('creator_institution')(default_value(CREATOR_INSTITUTION))
+    _validate_creator_type = field_validator('creator_type')(is_in(CREATOR_TYPES))
+    _validate_geospatial_vertical_units = field_validator('geospatial_vertical_units')(default_value('m'))
+    _validate_geospatial_vertical_positive = field_validator('geospatial_vertical_positive')(default_value('up'))
+    _validate_keywords_vocabulary = field_validator('keywords_vocabulary')(default_value(KEYWORDS_VOCABULARY))
+    _validate_license = field_validator('license')(default_value(LICENSE))
+    _validate_naming_authority = field_validator('naming_authority')(default_value(NAMING_AUTHORITY))
+    _validate_platform = field_validator('platform')(default_value(PLATFORM))
+    _validate_publisher_type = field_validator('publisher_type')(default_value(PUBLISHER_TYPE))
+    _validate_publisher_institution = field_validator('publisher_institution')(default_value(PUBLISHER_INSTITUTION))
+    _validate_publisher_url = field_validator('publisher_url')(default_value(PUBLISHER_URL))
