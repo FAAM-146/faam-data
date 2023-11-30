@@ -302,12 +302,12 @@ groups:
       instrument_description: >-
         Droplet Measurement Technologies Inc. Cloud Imaging Probe,
         15 micron resolution with Grayscale and Korolev anti-shatter
-        tips (CIP-15 GS)
+        tips (CIP15-GS)
       instrument_location: '<str: derived_from_file>'
       instrument_orientation: '<str: derived_from_file>'
       instrument_manufacturer: Droplet Measurement Technologies
-      instrument_model: CIP-15 GS
-      instrument_serial_number: '0302-002'
+      instrument_model: CIP15-GS
+      instrument_serial_number: 0302-002
       instrument_software: '<str: derived_from_file optional>'
       instrument_software_version: '<str: derived_from_file optional>'
       instrument_fimware: '<str: derived_from_file optional>'

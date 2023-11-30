@@ -1,17 +1,17 @@
-# Definition file for FAAM CIP15-1
+# Definition file for FAAM CIP15-2
 # Use with SPIF vocal project to create/check netCDF files
 # see;
 #    https://github.com/FAAM-146/spif
 #
 # Creates version: 0.1
-# Example filename: core-cloud-phy_faam_20230614_v001_r0_c339_cip15-1.nc
+# Example filename: core-cloud-phy_faam_20230614_v001_r0_c339_cip15-2.nc
 #
 meta:
   file_pattern: >-
-    core-cloud-phy_faam_[0-9]{8}_v001_r[0-9]+_[c-z][0-9]{3}_cip15-1.nc
-  short_name: 'spif_cip15-1'
-  canonical_name: 'Decoded image data from the CIP15-1'
-  version: 20231128
+    core-cloud-phy_faam_[0-9]{8}_v001_r[0-9]+_[c-z][0-9]{3}_cip15-2.nc
+  short_name: 'spif_cip15-2'
+  canonical_name: 'Decoded image data from the CIP15-2'
+  version: 20231130
   description: >-
     This dataset contains decoded raw image data from the DMT Cloud Imaging
     Probe. Data is stored using the SPIF standard file structure. Higher level
@@ -297,17 +297,17 @@ groups:
     attributes:
       # instrument information
       instrument: '<str: derived_from_file optional>'
-      instrument_name: CIP15-1
+      instrument_name: CIP15-2
       instrument_long_name: Cloud Imaging Probe, 15 um resolution.
       instrument_description: >-
         Droplet Measurement Technologies Inc. Cloud Imaging Probe,
         15 micron resolution with Grayscale and Korolev anti-shatter
-        tips (CIP-15 GS)
+        tips (CIP15-GS)
       instrument_location: '<str: derived_from_file>'
       instrument_orientation: '<str: derived_from_file>'
       instrument_manufacturer: Droplet Measurement Technologies
-      instrument_model: CIP-15 GS
-      instrument_serial_number: '0302-002'
+      instrument_model: CIP15-GS
+      instrument_serial_number: 0303-005
       instrument_software: '<str: derived_from_file optional>'
       instrument_software_version: '<str: derived_from_file optional>'
       instrument_fimware: '<str: derived_from_file optional>'

@@ -9,9 +9,9 @@
 meta:
   file_pattern: >-
     core-cloud-phy_faam_[0-9]{8}_v001_r[0-9]+_[c-z][0-9]{3}_cip15-1.nc
-  short_name: 'spif_cip15-1'
-  canonical_name: 'Decoded image data from the CIP15-1'
-  version: 20231128
+  short_name: 'spif_cip100-2'
+  canonical_name: 'Decoded image data from the CIP100-2'
+  version: 20231130
   description: >-
     This dataset contains decoded raw image data from the DMT Cloud Imaging
     Probe. Data is stored using the SPIF standard file structure. Higher level
@@ -291,23 +291,23 @@ groups:
   # -------------------------------------------------
   # instrument-1 group
   - meta:
-      name: CIP15
+      name: CIP100
       description: Instrument group of raw and processed data for this instrument.
 
     attributes:
       # instrument information
       instrument: '<str: derived_from_file optional>'
-      instrument_name: CIP15-1
-      instrument_long_name: Cloud Imaging Probe, 15 um resolution.
+      instrument_name: CIP100-2
+      instrument_long_name: Cloud Imaging Probe, 100 um resolution.
       instrument_description: >-
         Droplet Measurement Technologies Inc. Cloud Imaging Probe,
-        15 micron resolution with Grayscale and Korolev anti-shatter
-        tips (CIP-15 GS)
+        100 micron resolution with Grayscale and Korolev anti-shatter
+        tips (CIP100-GS)
       instrument_location: '<str: derived_from_file>'
       instrument_orientation: '<str: derived_from_file>'
       instrument_manufacturer: Droplet Measurement Technologies
-      instrument_model: CIP-15 GS
-      instrument_serial_number: '0302-002'
+      instrument_model: CIP100-GS
+      instrument_serial_number: 1504-070
       instrument_software: '<str: derived_from_file optional>'
       instrument_software_version: '<str: derived_from_file optional>'
       instrument_fimware: '<str: derived_from_file optional>'
