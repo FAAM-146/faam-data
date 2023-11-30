@@ -1,0 +1,646 @@
+# Definition file for FAAM CIP15-1
+# Use with SPIF vocal project to create/check netCDF files
+# see;
+#    https://github.com/FAAM-146/spif
+#
+# Creates version: 0.1
+# Example filename: core-cloud-phy_faam_20230614_v001_r0_c339_cip15-1.nc
+#
+meta:
+  file_pattern: >-
+    core-cloud-phy_faam_[0-9]{8}_v001_r[0-9]+_[c-z][0-9]{3}_cip15-1.nc
+  short_name: 'spif_cip15-1'
+  canonical_name: 'Decoded image data from the CIP15-1'
+  version: 20231128
+  description: >-
+    This dataset contains decoded raw image data from the DMT Cloud Imaging
+    Probe. Data is stored using the SPIF standard file structure. Higher level
+    data products, derived from the image data, may also be in this file.
+  references:
+    - ['FAAM instrument documentation', 'https://www.faam.ac.uk/sphinx/instruments/']
+    - ['SPIF standard', 'https://github.com/FAAM-146/spif']
+
+# ------------------------------------------------------------------------------
+attributes:
+  Conventions: '<str: derived_from_file>'
+  title: '<str: derived_from_file>'
+  summary: '<str: derived_from_file>'
+  references: '<str: derived_from_file>'
+  comment: '<str: derived_from_file optional>'
+  history: '<str: derived_from_file>'
+  revision_date: '<str: derived_from_file>'  #'datetime.date'
+  revision_number: '<int: derived_from_file>'
+  revision_comment: '<str: derived_from_file optional>'
+
+  # data creator and publisher
+  creator_name: '<str: derived_from_file>'
+  creator_institution: '<str: derived_from_file>'
+  creator_address:  '<str: derived_from_file>'
+  creator_email: '<str: derived_from_file>'
+  creator_url: '<str: derived_from_file optional>'
+  creator_type: '<str: derived_from_file>'
+  date_created: '<str: derived_from_file>'  #'datetime.datetime'
+  publisher_institution: CEDA
+  publisher_type: institution
+  publisher_email: support@ceda.ac.uk
+  publisher_url: https://www.ceda.ac.uk
+
+  # data source information
+  source: In situ probe; optical array probe.
+  instrument: CIP15   #### this is the name of the instrument group
+  institution: FAAM Airborne Laboratory
+  address: >-
+    Building 146, Cranfield University, College Road,
+    Cranfield, Bedford. MK43 0AL. UK.
+  platform: FAAM BAe-146-301 Atmospheric Research Aircraft
+  platform_type: aircraft
+  deployment_mode: '<str: derived_from_file optional,regex=air>'
+  naming_authority: uk.ac.faam
+  id: '<str: derived_from_file>'
+  uuid: '<str: derived_from_file>'
+
+  # project information
+  project: '<str: derived_from_file optional>'
+  project_name: '<str: derived_from_file optional>'
+  project_acronym: '<str: derived_from_file optional>'
+  project_principal_investigator: '<str: derived_from_file optional>'
+  project_principal_investigator_email: '<str: derived_from_file optional>'
+  project_principal_investigator_url: '<str: derived_from_file optional>'
+
+  # processor information
+  processing_software_commit: '<str: derived_from_file optional>'
+  processing_software_doi: '<str: derived_from_file optional>'
+  processing_software_url:  '<str: derived_from_file optional>'
+  processing_software_version: '<str: derived_from_file>'
+
+  # data information
+  date: '<str: derived_from_file>'  #'datetime.date'
+  flight_date: '<str: derived_from_file>'  #'datetime.date'
+  flight_number: '<str: derived_from_file>'
+  time_coverage_duration: '<str: derived_from_file>'  #'datetime.timedelta'
+  time_coverage_start: '<str: derived_from_file>'  #'datetime.datetime'
+  time_coverage_end: '<str: derived_from_file>'  #'datetime.datetime'
+  geospatial_bounds: '<str: derived_from_file>'
+  geospatial_bounds_crs: '<str: derived_from_file>'
+  geospatial_lat_max: '<float32: derived_from_file>'
+  geospatial_lat_min: '<float32: derived_from_file>'
+  geospatial_lat_units: '<str: derived_from_file>'
+  geospatial_lon_max: '<float32: derived_from_file>'
+  geospatial_lon_min: '<float32: derived_from_file>'
+  geospatial_lon_units: '<str: derived_from_file>'
+  geospatial_vertical_max: '<float32: derived_from_file>'
+  geospatial_vertical_min: '<float32: derived_from_file>'
+  geospatial_vertical_units: '<str: derived_from_file>'
+  geospatial_vertical_positive: '<str: derived_from_file>'
+
+  # Usage and vocab information
+  keywords: >-
+    CLOUD DROPLET DISTRIBUTION,
+  keywords_vocabulary: 'Global Change Master Directory (GCMD)'
+  metadata_link: '<str: derived_from_file>'
+  standard_name_vocabulary: '<str: derived_from_file>'
+  license: >-
+    UK Government Open Licence agreement -
+    http://www.nationalarchives.gov.uk/doc/open-government-licence
+  acknowledgement: >-
+    Airborne data was obtained using the BAe-146-301 Atmospheric Research
+    Aircraft [ARA] flown by Airtask Ltd and managed by FAAM Airborne
+    Laboratory, jointly operated by UKRI and the University of Leeds
+
+variables: []
+dimensions: []
+groups:
+  - meta:
+      name: platform
+      description: Data from platform that is used to process image data
+  
+    attributes:
+      comment: '<str: derived_from_file optional>' 
+
+    dimensions:
+      - name: Time
+        size: null
+      - name: sps32
+        size: 32
+
+    variables:
+      - meta:
+          name: Time
+          datatype: <int32>
+          required: false
+        dimensions: ['Time']
+        attributes:
+          long_name: Time of measurement
+          standard_name: time
+          calendar: gregorian
+          coverage_content_type: coordinate
+          source: '<str: derived_from_file>'    # core filename and variable name
+          frequency: 1
+          units: '<str: derived_from_file>'
+          _FillValue: -9999
+
+      - meta:
+          name: altitude
+          datatype: <float32>
+          required: false
+        dimensions: ['Time', 'sps32']
+        attributes:
+          long_name: Platform altitude
+          standard_name: altitude
+          coverage_content_type: physicalMeasurement
+          source: '<str: derived_from_file>'
+          frequency: 32
+          units: '<str: derived_from_file>'
+          actual_range:
+            - '<float32: derived_from_file>'
+            - '<float32: derived_from_file>'
+          ancillary_variables: altitude_flag
+          axis: Z
+          positive: up
+          _FillValue: -9999.
+
+      - meta:
+          name: altitude_flag
+          datatype: <byte>
+          required: false
+        dimensions: ['Time', 'sps32']
+        attributes:
+          long_name: Data quality flag for altitude
+          valid_range:  
+            - '<byte: derived_from_file>'
+            - '<byte: derived_from_file>'
+          flag_masks: '<Array[byte]: derived_from_file>'
+          flag_meanings: '<str: derived_from_file>'
+          coverage_content_type: qualityInformation
+          source: '<str: derived_from_file>'
+          frequency: 32
+          units: '1'
+          _FillValue: 0
+
+      - meta:
+          name: latitude
+          datatype: <float32>
+          required: false
+        dimensions: ['Time', 'sps32']
+        attributes:
+          long_name: Platform latitude
+          standard_name: latitude
+          coverage_content_type: physicalMeasurement
+          source: '<str: derived_from_file>'
+          frequency: 32
+          units: '<str: derived_from_file>'
+          actual_range: 
+            - '<float32: derived_from_file>'
+            - '<float32: derived_from_file>'
+          ancillary_variables: latitude_flag
+          axis: Y
+          _FillValue: -9999.
+
+      - meta:
+          name: latitude_flag
+          datatype: <byte>
+          required: false
+        dimensions: ['Time', 'sps32']
+        attributes:
+          long_name: Data quality flag for latitude
+          valid_range: 
+            - '<byte: derived_from_file>'
+            - '<byte: derived_from_file>'
+          flag_masks: '<Array[byte]: derived_from_file>'
+          flag_meanings: '<str: derived_from_file>'
+          coverage_content_type: qualityInformation
+          source: '<str: derived_from_file>'
+          frequency: 32
+          units: '1'
+          _FillValue: 0
+
+      - meta:
+          name: longitude
+          datatype: <float32>
+          required: false
+        dimensions: ['Time', 'sps32']
+        attributes:
+          long_name: Platform longitude
+          standard_name: longitude
+          coverage_content_type: physicalMeasurement
+          source: '<str: derived_from_file>'
+          frequency: 32
+          units: '<str: derived_from_file>'
+          actual_range: 
+            - '<float32: derived_from_file>'
+            - '<float32: derived_from_file>'
+          ancillary_variables: longitude_flag
+          axis: X
+          _FillValue: -9999.
+
+      - meta:
+          name: longitude_flag
+          datatype: <byte>
+          required: false
+        dimensions: ['Time', 'sps32']
+        attributes:
+          long_name: Data quality flag for longitude
+          valid_range: 
+            - '<byte: derived_from_file>'
+            - '<byte: derived_from_file>'
+          flag_masks: '<Array[byte]: derived_from_file>'
+          flag_meanings: '<str: derived_from_file>'
+          coverage_content_type: qualityInformation
+          source: '<str: derived_from_file>'
+          frequency: 32
+          units: '1'
+          _FillValue: 0
+
+      - meta:
+          name: tas
+          datatype: <float32>
+          required: false
+        dimensions: ['Time', 'sps32']
+        attributes:
+          long_name: Platform true air speed
+          standard_name: platform_speed_wrt_air
+          coverage_content_type: physicalMeasurement
+          source: '<str: derived_from_file>'
+          frequency: 32
+          units: '<str: derived_from_file>'
+          actual_range:
+            - '<float32: derived_from_file>'
+            - '<float32: derived_from_file>'
+          ancillary_variables: tas_flag
+          _FillValue: -9999.
+
+      - meta:
+          name: tas_flag
+          datatype: <byte>
+          required: false
+        dimensions: ['Time', 'sps32']
+        attributes:
+          long_name: Data quality flag for tas
+          valid_range:
+            - '<byte: derived_from_file>'
+            - '<byte: derived_from_file>'
+          flag_masks: '<Array[byte]: derived_from_file>'
+          flag_meanings: '<str: derived_from_file>'
+          coverage_content_type: qualityInformation
+          source: '<str: derived_from_file>'
+          frequency: 32
+          units: '1'
+          _FillValue: 0
+
+
+  # -------------------------------------------------
+  # instrument-1 group
+  - meta:
+      name: CIP15
+      description: Instrument group of raw and processed data for this instrument.
+
+    attributes:
+      # instrument information
+      instrument: '<str: derived_from_file optional>'
+      instrument_name: CIP15-1
+      instrument_long_name: Cloud Imaging Probe, 15 um resolution.
+      instrument_description: >-
+        Droplet Measurement Technologies Inc. Cloud Imaging Probe,
+        15 micron resolution with Grayscale and Korolev anti-shatter
+        tips (CIP-15 GS)
+      instrument_location: '<str: derived_from_file>'
+      instrument_orientation: '<str: derived_from_file>'
+      instrument_manufacturer: Droplet Measurement Technologies
+      instrument_model: CIP-15 GS
+      instrument_serial_number: '0302-002'
+      instrument_software: '<str: derived_from_file optional>'
+      instrument_software_version: '<str: derived_from_file optional>'
+      instrument_fimware: '<str: derived_from_file optional>'
+      references: >    ## Or maybe this should be FAAM instr page thing
+        https://www.dropletmeasurement.com/manual/
+        operator-manual-cloud-imaging-probe-cip/
+      raw_filenames: '<str: derived_from_file optional>'
+
+    # instrument group dimensions
+    dimensions:
+      - name: array_dimensions
+        size: 2
+      - name: pixel_colors
+        size: 3
+
+    # instrument group mandatory variables
+    variables:
+      - meta:
+          name: color_level
+          datatype: <float32>
+          required: true
+        dimensions: ['pixel_colors']
+        attributes:
+          long_name: Lower bound of obscuration/grayscale/color level
+          coverage_content_type: auxiliaryInformation
+          units: '1'
+          _FillValue: -9999.
+          comment: >-
+            Obscuration/grayscale/color level corresponding to each value of
+            pixel_colors. For example, a grayscale OAP may have lower-bound shadow
+            levels of [0, 0.25, 0.5, 0.75].
+
+      - meta:
+          name: array_size
+          datatype: <int32>
+          required: true
+        dimensions: ['array_dimensions']
+        attributes:
+          long_name: Number of pixels in detector along each array dimension
+          coverage_content_type: auxiliaryInformation
+          units: '1'
+          _FillValue: -9999
+
+      - meta:
+          name: image_size
+          datatype: <int32>
+          required: true
+        dimensions: ['array_dimensions']
+        attributes:
+          long_name: Number of pixels across an image along each array dimension
+          coverage_content_type: auxiliaryInformation
+          units: '1'
+          _FillValue: -9999
+          comment: If variable size images are produced by probe then is _FillValue.
+
+      - meta:
+          name: resolution
+          datatype: <float32>
+          required: true
+        dimensions: ['array_dimensions']
+        attributes:
+          long_name: Pixel resolution along each array dimension
+          coverage_content_type: auxiliaryInformation
+          units: '<str: derived_from_file>'
+          _FillValue: -9999.
+
+      - meta:
+          name: wavelength
+          datatype: <float32>
+          required: true
+        dimensions: []
+        attributes:
+          long_name: Wavelength of laser used for imaging particles
+          coverage_content_type: auxiliaryInformation
+          units: '<str: derived_from_file>'
+          _FillValue: -9999.
+
+      - meta:
+          name: pathlength
+          datatype: <float32>
+          required: true
+        dimensions: []
+        attributes:
+          long_name: Optical path length of imaging region
+          coverage_content_type: auxiliaryInformation
+          units: '<str: derived_from_file>'
+          _FillValue: -9999.
+          comment: For OAPs the pathlength will be arm separation distance.
+
+    # instrument group optional variables
+      - meta:
+          name: color_value
+          datatype: <uint8>
+          required: false
+        dimensions: ['pixel_colors']
+        attributes:
+          long_name: Byte values of image associated with each color_level value
+          coverage_content_type: auxiliaryInformation
+          units: '1'
+          _FillValue: 255
+
+      - meta:
+          name: resolution_error
+          datatype: <float32>
+          required: false
+        dimensions: ['array_dimensions']
+        attributes:
+          long_name: Uncertainty of pixel resolution
+          coverage_content_type: auxiliaryInformation
+          units: '<str: derived_from_file>'
+          _FillValue: -9999.
+
+    # ---------------------------------------------------
+    groups:
+      # instrument/core group
+      - meta:
+          name: core
+          description: Decompressed raw image data
+
+        attributes: {}
+
+        # instrument/images group dimensions. Both are UNLIMITED
+        dimensions:
+          - name: image_num
+            size: null
+          - name: pixel
+            size: null
+
+        # instrument/images group mandatory variables
+        variables:
+          - meta:
+              name: image
+              datatype: <uint8>
+              required: true
+            dimensions: ['pixel']
+            attributes:
+              long_name: 1-dimensional array of series of images
+              coverage_content_type: image
+              _FillValue: 255
+
+          - meta:
+              name: timestamp
+              datatype: <uint64>
+              required: true
+            dimensions: ['image_num']
+            attributes:
+              long_name: Image arrival time
+              standard_name: time
+              units: '<str: derived_from_file>'
+
+          - meta:
+              name: startpixel
+              datatype: <uint32>
+              required: true
+            dimensions: ['image_num']
+            attributes:
+              long_name: Array index for the first pixel of each image in image
+              _FillValue: 4294967295
+
+          - meta:
+              name: width
+              datatype: <uint8>
+              required: true
+            dimensions: ['image_num']
+            attributes:
+              long_name: Number of pixels across an image
+              _FillValue: 255
+
+          - meta:
+              name: height
+              datatype: <uint8>
+              required: true
+            dimensions: ['image_num']
+            attributes:
+              long_name: Number of slices/lines along an image
+              _FillValue: 255
+
+          - meta:
+              name: overload
+              datatype: <byte>
+              required: true
+            dimensions: ['image_num']
+            attributes:
+              long_name: Overload flag for each image
+              _FillValue: -127
+
+          # instrument.core group optional variables
+          - meta:
+              name: timestamp_flag
+              datatype: <byte>
+              required: false
+            dimensions: ['image_num']
+            attributes:
+              long_name: Surety in determination of image arrival timestamp
+              flag_values: '<Array[byte]: derived_from_file>'
+              flag_meanings: '<str: derived_from_file>'
+              _FillValue: -127
+
+
+    # ---------------------------------------------------
+      # instrument/auxillary group
+      - meta:
+          name: auxillary
+          description: Other probe data and housekeeping from PADS
+
+
+        attributes:
+          comment: Data and housekeeping obtained from the aggregated PADS datafile/s
+          raw_filenames: '<str: derived_from_file optional>'
+
+        dimensions:
+          - name: Time
+            size: null
+
+        variables:
+          - meta:
+              name: Time
+              datatype: <int32>
+              required: false
+            dimensions: ['Time']
+            attributes:
+              long_name: Time of measurement
+              standard_name: time
+              calendar: gregorian
+              coverage_content_type: coordinate
+              frequency: 1
+              units: '<str: derived_from_file>'
+              _FillValue: -9999
+
+          - meta:
+              name: diode_01_voltage
+              datatype: <float32>
+              required: false
+            dimensions: ['Time']
+            attributes:
+              long_name: Voltage of diode 1 (lefthand side) on image array
+              coverage_content_type: physicalMeasurement
+              comment: Obtained from 'Diode 1 Voltage' column in PADS data file.
+              frequency: 1
+              units: '1'
+              _FillValue: -9999.
+
+          - meta:
+              name: diode_32_voltage
+              datatype: <float32>
+              required: false
+            dimensions: ['Time']
+            attributes:
+              long_name: Voltage of diode 32 (center) on image array
+              coverage_content_type: physicalMeasurement
+              comment: Obtained from 'Diode 32 Voltage' column in PADS data file.
+              frequency: 1
+              units: '1'
+              _FillValue: -9999.
+
+          - meta:
+              name: diode_64_voltage
+              datatype: <float32>
+              required: false
+            dimensions: ['Time']
+            attributes:
+              long_name: Voltage of diode 64 (righthand side) on image array
+              coverage_content_type: physicalMeasurement
+              comment: Obtained from 'Diode 64 Voltage' column in PADS data file.
+              frequency: 1
+              units: '1'
+              _FillValue: -9999.
+
+          - meta:
+              name: board_temperature
+              datatype: <float32>
+              required: false
+            dimensions: ['Time']
+            attributes:
+              long_name: On-board probe temperature
+              coverage_content_type: physicalMeasurement
+              comment: Obtained from 'Board Temp (C)' column in PADS data file.
+              frequency: 1
+              units: 'degC'
+              _FillValue: -9999.
+
+          - meta:
+              name: laser_temperature
+              datatype: <float32>
+              required: false
+            dimensions: ['Time']
+            attributes:
+              long_name: Laser temperature
+              coverage_content_type: physicalMeasurement
+              comment: Obtained from 'Laser Temp (C)' column in PADS data file.
+              frequency: 1
+              units: 'degC'
+              _FillValue: -9999.
+
+          - meta:
+              name: laser_current
+              datatype: <float32>
+              required: false
+            dimensions: ['Time']
+            attributes:
+              long_name: Laser current
+              coverage_content_type: physicalMeasurement
+              comment: Obtained from 'Laser Current (mA)' column in PADS data file.
+              frequency: 1
+              units: 'mA'
+              _FillValue: -9999.
+
+          - meta:
+              name: pas
+              datatype: <float32>
+              required: false
+            dimensions: ['Time']
+            attributes:
+              long_name: Probe air speed as derived from instrument pitot tube.
+              coverage_content_type: physicalMeasurement
+              comment: Obtained from 'CIP Grayscale PAS (m/s)' column in PADS data file.
+              frequency: 1
+              units: 'ms-1'
+              _FillValue: -9999.
+
+          - meta:
+              name: number_concentration
+              datatype: <float32>
+              required: false
+            dimensions: ['Time']
+            attributes:
+              long_name: Particle number concentration derived in flight
+              coverage_content_type: physicalMeasurement
+              comment: Obtained from 'Number Conc (#/cm^3)' column in PADS data file.
+
+              frequency: 1
+              units: 'cc-1'
+              _FillValue: -9999.
+
+
+
