@@ -57,7 +57,7 @@ attributes:
   deployment_mode: '<str: derived_from_file optional,regex=air>'
   naming_authority: uk.ac.faam
   id: '<str: derived_from_file>'
-  uuid: '<uuid: derived_from_file>'
+  uuid: '<str: derived_from_file>'
 
   # project information
   project: '<str: derived_from_file optional>'
@@ -101,11 +101,11 @@ attributes:
   standard_name_vocabulary: '<str: derived_from_file>'
   license: >-
     UK Government Open Licence agreement -
-    http://www.nationalarchives.gov.uk/doc/open-government-licence'
+    http://www.nationalarchives.gov.uk/doc/open-government-licence
   acknowledgement: >-
     Airborne data was obtained using the BAe-146-301 Atmospheric Research
     Aircraft [ARA] flown by Airtask Ltd and managed by FAAM Airborne
-    Laboratory, jointly operated by UKRI and the University of Leeds.
+    Laboratory, jointly operated by UKRI and the University of Leeds
 
 variables: []
 dimensions: []
@@ -115,7 +115,7 @@ groups:
       description: Data from platform that is used to process image data
   
     attributes:
-      comment: '<str: derived_from_file>' 
+      comment: '<str: derived_from_file optional>' 
 
     dimensions:
       - name: Time
@@ -134,6 +134,7 @@ groups:
           standard_name: time
           calendar: gregorian
           coverage_content_type: coordinate
+          source: '<str: derived_from_file>'    # core filename and variable name
           frequency: 1
           units: '<str: derived_from_file>'
           _FillValue: -9999
@@ -144,14 +145,15 @@ groups:
           required: false
         dimensions: ['Time', 'sps32']
         attributes:
-          long_name: '<str: derived_from_file>'
+          long_name: Platform altitude
           standard_name: altitude
           coverage_content_type: physicalMeasurement
+          source: '<str: derived_from_file>'
           frequency: 32
-          instrument_manufacturer: '<str: derived_from_file>'
-          instrument_model: '<str: derived_from_file>'
           units: '<str: derived_from_file>'
-          actual_range: '<float32: derived_from_file>'
+          actual_range:
+            - '<float32: derived_from_file>'
+            - '<float32: derived_from_file>'
           ancillary_variables: altitude_flag
           axis: Z
           positive: up
@@ -163,14 +165,17 @@ groups:
           required: false
         dimensions: ['Time', 'sps32']
         attributes:
-          long_name: '<str: derived_from_file>'
-          valid_range: 1B, 3B
-          flag_masks: 1B, 2B
+          long_name: Data quality flag for altitude
+          valid_range:  
+            - '<byte: derived_from_file>'
+            - '<byte: derived_from_file>'
+          flag_masks: '<Array[byte]: derived_from_file>'
           flag_meanings: '<str: derived_from_file>'
           coverage_content_type: qualityInformation
+          source: '<str: derived_from_file>'
           frequency: 32
-          units: 1
-          _FillValue: 0B
+          units: '1'
+          _FillValue: 0
 
       - meta:
           name: latitude
@@ -178,14 +183,15 @@ groups:
           required: false
         dimensions: ['Time', 'sps32']
         attributes:
-          long_name: '<str: derived_from_file>'
+          long_name: Platform latitude
           standard_name: latitude
           coverage_content_type: physicalMeasurement
+          source: '<str: derived_from_file>'
           frequency: 32
-          instrument_manufacturer: '<str: derived_from_file>'
-          instrument_model: '<str: derived_from_file>'
           units: '<str: derived_from_file>'
-          actual_range: '<float32: derived_from_file>'
+          actual_range: 
+            - '<float32: derived_from_file>'
+            - '<float32: derived_from_file>'
           ancillary_variables: latitude_flag
           axis: Y
           _FillValue: -9999.
@@ -196,14 +202,17 @@ groups:
           required: false
         dimensions: ['Time', 'sps32']
         attributes:
-          long_name: '<str: derived_from_file>'
-          valid_range: 1B, 3B
-          flag_masks: 1B, 2B
+          long_name: Data quality flag for latitude
+          valid_range: 
+            - '<byte: derived_from_file>'
+            - '<byte: derived_from_file>'
+          flag_masks: '<Array[byte]: derived_from_file>'
           flag_meanings: '<str: derived_from_file>'
           coverage_content_type: qualityInformation
+          source: '<str: derived_from_file>'
           frequency: 32
-          units: 1
-          _FillValue: 0B
+          units: '1'
+          _FillValue: 0
 
       - meta:
           name: longitude
@@ -211,14 +220,15 @@ groups:
           required: false
         dimensions: ['Time', 'sps32']
         attributes:
-          long_name: '<str: derived_from_file>'
+          long_name: Platform longitude
           standard_name: longitude
           coverage_content_type: physicalMeasurement
+          source: '<str: derived_from_file>'
           frequency: 32
-          instrument_manufacturer: '<str: derived_from_file>'
-          instrument_model: '<str: derived_from_file>'
           units: '<str: derived_from_file>'
-          actual_range: '<float32: derived_from_file>'
+          actual_range: 
+            - '<float32: derived_from_file>'
+            - '<float32: derived_from_file>'
           ancillary_variables: longitude_flag
           axis: X
           _FillValue: -9999.
@@ -229,14 +239,17 @@ groups:
           required: false
         dimensions: ['Time', 'sps32']
         attributes:
-          long_name: '<str: derived_from_file>'
-          valid_range: 1B, 3B
-          flag_masks: 1B, 2B
+          long_name: Data quality flag for longitude
+          valid_range: 
+            - '<byte: derived_from_file>'
+            - '<byte: derived_from_file>'
+          flag_masks: '<Array[byte]: derived_from_file>'
           flag_meanings: '<str: derived_from_file>'
           coverage_content_type: qualityInformation
+          source: '<str: derived_from_file>'
           frequency: 32
-          units: 1
-          _FillValue: 0B
+          units: '1'
+          _FillValue: 0
 
       - meta:
           name: tas
@@ -244,12 +257,15 @@ groups:
           required: false
         dimensions: ['Time', 'sps32']
         attributes:
-          long_name: '<str: derived_from_file>'
+          long_name: Platform true air speed
           standard_name: platform_speed_wrt_air
           coverage_content_type: physicalMeasurement
+          source: '<str: derived_from_file>'
           frequency: 32
           units: '<str: derived_from_file>'
-          actual_range: '<float32: derived_from_file>'
+          actual_range:
+            - '<float32: derived_from_file>'
+            - '<float32: derived_from_file>'
           ancillary_variables: tas_flag
           _FillValue: -9999.
 
@@ -259,18 +275,21 @@ groups:
           required: false
         dimensions: ['Time', 'sps32']
         attributes:
-          long_name: '<str: derived_from_file>'
-          valid_range: 1B, 7B
-          flag_masks: 1B, 2B, 4B
+          long_name: Data quality flag for tas
+          valid_range:
+            - '<byte: derived_from_file>'
+            - '<byte: derived_from_file>'
+          flag_masks: '<Array[byte]: derived_from_file>'
           flag_meanings: '<str: derived_from_file>'
           coverage_content_type: qualityInformation
+          source: '<str: derived_from_file>'
           frequency: 32
-          units: 1
-          _FillValue: 0B
+          units: '1'
+          _FillValue: 0
 
 
   # -------------------------------------------------
-  # instrument group
+  # instrument-1 group
   - meta:
       name: CIP15
       description: Instrument group of raw and processed data for this instrument.
@@ -313,6 +332,9 @@ groups:
         dimensions: ['pixel_colors']
         attributes:
           long_name: Lower bound of obscuration/grayscale/color level
+          coverage_content_type: auxiliaryInformation
+          units: '1'
+          _FillValue: -9999.
           comment: >-
             Obscuration/grayscale/color level corresponding to each value of
             pixel_colors. For example, a grayscale OAP may have lower-bound shadow
@@ -325,6 +347,9 @@ groups:
         dimensions: ['array_dimensions']
         attributes:
           long_name: Number of pixels in detector along each array dimension
+          coverage_content_type: auxiliaryInformation
+          units: '1'
+          _FillValue: -9999
 
       - meta:
           name: image_size
@@ -333,6 +358,9 @@ groups:
         dimensions: ['array_dimensions']
         attributes:
           long_name: Number of pixels across an image along each array dimension
+          coverage_content_type: auxiliaryInformation
+          units: '1'
+          _FillValue: -9999
           comment: If variable size images are produced by probe then is _FillValue.
 
       - meta:
@@ -342,7 +370,9 @@ groups:
         dimensions: ['array_dimensions']
         attributes:
           long_name: Pixel resolution along each array dimension
+          coverage_content_type: auxiliaryInformation
           units: '<str: derived_from_file>'
+          _FillValue: -9999.
 
       - meta:
           name: wavelength
@@ -351,7 +381,9 @@ groups:
         dimensions: []
         attributes:
           long_name: Wavelength of laser used for imaging particles
+          coverage_content_type: auxiliaryInformation
           units: '<str: derived_from_file>'
+          _FillValue: -9999.
 
       - meta:
           name: pathlength
@@ -360,8 +392,10 @@ groups:
         dimensions: []
         attributes:
           long_name: Optical path length of imaging region
-          comment: For OAPs the pathlength will be arm separation distance.
+          coverage_content_type: auxiliaryInformation
           units: '<str: derived_from_file>'
+          _FillValue: -9999.
+          comment: For OAPs the pathlength will be arm separation distance.
 
     # instrument group optional variables
       - meta:
@@ -371,6 +405,9 @@ groups:
         dimensions: ['pixel_colors']
         attributes:
           long_name: Byte values of image associated with each color_level value
+          coverage_content_type: auxiliaryInformation
+          units: '1'
+          _FillValue: 255
 
       - meta:
           name: resolution_error
@@ -379,7 +416,9 @@ groups:
         dimensions: ['array_dimensions']
         attributes:
           long_name: Uncertainty of pixel resolution
+          coverage_content_type: auxiliaryInformation
           units: '<str: derived_from_file>'
+          _FillValue: -9999.
 
     # ---------------------------------------------------
     groups:
@@ -430,7 +469,7 @@ groups:
 
           - meta:
               name: width
-              datatype: <uint2>
+              datatype: <uint8>
               required: true
             dimensions: ['image_num']
             attributes:
@@ -439,7 +478,7 @@ groups:
 
           - meta:
               name: height
-              datatype: <uint2>
+              datatype: <uint8>
               required: true
             dimensions: ['image_num']
             attributes:
@@ -463,7 +502,7 @@ groups:
             dimensions: ['image_num']
             attributes:
               long_name: Surety in determination of image arrival timestamp
-              flag_values: '<str: derived_from_file>'   ### Is this a string??
+              flag_values: '<Array[byte]: derived_from_file>'
               flag_meanings: '<str: derived_from_file>'
               _FillValue: -127
 
@@ -477,6 +516,7 @@ groups:
 
         attributes:
           comment: Data and housekeeping obtained from the aggregated PADS datafile/s
+          raw_filenames: '<str: derived_from_file optional>'
 
         dimensions:
           - name: Time
@@ -499,7 +539,7 @@ groups:
 
           - meta:
               name: diode_01_voltage
-              datatype: <float16>
+              datatype: <float32>
               required: false
             dimensions: ['Time']
             attributes:
@@ -507,12 +547,12 @@ groups:
               coverage_content_type: physicalMeasurement
               comment: Obtained from 'Diode 1 Voltage' column in PADS data file.
               frequency: 1
-              units: 1
+              units: '1'
               _FillValue: -9999.
 
           - meta:
               name: diode_32_voltage
-              datatype: <float16>
+              datatype: <float32>
               required: false
             dimensions: ['Time']
             attributes:
@@ -520,12 +560,12 @@ groups:
               coverage_content_type: physicalMeasurement
               comment: Obtained from 'Diode 32 Voltage' column in PADS data file.
               frequency: 1
-              units: 1
+              units: '1'
               _FillValue: -9999.
 
           - meta:
               name: diode_64_voltage
-              datatype: <float16>
+              datatype: <float32>
               required: false
             dimensions: ['Time']
             attributes:
@@ -533,12 +573,12 @@ groups:
               coverage_content_type: physicalMeasurement
               comment: Obtained from 'Diode 64 Voltage' column in PADS data file.
               frequency: 1
-              units: 1
+              units: '1'
               _FillValue: -9999.
 
           - meta:
               name: board_temperature
-              datatype: <float16>
+              datatype: <float32>
               required: false
             dimensions: ['Time']
             attributes:
@@ -551,7 +591,7 @@ groups:
 
           - meta:
               name: laser_temperature
-              datatype: <float16>
+              datatype: <float32>
               required: false
             dimensions: ['Time']
             attributes:
@@ -564,7 +604,7 @@ groups:
 
           - meta:
               name: laser_current
-              datatype: <float16>
+              datatype: <float32>
               required: false
             dimensions: ['Time']
             attributes:
@@ -577,7 +617,7 @@ groups:
 
           - meta:
               name: pas
-              datatype: <float16>
+              datatype: <float32>
               required: false
             dimensions: ['Time']
             attributes:
@@ -590,7 +630,7 @@ groups:
 
           - meta:
               name: number_concentration
-              datatype: <float16>
+              datatype: <float32>
               required: false
             dimensions: ['Time']
             attributes:
