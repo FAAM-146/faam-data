@@ -3,12 +3,12 @@
 # see;
 #    https://github.com/FAAM-146/spif
 #
-# Creates version: 1.0
-# Example filename: core-cloud-phy_faam_20230614_v100_r0_c339_cip15-1.nc
+# Creates version: 0.1
+# Example filename: core-cloud-phy_faam_20230614_v001_r0_c339_cip15-1.nc
 #
 meta:
   file_pattern: >-
-    core-cloud-phy_faam_[0-9]{8}_v100_r[0-9]+_[c-z][0-9]{3}_cip15-1.nc
+    core-cloud-phy_faam_[0-9]{8}_v001_r[0-9]+_[c-z][0-9]{3}_cip15-1.nc
   short_name: 'spif_cip15-1'
   canonical_name: 'Decoded image data from the CIP15-1'
   version: 20231128
