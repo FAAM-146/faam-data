@@ -310,7 +310,7 @@ groups:
       instrument_serial_number: 0302-002
       instrument_software: '<str: derived_from_file optional>'
       instrument_software_version: '<str: derived_from_file optional>'
-      instrument_fimware: '<str: derived_from_file optional>'
+      instrument_firmware: '<str: derived_from_file optional>'
       references: >    ## Or maybe this should be FAAM instr page thing
         https://www.dropletmeasurement.com/manual/
         operator-manual-cloud-imaging-probe-cip/
