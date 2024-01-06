@@ -1,17 +1,17 @@
-# Definition file for FAAM CIP15-1
+# Definition file for FAAM CAPS CIP25
 # Use with SPIF vocal project to create/check netCDF files
 # see;
 #    https://github.com/FAAM-146/spif
 #
-# Creates version: 0.1
-# Example filename: core-cloud-phy_faam_20230614_v001_r0_c339_cip15-1.nc
+# Definition version: 20231219
+# Creates version: 1.0
+# Example filename: core-cloud-phy_faam_20230614_v001_r0_c339_cip25-1.nc
 #
 meta:
   file_pattern: >-
-    core-cloud-phy_faam_[0-9]{8}_v001_r[0-9]+_[c-z][0-9]{3}_cip15-1.nc
-  short_name: 'spif_cip15-1'
-  canonical_name: 'Decoded image data from the CIP15-1'
-  version: 20231128
+    core-cloud-phy_faam_[0-9]{8}_v001_r[0-9]+_[c-z][0-9]{3}_cip25-1.nc
+  short_name: 'spif_cip25-1'
+  long_name: 'Decoded image data from the CIP25-1'
   description: >-
     This dataset contains decoded raw image data from the DMT Cloud Imaging
     Probe. Data is stored using the SPIF standard file structure. Higher level
@@ -47,7 +47,7 @@ attributes:
 
   # data source information
   source: In situ probe; optical array probe.
-  instrument: CIP15   #### this is the name of the instrument group
+  instrument: CIP25   #### this is the name of the instrument group
   institution: FAAM Airborne Laboratory
   address: >-
     Building 146, Cranfield University, College Road,
@@ -109,6 +109,8 @@ attributes:
 
 variables: []
 dimensions: []
+
+# ------------------------------------------------------------------------------
 groups:
   - meta:
       name: platform
@@ -135,7 +137,7 @@ groups:
           calendar: gregorian
           coverage_content_type: coordinate
           source: '<str: derived_from_file>'    # core filename and variable name
-          frequency: 1
+          frequency: 32
           units: '<str: derived_from_file>'
           _FillValue: -9999
 
@@ -288,26 +290,27 @@ groups:
           _FillValue: 0
 
 
-  # -------------------------------------------------
-  # instrument-1 group
+  # ----------------------------------------------------------------------------
+  # Top-level instrument group
   - meta:
-      name: CIP15
+      name: CIP25
       description: Instrument group of raw and processed data for this instrument.
 
     attributes:
       # instrument information
       instrument: '<str: derived_from_file optional>'
-      instrument_name: CIP15-1
+      instrument_name: CIP25-1
       instrument_long_name: Cloud Imaging Probe, 15 um resolution.
       instrument_description: >-
         Droplet Measurement Technologies Inc. Cloud Imaging Probe,
-        15 micron resolution with Grayscale and Korolev anti-shatter
-        tips (CIP-15 GS)
+        25 micron resolution with Grayscale and Korolev anti-shatter
+        tips (CIP-15 GS). This part of the DMT Cloud, Aerosol, and Precipitation
+        Spectrometer with Depolarization (CAPS-DPOL) probe.
       instrument_location: '<str: derived_from_file>'
       instrument_orientation: '<str: derived_from_file>'
       instrument_manufacturer: Droplet Measurement Technologies
-      instrument_model: CIP-15 GS
-      instrument_serial_number: '0302-002'
+      instrument_model: CIP-25 GS
+      instrument_serial_number: '1312-062'
       instrument_software: '<str: derived_from_file optional>'
       instrument_software_version: '<str: derived_from_file optional>'
       instrument_firmware: '<str: derived_from_file optional>'
@@ -337,8 +340,8 @@ groups:
           _FillValue: -9999.
           comment: >-
             Obscuration/grayscale/color level corresponding to each value of
-            pixel_colors. For example, a grayscale OAP may have lower-bound shadow
-            levels of [0, 0.25, 0.5, 0.75].
+            pixel_colors. For example, a grayscale OAP may have lower-bound
+            shadow levels of [0, 0.25, 0.5, 0.75].
 
       - meta:
           name: array_size
@@ -361,7 +364,8 @@ groups:
           coverage_content_type: auxiliaryInformation
           units: '1'
           _FillValue: -9999
-          comment: If variable size images are produced by probe then is _FillValue.
+          comment: >-
+            If variable size images are produced by probe then is _FillValue.
 
       - meta:
           name: resolution
@@ -397,7 +401,7 @@ groups:
           _FillValue: -9999.
           comment: For OAPs the pathlength will be arm separation distance.
 
-    # instrument group optional variables
+      # instrument group optional variables
       - meta:
           name: color_value
           datatype: <uint8>
@@ -515,7 +519,8 @@ groups:
 
 
         attributes:
-          comment: Data and housekeeping obtained from the aggregated PADS datafile/s
+          comment: >-
+            Data and housekeeping obtained from the aggregated PADS datafile/s
           raw_filenames: '<str: derived_from_file optional>'
 
         dimensions:
@@ -545,7 +550,8 @@ groups:
             attributes:
               long_name: Voltage of diode 1 (lefthand side) on image array
               coverage_content_type: physicalMeasurement
-              comment: Obtained from 'Diode 1 Voltage' column in PADS data file.
+              comment: >-
+                Obtained from 'Diode 1 Voltage' column in PADS data file.
               frequency: 1
               units: '1'
               _FillValue: -9999.
@@ -558,7 +564,8 @@ groups:
             attributes:
               long_name: Voltage of diode 32 (center) on image array
               coverage_content_type: physicalMeasurement
-              comment: Obtained from 'Diode 32 Voltage' column in PADS data file.
+              comment: >-
+                Obtained from 'Diode 32 Voltage' column in PADS data file.
               frequency: 1
               units: '1'
               _FillValue: -9999.
@@ -571,7 +578,8 @@ groups:
             attributes:
               long_name: Voltage of diode 64 (righthand side) on image array
               coverage_content_type: physicalMeasurement
-              comment: Obtained from 'Diode 64 Voltage' column in PADS data file.
+              comment: >-
+                Obtained from 'Diode 64 Voltage' column in PADS data file.
               frequency: 1
               units: '1'
               _FillValue: -9999.
@@ -584,7 +592,8 @@ groups:
             attributes:
               long_name: On-board probe temperature
               coverage_content_type: physicalMeasurement
-              comment: Obtained from 'Board Temp (C)' column in PADS data file.
+              comment: >-
+                Obtained from 'Board Temp (C)' column in PADS data file.
               frequency: 1
               units: 'degC'
               _FillValue: -9999.
@@ -597,7 +606,8 @@ groups:
             attributes:
               long_name: Laser temperature
               coverage_content_type: physicalMeasurement
-              comment: Obtained from 'Laser Temp (C)' column in PADS data file.
+              comment: >-
+                Obtained from 'Laser Temp (C)' column in PADS data file.
               frequency: 1
               units: 'degC'
               _FillValue: -9999.
@@ -610,7 +620,8 @@ groups:
             attributes:
               long_name: Laser current
               coverage_content_type: physicalMeasurement
-              comment: Obtained from 'Laser Current (mA)' column in PADS data file.
+              comment: >-
+                Obtained from 'Laser Current (mA)' column in PADS data file.
               frequency: 1
               units: 'mA'
               _FillValue: -9999.
@@ -623,7 +634,9 @@ groups:
             attributes:
               long_name: Probe air speed as derived from instrument pitot tube.
               coverage_content_type: physicalMeasurement
-              comment: Obtained from 'CIP Grayscale PAS (m/s)' column in PADS data file.
+              comment: >-
+                Obtained from 'CIP Grayscale PAS (m/s)' column in PADS data
+                file.
               frequency: 1
               units: 'ms-1'
               _FillValue: -9999.
@@ -636,8 +649,8 @@ groups:
             attributes:
               long_name: Particle number concentration derived in flight
               coverage_content_type: physicalMeasurement
-              comment: Obtained from 'Number Conc (#/cm^3)' column in PADS data file.
-
+              comment: >-
+                Obtained from 'Number Conc (#/cm^3)' column in PADS data file.
               frequency: 1
               units: 'cc-1'
               _FillValue: -9999.
