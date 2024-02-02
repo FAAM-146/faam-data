@@ -1,12 +1,12 @@
 # Definition file for FAAM core cloud data
 #
 # Definition version: 20240201
-# Creates version: 602
-# Example filename: core-cloud-phy_faam_20220731_v602_r0_c308.nc
+# Creates version: 700
+# Example filename: core-cloud-phy_faam_20220731_v700_r0_c308.nc
 #
 meta:
   file_pattern: >-
-    core-cloud-phy_faam_[0-9]{8}_v001_r[0-9]+_[c-z][0-9]{3}_cip100-1.nc
+    core-cloud-phy_faam_[0-9]{8}_v700_r[0-9]+_[c-z][0-9]{3}.nc
   short_name: core_cloud
   long_name: FAAM core cloud data
   description: >-
@@ -31,7 +31,9 @@ attributes:
   # data creator and publisher
   creator_name: '<str: derived_from_file>'
   creator_institution: FAAM Airborne Laboratory
-  creator_address:  Building 146, Cranfield University, College Road, Cranfield, Bedford. MK43 0AL. UK.
+  creator_address:  >-
+    Building 146, Cranfield University, College Road, Cranfield, Bedford.
+    MK43 0AL. UK.
   creator_email: '<str: derived_from_file>'
   creator_url: '<str: derived_from_file optional>'
   creator_type: '<str: derived_from_file>'
@@ -363,8 +365,11 @@ groups:
 
       # instrument information
       instrument: PCASP-1
-      instrument_manufacturer: Particle Metrics Inc./Droplet Measurement Technologies Inc.
-      instrument_model: Passive Cavity Aerosol Spectrometer Probe 100X with SPP200 electronics (PCASP-100X (SPP200))
+      instrument_manufacturer: >-
+        Particle Metrics Inc./Droplet Measurement Technologies Inc.
+      instrument_model: >-
+        Passive Cavity Aerosol Spectrometer Probe 100X with
+        SPP200 electronics (PCASP-100X (SPP200))
       instrument_serial: '17884-0190-04'
       instrument_location: '<str: derived_from_file>'
       instrument_description: '<str: derived_from_file>'
@@ -378,7 +383,7 @@ groups:
       processing_software_version: '<str: derived_from_file optional>'
       processing_software_url: '<str: derived_from_file optional>'
       processing_software_doi: '<str: derived_from_file optional>'
-      source: '<str: derived_from_file optional>'                       # list of raw data files
+      source: '<str: derived_from_file optional>'       # list of raw data files
 
     dimensions:
       - name: bin
@@ -474,7 +479,9 @@ groups:
           - '<str: derived_from_file optional,regex=sps>'
           - bin
         attributes:
-          long_name: Error in size-resolved aerosol number concentration, 1-sigma uncertainty
+          long_name: >-
+            Error in size-resolved aerosol number concentration,
+            1-sigma uncertainty
           comment: '<str: derived_from_file optional>'
           references: '<str: derived_from_file optional>'
           coverage_content_type: auxiliaryInformation
@@ -495,7 +502,8 @@ groups:
           - '<str: derived_from_file optional,regex=sps>'
         attributes:
           long_name: Total particle number concentration over bin_range
-          standard_name: number_concentration_of_ambient_aerosol_particles_in_air
+          standard_name: >-
+            number_concentration_of_ambient_aerosol_particles_in_air
           comment: '<str: derived_from_file optional>'
           references: '<str: derived_from_file optional>'
           coverage_content_type: physicalMeasurement
@@ -518,7 +526,9 @@ groups:
           - Time
           - '<str: derived_from_file optional,regex=sps>'
         attributes:
-          long_name: Error in total particle number concentration over bin_range, 1-sigma uncertainty
+          long_name: >-
+            Error in total particle number concentration over bin_range,
+            1-sigma uncertainty
           comment: '<str: derived_from_file optional>'
           references: '<str: derived_from_file optional>'
           coverage_content_type: auxiliaryInformation
@@ -539,7 +549,9 @@ groups:
           - '<str: derived_from_file optional,regex=sps>'
           - bin
         attributes:
-          long_name: Size-resolved aerosol number concentration - corrected for nonisokinetic sampling
+          long_name: >-
+            Size-resolved aerosol number concentration -
+            corrected for nonisokinetic sampling
           standard_name: number_size_distribution_of_aerosol_particles_in_air
           comment: '<str: derived_from_file optional>'
           references: '<str: derived_from_file optional>'
@@ -563,7 +575,9 @@ groups:
           - '<str: derived_from_file optional,regex=sps>'
           - bin
         attributes:
-          long_name: Error in size-resolved aerosol number concentration - corrected for nonisokinetic sampling, 1-sigma uncertainty
+          long_name: >-
+            Error in size-resolved aerosol number concentration -
+            corrected for nonisokinetic sampling, 1-sigma uncertainty
           comment: '<str: derived_from_file optional>'
           references: '<str: derived_from_file optional>'
           coverage_content_type: auxiliaryInformation
@@ -583,8 +597,11 @@ groups:
           - Time
           - '<str: derived_from_file optional,regex=sps>'
         attributes:
-          long_name: Total particle number concentration over bin_range - corrected for nonisokinetic sampling
-          standard_name: number_concentration_of_ambient_aerosol_particles_in_air
+          long_name: >-
+            Total particle number concentration over bin_range -
+            corrected for nonisokinetic sampling
+          standard_name: >-
+            number_concentration_of_ambient_aerosol_particles_in_air
           comment: '<str: derived_from_file optional>'
           references: '<str: derived_from_file optional>'
           coverage_content_type: physicalMeasurement
@@ -607,7 +624,9 @@ groups:
           - Time
           - '<str: derived_from_file optional,regex=sps>'
         attributes:
-          long_name: Error in total particle number concentration over bin_range - corrected for nonisokinetic sampling, 1-sigma uncertainty
+          long_name: >-
+            Error in total particle number concentration over bin_range -
+            corrected for nonisokinetic sampling, 1-sigma uncertainty
           comment: '<str: derived_from_file optional>'
           references: '<str: derived_from_file optional>'
           coverage_content_type: auxiliaryInformation
@@ -677,8 +696,11 @@ groups:
 
       # instrument information
       instrument: PCASP-2
-      instrument_manufacturer: Particle Metrics Inc./Droplet Measurement Technologies Inc.
-      instrument_model: Passive Cavity Aerosol Spectrometer Probe 100X with SPP200 electronics (PCASP-100X (SPP200))
+      instrument_manufacturer: >-
+        Particle Metrics Inc./Droplet Measurement Technologies Inc.
+      instrument_model: >-
+        Passive Cavity Aerosol Spectrometer Probe 100X with
+        SPP200 electronics (PCASP-100X (SPP200))
       instrument_serial: 'PMI-1022-1202-31'
       instrument_location: '<str: derived_from_file>'
       instrument_description: '<str: derived_from_file>'
@@ -692,7 +714,7 @@ groups:
       processing_software_version: '<str: derived_from_file optional>'
       processing_software_url: '<str: derived_from_file optional>'
       processing_software_doi: '<str: derived_from_file optional>'
-      source: '<str: derived_from_file optional>'                       # list of raw data files
+      source: '<str: derived_from_file optional>'       # list of raw data files
 
     dimensions:
       - name: bin
@@ -788,7 +810,9 @@ groups:
           - '<str: derived_from_file optional,regex=sps>'
           - bin
         attributes:
-          long_name: Error in size-resolved aerosol number concentration, 1-sigma uncertainty
+          long_name: >-
+            Error in size-resolved aerosol number concentration,
+            1-sigma uncertainty
           comment: '<str: derived_from_file optional>'
           references: '<str: derived_from_file optional>'
           coverage_content_type: auxiliaryInformation
@@ -809,7 +833,8 @@ groups:
           - '<str: derived_from_file optional,regex=sps>'
         attributes:
           long_name: Total particle number concentration over bin_range
-          standard_name: number_concentration_of_ambient_aerosol_particles_in_air
+          standard_name: >-
+            number_concentration_of_ambient_aerosol_particles_in_air
           comment: '<str: derived_from_file optional>'
           references: '<str: derived_from_file optional>'
           coverage_content_type: physicalMeasurement
@@ -832,7 +857,9 @@ groups:
           - Time
           - '<str: derived_from_file optional,regex=sps>'
         attributes:
-          long_name: Error in total particle number concentration over bin_range, 1-sigma uncertainty
+          long_name: >-
+            Error in total particle number concentration over bin_range,
+            1-sigma uncertainty
           comment: '<str: derived_from_file optional>'
           references: '<str: derived_from_file optional>'
           coverage_content_type: auxiliaryInformation
@@ -853,7 +880,9 @@ groups:
           - '<str: derived_from_file optional,regex=sps>'
           - bin
         attributes:
-          long_name: Size-resolved aerosol number concentration - corrected for nonisokinetic sampling
+          long_name: >-
+            Size-resolved aerosol number concentration -
+            corrected for nonisokinetic sampling
           standard_name: number_size_distribution_of_aerosol_particles_in_air
           comment: '<str: derived_from_file optional>'
           references: '<str: derived_from_file optional>'
@@ -877,7 +906,9 @@ groups:
           - '<str: derived_from_file optional,regex=sps>'
           - bin
         attributes:
-          long_name: Error in size-resolved aerosol number concentration - corrected for nonisokinetic sampling, 1-sigma uncertainty
+          long_name: >-
+            Error in size-resolved aerosol number concentration -
+            corrected for nonisokinetic sampling, 1-sigma uncertainty
           comment: '<str: derived_from_file optional>'
           references: '<str: derived_from_file optional>'
           coverage_content_type: auxiliaryInformation
@@ -897,8 +928,11 @@ groups:
           - Time
           - '<str: derived_from_file optional,regex=sps>'
         attributes:
-          long_name: Total particle number concentration over bin_range - corrected for nonisokinetic sampling
-          standard_name: number_concentration_of_ambient_aerosol_particles_in_air
+          long_name: >-
+            Total particle number concentration over bin_range -
+            corrected for nonisokinetic sampling
+          standard_name: >-
+            number_concentration_of_ambient_aerosol_particles_in_air
           comment: '<str: derived_from_file optional>'
           references: '<str: derived_from_file optional>'
           coverage_content_type: physicalMeasurement
@@ -921,7 +955,9 @@ groups:
           - Time
           - '<str: derived_from_file optional,regex=sps>'
         attributes:
-          long_name: Error in total particle number concentration over bin_range - corrected for nonisokinetic sampling, 1-sigma uncertainty
+          long_name: >-
+            Error in total particle number concentration over bin_range -
+            corrected for nonisokinetic sampling, 1-sigma uncertainty
           comment: '<str: derived_from_file optional>'
           references: '<str: derived_from_file optional>'
           coverage_content_type: auxiliaryInformation
@@ -1009,7 +1045,7 @@ groups:
       processing_software_version: '<str: derived_from_file optional>'
       processing_software_url: '<str: derived_from_file optional>'
       processing_software_doi: '<str: derived_from_file optional>'
-      source: '<str: derived_from_file optional>'                       # list of raw data files
+      source: '<str: derived_from_file optional>'       # list of raw data files
 
     dimensions:
       - name: bin
@@ -1103,7 +1139,9 @@ groups:
           - '<str: derived_from_file optional,regex=sps>'
           - bin
         attributes:
-          long_name: Error in size-resolved cloud droplet number concentration, 1-sigma uncertainty
+          long_name: >-
+            Error in size-resolved cloud droplet number concentration,
+            1-sigma uncertainty
           comment: '<str: derived_from_file optional>'
           references: '<str: derived_from_file optional>'
           coverage_content_type: auxiliaryInformation
@@ -1124,7 +1162,8 @@ groups:
           - '<str: derived_from_file optional,regex=sps>'
         attributes:
           long_name: Total cloud droplet number concentration over bin_range
-          standard_name: number_concentration_of_cloud_liquid_water_particles_in_air
+          standard_name: >-
+            number_concentration_of_cloud_liquid_water_particles_in_air
           comment: '<str: derived_from_file optional>'
           references: '<str: derived_from_file optional>'
           coverage_content_type: physicalMeasurement
@@ -1147,7 +1186,9 @@ groups:
           - Time
           - '<str: derived_from_file optional,regex=sps>'
         attributes:
-          long_name: Error in total cloud droplet number concentration over bin_range, 1-sigma uncertainty
+          long_name: >-
+            Error in total cloud droplet number concentration over bin_range,
+            1-sigma uncertainty
           comment: '<str: derived_from_file optional>'
           references: '<str: derived_from_file optional>'
           coverage_content_type: auxiliaryInformation
@@ -1190,7 +1231,9 @@ groups:
           - Time
           - '<str: derived_from_file optional,regex=sps>'
         attributes:
-          long_name: Error in mass concentration of cloud droplets assuming liquid water, 1-sigma uncertainty
+          long_name: >-
+            Error in mass concentration of cloud droplets assuming liquid water,
+            1-sigma uncertainty
           comment: '<str: derived_from_file optional>'
           references: '<str: derived_from_file optional>'
           coverage_content_type: auxiliaryInformation
@@ -1255,7 +1298,7 @@ groups:
       processing_software_version: '<str: derived_from_file optional>'
       processing_software_url: '<str: derived_from_file optional>'
       processing_software_doi: '<str: derived_from_file optional>'
-      source: '<str: derived_from_file optional>'                       # list of raw data files
+      source: '<str: derived_from_file optional>'       # list of raw data files
 
     dimensions:
       - name: bin
@@ -1349,7 +1392,9 @@ groups:
           - '<str: derived_from_file optional,regex=sps>'
           - bin
         attributes:
-          long_name: Error in size-resolved cloud droplet number concentration, 1-sigma uncertainty
+          long_name: >-
+            Error in size-resolved cloud droplet number concentration,
+            1-sigma uncertainty
           comment: '<str: derived_from_file optional>'
           references: '<str: derived_from_file optional>'
           coverage_content_type: auxiliaryInformation
@@ -1370,7 +1415,8 @@ groups:
           - '<str: derived_from_file optional,regex=sps>'
         attributes:
           long_name: Total cloud droplet number concentration over bin_range
-          standard_name: number_concentration_of_cloud_liquid_water_particles_in_air
+          standard_name: >-
+            number_concentration_of_cloud_liquid_water_particles_in_air
           comment: '<str: derived_from_file optional>'
           references: '<str: derived_from_file optional>'
           coverage_content_type: physicalMeasurement
@@ -1393,7 +1439,9 @@ groups:
           - Time
           - '<str: derived_from_file optional,regex=sps>'
         attributes:
-          long_name: Error in total cloud droplet number concentration over bin_range, 1-sigma uncertainty
+          long_name: >-
+            Error in total cloud droplet number concentration over bin_range,
+            1-sigma uncertainty
           comment: '<str: derived_from_file optional>'
           references: '<str: derived_from_file optional>'
           coverage_content_type: auxiliaryInformation
@@ -1436,7 +1484,9 @@ groups:
           - Time
           - '<str: derived_from_file optional,regex=sps>'
         attributes:
-          long_name: Error in mass concentration of cloud droplets assuming liquid water, 1-sigma uncertainty
+          long_name: >-
+            Error in mass concentration of cloud droplets assuming liquid water,
+            1-sigma uncertainty
           comment: '<str: derived_from_file optional>'
           references: '<str: derived_from_file optional>'
           coverage_content_type: auxiliaryInformation
