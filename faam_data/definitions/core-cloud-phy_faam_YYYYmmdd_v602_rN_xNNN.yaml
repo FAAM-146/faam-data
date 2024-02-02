@@ -16,7 +16,7 @@ meta:
     - ['FAAM instrument documentation', 'https://www.faam.ac.uk/sphinx/instruments/']
 
 # Global attributes
-# ------------------------------------------------------------------------------
+# ==============================================================================
 attributes:
   Conventions: '<str: derived_from_file>' #CF-1.9 ACDD-1.3
   title: '<str: derived_from_file>'
@@ -135,6 +135,7 @@ variables:
 
 # ------------------------------------------------------------------------------
 groups:
+# == Platform ==================================================================
   - meta:
       name: platform
       description: Data from aircraft that has been used to process probe data
@@ -350,7 +351,7 @@ groups:
           _FillValue: 0
 
 
-# ------------------------------------------------------------------------------
+# == PCASP-1 ===================================================================
   - meta:
       name: pcasp-1
       description: Data from PCASP-1
@@ -650,6 +651,812 @@ groups:
           - '<str: derived_from_file optional,regex=sps>'
         attributes:
           long_name: Flag for all PCASP derived parameters
+          standard_name: status_flag
+          comment: '<str: derived_from_file optional>'
+          coverage_content_type: qualityInformation
+          flag_masks: '<Array[byte]: derived_from_file>'
+          flag_meanings: '<str: derived_from_file>'
+          frequency: '<int: derived_from_file>'
+          units: '1'
+          valid_min: 0.
+          valid_range:
+            - 1b
+            - '<byte: derived_from_file>'
+          _FillValue: 0b
+
+
+# == PCASP-2 ===================================================================
+  - meta:
+      name: pcasp-2
+      description: Data from PCASP-2
+      required: false
+
+    attributes:
+      summary: '<str: derived_from_file>'
+      comment: '<str: derived_from_file optional>'
+
+      # instrument information
+      instrument: PCASP-2
+      instrument_manufacturer: Particle Metrics Inc./Droplet Measurement Technologies Inc.
+      instrument_model: Passive Cavity Aerosol Spectrometer Probe 100X with SPP200 electronics (PCASP-100X (SPP200))
+      instrument_serial: 'PMI-1022-1202-31'
+      instrument_location: '<str: derived_from_file>'
+      instrument_description: '<str: derived_from_file>'
+      references: >-
+        Rosenberg et al., 2012, (https://doi.org/10.5194/amt-5-1147-2012).
+        Cai et al., 2013, (https://doi.org/10.5194/amt-6-2349-2013)
+      instrument_software: '<str: derived_from_file>'
+      instrument_software_version: '<str: derived_from_file>'
+
+      # processing algorithm information
+      processing_software_version: '<str: derived_from_file optional>'
+      processing_software_url: '<str: derived_from_file optional>'
+      processing_software_doi: '<str: derived_from_file optional>'
+      source: '<str: derived_from_file optional>'                       # list of raw data files
+
+    dimensions:
+      - name: bin
+      - size: 30
+
+    variables:
+      - meta:
+          name: bin_centre
+          datatype: <float32>
+          required: true
+        dimensions:
+          - bin
+        attributes:
+          long_name: Nominal bin centre diameter
+          standard_name: diameter_of_ambient_aerosol_particles
+          coverage_content_type: physicalMeasurement
+          frequency: '<int: derived_from_file>'
+          units: '<str: derived_from_file>'
+          valid_min: '<float32: derived_from_file optional>'
+          actual_range:
+            - '<float32: derived_from_file>'
+            - '<float32: derived_from_file>'
+          _FillValue: -9999.
+
+      - meta:
+          name: bin_width
+          datatype: <float32>
+          required: true
+        dimensions:
+          - bin
+        attributes:
+          long_name: Nominal bin width
+          coverage_content_type: physicalMeasurement
+          frequency: '<int: derived_from_file>'
+          units: '<str: derived_from_file>'
+          valid_min: '<float32: derived_from_file optional>'
+          actual_range:
+            - '<float32: derived_from_file>'
+            - '<float32: derived_from_file>'
+          _FillValue: -9999.
+
+      - meta:
+          name: counts
+          datatype: <uint32>
+          required: true
+        dimensions:
+          - Time
+          - '<str: derived_from_file optional,regex=sps>'
+          - bin
+        attributes:
+          long_name: Raw particle counts in each size bin and sample time
+          coverage_content_type: physicalMeasurement
+          frequency: '<int: derived_from_file>'
+          units: '1'
+          valid_min: '<uint32: derived_from_file optional>'
+          actual_range:
+            - '<uint32: derived_from_file>'
+            - '<uint32: derived_from_file>'
+          coordinates: latitude longitude altitude
+          ancillary_variables: pcasp_flag
+          _FillValue: 65535
+
+      - meta:
+          name: concentration
+          datatype: <float32>
+          required: false
+        dimensions:
+          - Time
+          - '<str: derived_from_file optional,regex=sps>'
+          - bin
+        attributes:
+          long_name: Size-resolved aerosol number concentration
+          standard_name: number_size_distribution_of_aerosol_particles_in_air
+          comment: '<str: derived_from_file optional>'
+          references: '<str: derived_from_file optional>'
+          coverage_content_type: physicalMeasurement
+          frequency: '<int: derived_from_file>'
+          units: '<str: derived_from_file>'
+          valid_min: 0.
+          actual_range:
+            - '<float32: derived_from_file>'
+            - '<float32: derived_from_file>'
+          coordinates: latitude longitude altitude
+          ancillary_variables: concentration_error pcasp_flag
+          _FillValue: -9999.
+
+      - meta:
+          name: concentration_error
+          datatype: <float32>
+          required: false
+        dimensions:
+          - Time
+          - '<str: derived_from_file optional,regex=sps>'
+          - bin
+        attributes:
+          long_name: Error in size-resolved aerosol number concentration, 1-sigma uncertainty
+          comment: '<str: derived_from_file optional>'
+          references: '<str: derived_from_file optional>'
+          coverage_content_type: auxiliaryInformation
+          frequency: '<int: derived_from_file>'
+          units: '<str: derived_from_file>'
+          valid_min: 0.
+          actual_range:
+            - '<float32: derived_from_file>'
+            - '<float32: derived_from_file>'
+          _FillValue: -9999.
+
+      - meta:
+          name: total_concentration
+          datatype: <float32>
+          required: false
+        dimensions:
+          - Time
+          - '<str: derived_from_file optional,regex=sps>'
+        attributes:
+          long_name: Total particle number concentration over bin_range
+          standard_name: number_concentration_of_ambient_aerosol_particles_in_air
+          comment: '<str: derived_from_file optional>'
+          references: '<str: derived_from_file optional>'
+          coverage_content_type: physicalMeasurement
+          bin_range: '<Array[int]: derived_from_file>'
+          frequency: '<int: derived_from_file>'
+          units: '<str: derived_from_file>'
+          valid_min: 0.
+          actual_range:
+            - '<float32: derived_from_file>'
+            - '<float32: derived_from_file>'
+          coordinates: latitude longitude altitude
+          ancillary_variables: total_concentration_error pcasp_flag
+          _FillValue: -9999.
+
+      - meta:
+          name: total_concentration_error
+          datatype: <float32>
+          required: false
+        dimensions:
+          - Time
+          - '<str: derived_from_file optional,regex=sps>'
+        attributes:
+          long_name: Error in total particle number concentration over bin_range, 1-sigma uncertainty
+          comment: '<str: derived_from_file optional>'
+          references: '<str: derived_from_file optional>'
+          coverage_content_type: auxiliaryInformation
+          frequency: '<int: derived_from_file>'
+          units: '<str: derived_from_file>'
+          valid_min: 0.
+          actual_range:
+            - '<float32: derived_from_file>'
+            - '<float32: derived_from_file>'
+          _FillValue: -9999.
+
+      - meta:
+          name: concentration_corrected
+          datatype: <float32>
+          required: false
+        dimensions:
+          - Time
+          - '<str: derived_from_file optional,regex=sps>'
+          - bin
+        attributes:
+          long_name: Size-resolved aerosol number concentration - corrected for nonisokinetic sampling
+          standard_name: number_size_distribution_of_aerosol_particles_in_air
+          comment: '<str: derived_from_file optional>'
+          references: '<str: derived_from_file optional>'
+          coverage_content_type: physicalMeasurement
+          frequency: '<int: derived_from_file>'
+          units: '<str: derived_from_file>'
+          valid_min: 0.
+          actual_range:
+            - '<float32: derived_from_file>'
+            - '<float32: derived_from_file>'
+          coordinates: latitude longitude altitude
+          ancillary_variables: concentration_corrected_error pcasp_flag
+          _FillValue: -9999.
+
+      - meta:
+          name: concentration_corrected_error
+          datatype: <float32>
+          required: false
+        dimensions:
+          - Time
+          - '<str: derived_from_file optional,regex=sps>'
+          - bin
+        attributes:
+          long_name: Error in size-resolved aerosol number concentration - corrected for nonisokinetic sampling, 1-sigma uncertainty
+          comment: '<str: derived_from_file optional>'
+          references: '<str: derived_from_file optional>'
+          coverage_content_type: auxiliaryInformation
+          frequency: '<int: derived_from_file>'
+          units: '<str: derived_from_file>'
+          valid_min: 0.
+          actual_range:
+            - '<float32: derived_from_file>'
+            - '<float32: derived_from_file>'
+          _FillValue: -9999.
+
+      - meta:
+          name: total_concentration_corrected
+          datatype: <float32>
+          required: false
+        dimensions:
+          - Time
+          - '<str: derived_from_file optional,regex=sps>'
+        attributes:
+          long_name: Total particle number concentration over bin_range - corrected for nonisokinetic sampling
+          standard_name: number_concentration_of_ambient_aerosol_particles_in_air
+          comment: '<str: derived_from_file optional>'
+          references: '<str: derived_from_file optional>'
+          coverage_content_type: physicalMeasurement
+          bin_range: '<Array[int]: derived_from_file>'
+          frequency: '<int: derived_from_file>'
+          units: '<str: derived_from_file>'
+          valid_min: 0.
+          actual_range:
+            - '<float32: derived_from_file>'
+            - '<float32: derived_from_file>'
+          coordinates: latitude longitude altitude
+          ancillary_variables: total_concentration_corrected_error pcasp_flag
+          _FillValue: -9999.
+
+      - meta:
+          name: total_concentration_corrected_error
+          datatype: <float32>
+          required: false
+        dimensions:
+          - Time
+          - '<str: derived_from_file optional,regex=sps>'
+        attributes:
+          long_name: Error in total particle number concentration over bin_range - corrected for nonisokinetic sampling, 1-sigma uncertainty
+          comment: '<str: derived_from_file optional>'
+          references: '<str: derived_from_file optional>'
+          coverage_content_type: auxiliaryInformation
+          frequency: '<int: derived_from_file>'
+          units: '<str: derived_from_file>'
+          valid_min: 0.
+          actual_range:
+            - '<float32: derived_from_file>'
+            - '<float32: derived_from_file>'
+          _FillValue: -9999.
+
+      - meta:
+          name: sample_flow
+          datatype: <float32>
+          required: false
+        dimensions:
+          - Time
+          - '<str: derived_from_file optional,regex=sps>'
+        attributes:
+          long_name: Volumetric sample flow
+          comment: '<str: derived_from_file optional>'
+          references: '<str: derived_from_file optional>'
+          calibrated: '<str: derived_from_file optional>'
+          calibration_date: '<str: derived_from_file optional>'
+          calibration_information: '<str: derived_from_file optional>'
+          coverage_content_type: physicalMeasurement
+          frequency: '<int: derived_from_file>'
+          units: '<str: derived_from_file>'
+          valid_min: 0.
+          actual_range:
+            - '<float32: derived_from_file>'
+            - '<float32: derived_from_file>'
+          _FillValue: -9999.
+
+      - meta:
+          name: pcasp_flag
+          datatype: <byte>
+          required: false
+        dimensions:
+          - Time
+          - '<str: derived_from_file optional,regex=sps>'
+        attributes:
+          long_name: Flag for all PCASP derived parameters
+          standard_name: status_flag
+          comment: '<str: derived_from_file optional>'
+          coverage_content_type: qualityInformation
+          flag_masks: '<Array[byte]: derived_from_file>'
+          flag_meanings: '<str: derived_from_file>'
+          frequency: '<int: derived_from_file>'
+          units: '1'
+          valid_min: 0.
+          valid_range:
+            - 1b
+            - '<byte: derived_from_file>'
+          _FillValue: 0b
+
+
+# == CDP-1 =====================================================================
+  - meta:
+      name: cdp-1
+      description: Data from CDP-1
+      required: false
+
+    attributes:
+      summary: '<str: derived_from_file>'
+      comment: '<str: derived_from_file optional>'
+
+      # instrument information
+      instrument: CDP-1
+      instrument_manufacturer: Droplet Measurement Technologies Inc.
+      instrument_model: Cloud Droplet Probe (CDP-2)
+      instrument_serial: '0806-037'
+      instrument_location: '<str: derived_from_file>'
+      instrument_description: '<str: derived_from_file>'
+      references: >-
+        Rosenberg et al., 2012, (https://doi.org/10.5194/amt-5-1147-2012).
+        Lance, S., 2012, (https://doi.org/10.1175/JTECH-D-11-00208.1).
+        Lance et al., 2010, (https://doi.org/10.5194/amt-3-1683-2010).
+      instrument_software: '<str: derived_from_file>'
+      instrument_software_version: '<str: derived_from_file>'
+      calibration_information: '<str: derived_from_file>'
+      calibration_date: '<str: derived_from_file>'
+
+      # processing algorithm information
+      processing_software_version: '<str: derived_from_file optional>'
+      processing_software_url: '<str: derived_from_file optional>'
+      processing_software_doi: '<str: derived_from_file optional>'
+      source: '<str: derived_from_file optional>'                       # list of raw data files
+
+    dimensions:
+      - name: bin
+      - size: 30
+
+    variables:
+      - meta:
+          name: bin_centre
+          datatype: <float32>
+          required: true
+        dimensions:
+          - bin
+        attributes:
+          long_name: Nominal bin centre diameter
+          coverage_content_type: physicalMeasurement
+          frequency: '<int: derived_from_file>'
+          units: '<str: derived_from_file>'
+          valid_min: '<float32: derived_from_file optional>'
+          actual_range:
+            - '<float32: derived_from_file>'
+            - '<float32: derived_from_file>'
+          _FillValue: -9999.
+
+      - meta:
+          name: bin_width
+          datatype: <float32>
+          required: true
+        dimensions:
+          - bin
+        attributes:
+          long_name: Nominal bin width
+          coverage_content_type: physicalMeasurement
+          frequency: '<int: derived_from_file>'
+          units: '<str: derived_from_file>'
+          valid_min: '<float32: derived_from_file optional>'
+          actual_range:
+            - '<float32: derived_from_file>'
+            - '<float32: derived_from_file>'
+          _FillValue: -9999.
+
+      - meta:
+          name: counts
+          datatype: <uint32>
+          required: true
+        dimensions:
+          - Time
+          - '<str: derived_from_file optional,regex=sps>'
+          - bin
+        attributes:
+          long_name: Raw particle counts in each size bin and sample time
+          coverage_content_type: physicalMeasurement
+          frequency: '<int: derived_from_file>'
+          units: '1'
+          valid_min: '<uint32: derived_from_file optional>'
+          actual_range:
+            - '<uint32: derived_from_file>'
+            - '<uint32: derived_from_file>'
+          coordinates: latitude longitude altitude
+          ancillary_variables: cdp_flag
+          _FillValue: 65535
+
+      - meta:
+          name: concentration
+          datatype: <float32>
+          required: false
+        dimensions:
+          - Time
+          - '<str: derived_from_file optional,regex=sps>'
+          - bin
+        attributes:
+          long_name: Size-resolved cloud droplet number concentration
+          comment: '<str: derived_from_file optional>'
+          references: '<str: derived_from_file optional>'
+          coverage_content_type: physicalMeasurement
+          frequency: '<int: derived_from_file>'
+          units: '<str: derived_from_file>'
+          valid_min: 0.
+          actual_range:
+            - '<float32: derived_from_file>'
+            - '<float32: derived_from_file>'
+          coordinates: latitude longitude altitude
+          ancillary_variables: concentration_error cdp_flag
+          _FillValue: -9999.
+
+      - meta:
+          name: concentration_error
+          datatype: <float32>
+          required: false
+        dimensions:
+          - Time
+          - '<str: derived_from_file optional,regex=sps>'
+          - bin
+        attributes:
+          long_name: Error in size-resolved cloud droplet number concentration, 1-sigma uncertainty
+          comment: '<str: derived_from_file optional>'
+          references: '<str: derived_from_file optional>'
+          coverage_content_type: auxiliaryInformation
+          frequency: '<int: derived_from_file>'
+          units: '<str: derived_from_file>'
+          valid_min: 0.
+          actual_range:
+            - '<float32: derived_from_file>'
+            - '<float32: derived_from_file>'
+          _FillValue: -9999.
+
+      - meta:
+          name: total_concentration
+          datatype: <float32>
+          required: false
+        dimensions:
+          - Time
+          - '<str: derived_from_file optional,regex=sps>'
+        attributes:
+          long_name: Total cloud droplet number concentration over bin_range
+          standard_name: number_concentration_of_cloud_liquid_water_particles_in_air
+          comment: '<str: derived_from_file optional>'
+          references: '<str: derived_from_file optional>'
+          coverage_content_type: physicalMeasurement
+          bin_range: '<Array[int]: derived_from_file>'
+          frequency: '<int: derived_from_file>'
+          units: '<str: derived_from_file>'
+          valid_min: 0.
+          actual_range:
+            - '<float32: derived_from_file>'
+            - '<float32: derived_from_file>'
+          coordinates: latitude longitude altitude
+          ancillary_variables: total_concentration_error cdp_flag
+          _FillValue: -9999.
+
+      - meta:
+          name: total_concentration_error
+          datatype: <float32>
+          required: false
+        dimensions:
+          - Time
+          - '<str: derived_from_file optional,regex=sps>'
+        attributes:
+          long_name: Error in total cloud droplet number concentration over bin_range, 1-sigma uncertainty
+          comment: '<str: derived_from_file optional>'
+          references: '<str: derived_from_file optional>'
+          coverage_content_type: auxiliaryInformation
+          frequency: '<int: derived_from_file>'
+          units: '<str: derived_from_file>'
+          valid_min: 0.
+          actual_range:
+            - '<float32: derived_from_file>'
+            - '<float32: derived_from_file>'
+          _FillValue: -9999.
+
+      - meta:
+          name: lwc
+          datatype: <float32>
+          required: false
+        dimensions:
+          - Time
+          - '<str: derived_from_file optional,regex=sps>'
+        attributes:
+          long_name: Mass concentration of cloud droplets assuming liquid water
+          standard_name: mass_concentration_of_cloud_liquid_water_in_air
+          comment: '<str: derived_from_file optional>'
+          references: '<str: derived_from_file optional>'
+          coverage_content_type: physicalMeasurement
+          frequency: '<int: derived_from_file>'
+          units: '<str: derived_from_file>'
+          valid_min: 0.
+          actual_range:
+            - '<float32: derived_from_file>'
+            - '<float32: derived_from_file>'
+          coordinates: latitude longitude altitude
+          ancillary_variables: lwc_error cdp_flag
+          _FillValue: -9999.
+
+      - meta:
+          name: lwc_error
+          datatype: <float32>
+          required: false
+        dimensions:
+          - Time
+          - '<str: derived_from_file optional,regex=sps>'
+        attributes:
+          long_name: Error in mass concentration of cloud droplets assuming liquid water, 1-sigma uncertainty
+          comment: '<str: derived_from_file optional>'
+          references: '<str: derived_from_file optional>'
+          coverage_content_type: auxiliaryInformation
+          frequency: '<int: derived_from_file>'
+          units: '<str: derived_from_file>'
+          valid_min: 0.
+          actual_range:
+            - '<float32: derived_from_file>'
+            - '<float32: derived_from_file>'
+          _FillValue: -9999.
+
+      - meta:
+          name: cdp_flag
+          datatype: <byte>
+          required: false
+        dimensions:
+          - Time
+          - '<str: derived_from_file optional,regex=sps>'
+        attributes:
+          long_name: Flag for all CDP derived parameters
+          standard_name: status_flag
+          comment: '<str: derived_from_file optional>'
+          coverage_content_type: qualityInformation
+          flag_masks: '<Array[byte]: derived_from_file>'
+          flag_meanings: '<str: derived_from_file>'
+          frequency: '<int: derived_from_file>'
+          units: '1'
+          valid_min: 0.
+          valid_range:
+            - 1b
+            - '<byte: derived_from_file>'
+          _FillValue: 0b
+
+
+# == CDP-2 =====================================================================
+  - meta:
+      name: cdp-2
+      description: Data from CDP-2
+      required: false
+
+    attributes:
+      summary: '<str: derived_from_file>'
+      comment: '<str: derived_from_file optional>'
+
+      # instrument information
+      instrument: CDP-2
+      instrument_manufacturer: Droplet Measurement Technologies Inc.
+      instrument_model: Cloud Droplet Probe (CDP-2)
+      instrument_serial: '0604-008'
+      instrument_location: '<str: derived_from_file>'
+      instrument_description: '<str: derived_from_file>'
+      references: >-
+        Rosenberg et al., 2012, (https://doi.org/10.5194/amt-5-1147-2012).
+        Lance, S., 2012, (https://doi.org/10.1175/JTECH-D-11-00208.1).
+        Lance et al., 2010, (https://doi.org/10.5194/amt-3-1683-2010).
+      instrument_software: '<str: derived_from_file>'
+      instrument_software_version: '<str: derived_from_file>'
+      calibration_information: '<str: derived_from_file>'
+      calibration_date: '<str: derived_from_file>'
+
+      # processing algorithm information
+      processing_software_version: '<str: derived_from_file optional>'
+      processing_software_url: '<str: derived_from_file optional>'
+      processing_software_doi: '<str: derived_from_file optional>'
+      source: '<str: derived_from_file optional>'                       # list of raw data files
+
+    dimensions:
+      - name: bin
+      - size: 30
+
+    variables:
+      - meta:
+          name: bin_centre
+          datatype: <float32>
+          required: true
+        dimensions:
+          - bin
+        attributes:
+          long_name: Nominal bin centre diameter
+          coverage_content_type: physicalMeasurement
+          frequency: '<int: derived_from_file>'
+          units: '<str: derived_from_file>'
+          valid_min: '<float32: derived_from_file optional>'
+          actual_range:
+            - '<float32: derived_from_file>'
+            - '<float32: derived_from_file>'
+          _FillValue: -9999.
+
+      - meta:
+          name: bin_width
+          datatype: <float32>
+          required: true
+        dimensions:
+          - bin
+        attributes:
+          long_name: Nominal bin width
+          coverage_content_type: physicalMeasurement
+          frequency: '<int: derived_from_file>'
+          units: '<str: derived_from_file>'
+          valid_min: '<float32: derived_from_file optional>'
+          actual_range:
+            - '<float32: derived_from_file>'
+            - '<float32: derived_from_file>'
+          _FillValue: -9999.
+
+      - meta:
+          name: counts
+          datatype: <uint32>
+          required: true
+        dimensions:
+          - Time
+          - '<str: derived_from_file optional,regex=sps>'
+          - bin
+        attributes:
+          long_name: Raw particle counts in each size bin and sample time
+          coverage_content_type: physicalMeasurement
+          frequency: '<int: derived_from_file>'
+          units: '1'
+          valid_min: '<uint32: derived_from_file optional>'
+          actual_range:
+            - '<uint32: derived_from_file>'
+            - '<uint32: derived_from_file>'
+          coordinates: latitude longitude altitude
+          ancillary_variables: cdp_flag
+          _FillValue: 65535
+
+      - meta:
+          name: concentration
+          datatype: <float32>
+          required: false
+        dimensions:
+          - Time
+          - '<str: derived_from_file optional,regex=sps>'
+          - bin
+        attributes:
+          long_name: Size-resolved cloud droplet number concentration
+          comment: '<str: derived_from_file optional>'
+          references: '<str: derived_from_file optional>'
+          coverage_content_type: physicalMeasurement
+          frequency: '<int: derived_from_file>'
+          units: '<str: derived_from_file>'
+          valid_min: 0.
+          actual_range:
+            - '<float32: derived_from_file>'
+            - '<float32: derived_from_file>'
+          coordinates: latitude longitude altitude
+          ancillary_variables: concentration_error cdp_flag
+          _FillValue: -9999.
+
+      - meta:
+          name: concentration_error
+          datatype: <float32>
+          required: false
+        dimensions:
+          - Time
+          - '<str: derived_from_file optional,regex=sps>'
+          - bin
+        attributes:
+          long_name: Error in size-resolved cloud droplet number concentration, 1-sigma uncertainty
+          comment: '<str: derived_from_file optional>'
+          references: '<str: derived_from_file optional>'
+          coverage_content_type: auxiliaryInformation
+          frequency: '<int: derived_from_file>'
+          units: '<str: derived_from_file>'
+          valid_min: 0.
+          actual_range:
+            - '<float32: derived_from_file>'
+            - '<float32: derived_from_file>'
+          _FillValue: -9999.
+
+      - meta:
+          name: total_concentration
+          datatype: <float32>
+          required: false
+        dimensions:
+          - Time
+          - '<str: derived_from_file optional,regex=sps>'
+        attributes:
+          long_name: Total cloud droplet number concentration over bin_range
+          standard_name: number_concentration_of_cloud_liquid_water_particles_in_air
+          comment: '<str: derived_from_file optional>'
+          references: '<str: derived_from_file optional>'
+          coverage_content_type: physicalMeasurement
+          bin_range: '<Array[int]: derived_from_file>'
+          frequency: '<int: derived_from_file>'
+          units: '<str: derived_from_file>'
+          valid_min: 0.
+          actual_range:
+            - '<float32: derived_from_file>'
+            - '<float32: derived_from_file>'
+          coordinates: latitude longitude altitude
+          ancillary_variables: total_concentration_error cdp_flag
+          _FillValue: -9999.
+
+      - meta:
+          name: total_concentration_error
+          datatype: <float32>
+          required: false
+        dimensions:
+          - Time
+          - '<str: derived_from_file optional,regex=sps>'
+        attributes:
+          long_name: Error in total cloud droplet number concentration over bin_range, 1-sigma uncertainty
+          comment: '<str: derived_from_file optional>'
+          references: '<str: derived_from_file optional>'
+          coverage_content_type: auxiliaryInformation
+          frequency: '<int: derived_from_file>'
+          units: '<str: derived_from_file>'
+          valid_min: 0.
+          actual_range:
+            - '<float32: derived_from_file>'
+            - '<float32: derived_from_file>'
+          _FillValue: -9999.
+
+      - meta:
+          name: lwc
+          datatype: <float32>
+          required: false
+        dimensions:
+          - Time
+          - '<str: derived_from_file optional,regex=sps>'
+        attributes:
+          long_name: Mass concentration of cloud droplets assuming liquid water
+          standard_name: mass_concentration_of_cloud_liquid_water_in_air
+          comment: '<str: derived_from_file optional>'
+          references: '<str: derived_from_file optional>'
+          coverage_content_type: physicalMeasurement
+          frequency: '<int: derived_from_file>'
+          units: '<str: derived_from_file>'
+          valid_min: 0.
+          actual_range:
+            - '<float32: derived_from_file>'
+            - '<float32: derived_from_file>'
+          coordinates: latitude longitude altitude
+          ancillary_variables: lwc_error cdp_flag
+          _FillValue: -9999.
+
+      - meta:
+          name: lwc_error
+          datatype: <float32>
+          required: false
+        dimensions:
+          - Time
+          - '<str: derived_from_file optional,regex=sps>'
+        attributes:
+          long_name: Error in mass concentration of cloud droplets assuming liquid water, 1-sigma uncertainty
+          comment: '<str: derived_from_file optional>'
+          references: '<str: derived_from_file optional>'
+          coverage_content_type: auxiliaryInformation
+          frequency: '<int: derived_from_file>'
+          units: '<str: derived_from_file>'
+          valid_min: 0.
+          actual_range:
+            - '<float32: derived_from_file>'
+            - '<float32: derived_from_file>'
+          _FillValue: -9999.
+
+      - meta:
+          name: cdp_flag
+          datatype: <byte>
+          required: false
+        dimensions:
+          - Time
+          - '<str: derived_from_file optional,regex=sps>'
+        attributes:
+          long_name: Flag for all CDP derived parameters
           standard_name: status_flag
           comment: '<str: derived_from_file optional>'
           coverage_content_type: qualityInformation
