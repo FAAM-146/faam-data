@@ -6,7 +6,7 @@
 #
 meta:
   file_pattern: >-
-    core-cloud-phy_faam_[0-9]{8}_v700_r[0-9]+_[c-z][0-9]{3}.nc
+    ccore-cloud-phy_faam_(?P<date>[0-9]{8})_v700_r(?P<revision>[0-9]{1,3})_(?P<flight>[c-z][0-9]{3}).nc
   short_name: core_cloud
   long_name: FAAM core cloud data
   description: >-
