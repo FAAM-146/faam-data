@@ -94,6 +94,20 @@ A minimal example of accessing a 1-dimensional variable, *data*, along with its 
 
 Python software libraries to aid in accessing FAAM data are in development, and will be made available in due course.
 
+-------------
+NCAS-Airborne
+-------------
+
+FAAM's data has made use of the NetCDF file format since the facility's inception in 2004, in common with approaches taken on similar aircraft platforms globally.
+
+Several factors continue to govern choices of how the FAAM data are represented within what has become known as the NCAS-Airborne standard:
+
+* Early users developed applications to easily view all available data from their (and other) airborne facilities. These were typically user-interactive, and it made sense for the data to be grouped into a small number of files to enable its simple use with tools like these.
+* FAAM users wanted, as far as possible, all the data in one file. In many cases data analysis or correction schemes rely on not just a single parameter, and the dependent variables for a given experiment cannot be assumed to always be time, position, or altitude. An alternative approach, to reproduce data files per-instrument with a small number of key dependent variables alongside individual parameters, would have resulted in inefficient use of storage - typically 50+ instrument systems support the main FAAM dataset for a flight.
+* There is no single source of truth for some measurements, because of different performance characteristics. Data from different sources are therefore presented together to facilitate this choice being made by a user.
+* Other international airborne facilities pursued the same approach, and FAAM seeks to retain commonality as far as possible with their user communities, enabling code to be shared and re-used.
+
+
 --------------------
 External Conventions
 --------------------
