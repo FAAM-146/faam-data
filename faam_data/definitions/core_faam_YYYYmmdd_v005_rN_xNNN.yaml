@@ -1,5 +1,5 @@
 meta:
-  file_pattern: 'core_faam_[0-9]{8}_v005_r[0-9]+_[c-z][0-9]{3}.nc'
+  file_pattern: 'core_faam_{date}_v005_r{revision}_{flight_number}.nc'
   short_name: core_full
   long_name:  FAAM Core (DECADES) data
   description: >-
