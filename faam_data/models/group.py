@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Optional
 
 from pydantic import BaseModel, ConfigDict
-from vocal.netcdf.mixins import GroupNetCDFMixin
+from vocal.mixins import VocalGroupMixin
 
 from ..attributes import GroupAttributes
 from .dimension import Dimension
@@ -16,7 +16,7 @@ class GroupMeta(BaseModel):
 
     name: str
 
-class Group(BaseModel, GroupNetCDFMixin):
+class Group(BaseModel, VocalGroupMixin):
     model_config = ConfigDict(
         title='Group Schema'
     )

@@ -5,8 +5,7 @@ import netCDF4 # type: ignore
 from pydantic import BaseModel, ConfigDict
 
 from vocal.field import Field
-from vocal.netcdf.mixins import DatasetNetCDFMixin
-from vocal.utils.mixins import DatasetUtilsMixin
+from vocal.mixins import VocalDatasetMixin
 
 from ..attributes import GlobalAttributes
 
@@ -35,7 +34,7 @@ class DatasetMeta(BaseModel):
     )
 
 
-class Dataset(BaseModel, DatasetNetCDFMixin, DatasetUtilsMixin):
+class Dataset(BaseModel, VocalDatasetMixin):
     model_config = ConfigDict(
         title = 'FAAM Dataset Schema'
     )

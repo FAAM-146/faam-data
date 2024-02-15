@@ -2,8 +2,8 @@
 from pydantic import BaseModel
 from typing import Union
 
-from vocal.netcdf.mixins import DimensionNetCDFMixin
+from vocal.mixins import VocalDimensionMixin
 
-class Dimension(BaseModel, DimensionNetCDFMixin):
+class Dimension(BaseModel, VocalDimensionMixin):
     name: str
     size: Union[int, None]

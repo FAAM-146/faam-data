@@ -3,7 +3,7 @@ from pydantic import BaseModel
 from typing import List
 
 from vocal.field import Field
-from vocal.netcdf.mixins import VariableNetCDFMixin
+from vocal.mixins import VocalVariableMixin
 from ..attributes import VariableAttributes
 
 
@@ -13,7 +13,7 @@ class VariableMeta(BaseModel):
     required: bool = True
 
 
-class Variable(BaseModel, VariableNetCDFMixin):       
+class Variable(BaseModel, VocalVariableMixin):       
     meta: VariableMeta
     dimensions: List[str]
     attributes: VariableAttributes
