@@ -6,7 +6,7 @@
 #
 meta:
   file_pattern: >-
-    ccore-cloud-phy_faam_(?P<date>[0-9]{8})_v700_r(?P<revision>[0-9]{1,3})_(?P<flight>[c-z][0-9]{3}).nc
+    core-cloud-phy_faam_{date}_v700_r{revision}_{flight_number}.nc
   short_name: core_cloud
   long_name: FAAM core cloud data
   description: >-
@@ -387,7 +387,7 @@ groups:
 
     dimensions:
       - name: bin
-      - size: 30
+        size: 30
 
     variables:
       - meta:
@@ -679,9 +679,9 @@ groups:
           units: '1'
           valid_min: 0.
           valid_range:
-            - 1b
+            - 1
             - '<byte: derived_from_file>'
-          _FillValue: 0b
+          _FillValue: 0
 
 
 # == PCASP-2 ===================================================================
@@ -718,7 +718,7 @@ groups:
 
     dimensions:
       - name: bin
-      - size: 30
+        size: 30
 
     variables:
       - meta:
@@ -1010,9 +1010,9 @@ groups:
           units: '1'
           valid_min: 0.
           valid_range:
-            - 1b
+            - 1
             - '<byte: derived_from_file>'
-          _FillValue: 0b
+          _FillValue: 0
 
 
 # == CDP-1 =====================================================================
@@ -1049,7 +1049,7 @@ groups:
 
     dimensions:
       - name: bin
-      - size: 30
+        size: 30
 
     variables:
       - meta:
@@ -1263,9 +1263,9 @@ groups:
           units: '1'
           valid_min: 0.
           valid_range:
-            - 1b
+            - 1
             - '<byte: derived_from_file>'
-          _FillValue: 0b
+          _FillValue: 0
 
 
 # == CDP-2 =====================================================================
@@ -1302,7 +1302,7 @@ groups:
 
     dimensions:
       - name: bin
-      - size: 30
+        size: 30
 
     variables:
       - meta:
@@ -1516,7 +1516,7 @@ groups:
           units: '1'
           valid_min: 0.
           valid_range:
-            - 1b
+            - 1
             - '<byte: derived_from_file>'
-          _FillValue: 0b
+          _FillValue: 0
 

@@ -9,7 +9,7 @@
 #
 meta:
   file_pattern: >-
-    core-cloud-phy_faam_[0-9]{8}_v001_r[0-9]+_[c-z][0-9]{3}_cip100-1.nc
+    core-cloud-phy_faam_{date}_v001_r{revision}_{flight_number}_cip100-1.nc
   short_name: 'spif_cip100-1'
   long_name: 'Decoded image data from the CIP100-1'
   description: >-
