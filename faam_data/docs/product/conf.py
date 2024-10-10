@@ -15,21 +15,30 @@
 #sys.path.insert(0, os.path.abspath('../../..'))
 import sphinx_rtd_theme # type: ignore
 import datetime
+import os
+import json
 
-#print(sys.path[0])
-#from faam_data import __version__
-__version__ = 0.1
 
 def setup(app):
-    app.add_css_file('mods.css')
+    app.add_css_file('faam.css')
+
+
+def get_product_name():
+    with open(os.environ['FAAM_PRODUCT'], 'r') as f:
+        data = json.load(f)
+    return data['meta']['long_name']
+
+
+def get_version():
+    return os.environ['PRODUCT_VERSION']
+
 
 # -- Project information -----------------------------------------------------
-
-project = 'FAAM Data Standard Documentation'
+project = get_product_name()
 copyright = f'{datetime.datetime.now().year}, FAAM'
 author = 'FAAM'
-release = f'{__version__}'
-version = f'{__version__}'
+release = get_version()
+version = get_version()
 
 # -- General configuration ---------------------------------------------------
 
@@ -37,13 +46,15 @@ version = f'{__version__}'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'sphinx_rtd_theme', 'sphinx.ext.autodoc', 'sphinx.ext.napoleon'
+    'sphinx_rtd_theme',
+    'sphinx.ext.autodoc',
+    'sphinx.ext.napoleon'
 ]
 
 napoleon_include_init_with_doc = True
 
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates']
+templates_path = ['templates']
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -57,14 +68,56 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', 'base_rst']
 # a list of builtin themes.
 #
 html_theme = 'sphinx_rtd_theme'
+html_static_path = ['../static']
+html_logo = '../static/faam-small.png'
+html_theme_options = {
+    'logo_only': False,
+    'display_version': True,
+}
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['../static']
-#latex_toplevel_sectioning = 'section'
 latex_elements = {
     'papersize': 'a4paper',
     'extraclassoptions': 'openany,oneside',
+    'preamble': r'''
+        \definecolor{FAAMDarkBlue}{HTML}{252243}
+        \definecolor{FAAMLightBlue}{HTML}{0ABBEF}
+        \usepackage{eso-pic}
+        \usepackage{pict2e}
+        \newcommand\BackgroundPic{
+        \put(300,-260){
+            \color{FAAMLightBlue}\circle*{900}
+        }
+        \put(300,-260){
+            \color{FAAMDarkBlue}\circle*{760}
+        }
+    }''',
+    # Pretty hacky this - escaping from the sphinx macros,
+    # but it sorta kinda works well enough.
+    'maketitle': '''
+        \\AddToShipoutPicture*{{\\BackgroundPic}}
+        \\begin{{titlepage}}
+            \\color{{FAAMDarkBlue}}
+            \\begin{{flushright}}
+                \\sphinxlogo
+                {{\\sffamily
+                    {{\\Huge \\textbf{{ {project} }}}}
+                    \\par\\vspace{{1cm}}
+                    {{\\itshape\\LARGE\\textbf{{ Release {release} }}}}
+                    \\par\\vspace{{3cm}}
+                    {{\\LARGE \\textbf{{{author}}}}}
+                    \\par\\vspace{{3cm}}
+                    {{\\Large \\textbf{{{date}}}}}
+                 }}
+             \\end{{flushright}}
+        \\end{{titlepage}}
+        '''.format(
+            project=project,
+            release=release,
+            author=author,
+            date=datetime.date.today().strftime('%B %-d, %Y')
+        )
 }
 latex_logo = '../static/faam.png'

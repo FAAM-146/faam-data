@@ -162,17 +162,18 @@ def add_product(definition):
         data = json.load(f)
 
     with open(os.path.join(dynamic_dir, 'products.rst'), 'a') as f:
-        name = os.path.basename(definition.replace('.json', ''))
+        def_name = os.path.basename(definition.replace('.json', ''))
+        name = data['meta']['long_name']
         f.write(name + '\n')
         f.write('-'*len(name) + '\n\n')
-        f.write(':Name: ' + data['meta']['canonical_name'] + '\n')
+        f.write(':Name: ' + data['meta']['long_name'] + '\n')
         f.write(':Pattern: ``' + data['meta']['file_pattern'] + '``\n')
         f.write(':Description: ' + data['meta']['description'] + '\n')
         f.write(':References: ')
         f.write(' | '.join([f'`{i[0]} <{i[1]}>`_' for i in data['meta']['references']]))
         f.write('\n')
-        f.write(':Details: ' + f'`{name} <https://www.faam.ac.uk/sphinx/data/product/{name}>`_\n')
-        f.write(':Definition: ' + f'`{name}.json <https://github.com/FAAM-146/faam-data/tree/main/products/latest/{name}.json>`_ [on Github]\n')
+        f.write(':Details: ' + f'`{name} <https://www.faam.ac.uk/sphinx/data/product/{def_name}>`_\n')
+        f.write(':Definition: ' + f'`{def_name}.json <https://github.com/FAAM-146/faam-data/tree/main/products/latest/{def_name}.json>`_ [on Github]\n')
         f.write(':Example data: ' + f'`{name} <https://drive.google.com/drive/folders/10jBV0odRNR6Yk7EbZHHyHGRlzvsAjFpl?usp=sharing>`_ [on Google Drive]')
         f.write('\n\n')
 

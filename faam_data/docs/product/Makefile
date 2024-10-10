@@ -6,7 +6,7 @@
 SPHINXOPTS    ?=
 SPHINXBUILD   ?= sphinx-build
 SOURCEDIR     = .
-BUILDDIR      = _build
+BUILDDIR      = _$(basename $(notdir $(FAAM_PRODUCT)))
 
 PYTHON        = python
 PREPROCESSOR  = preproc.py
@@ -25,7 +25,7 @@ help:
 publish:
 	make html
 	ssh $(PUBHOST) mkdir -p $(PUBDIR)
-	rsync -a  _build/html/ $(PUBHOST):$(PUBDIR)
+	rsync -a  $(BUILDDIR)/html/ $(PUBHOST):$(PUBDIR)
 
 # Catch-all target: route all unknown targets to Sphinx using the new
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).

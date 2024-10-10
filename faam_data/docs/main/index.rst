@@ -1,6 +1,6 @@
-==============
-FAAM Data Docs
-==============
+=======================
+FAAM Data Documentation
+=======================
 
 .. toctree::
     :glob:
