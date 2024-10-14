@@ -107,22 +107,91 @@ Several factors continue to govern choices of how the FAAM data are represented 
 * There is no single source of truth for some measurements, because of different performance characteristics. Data from different sources are therefore presented together to facilitate this choice being made by a user.
 * Other international airborne facilities pursued the same approach, and FAAM seeks to retain commonality as far as possible with their user communities, enabling code to be shared and re-used.
 
+Timseries Packing
+-----------------
+
+One of the major differences between the FAAM data standard (following the RAL conventions) and the
+other NCAS data standards is the use of timseseries packing. This is where timeseries data at a
+frequence above 1 Hz are packed into a 2-dimensional array, with the first dimension being a 1 Hz
+representation of time, and the second dimension being the number of samples in each second.
+
+For example, a timeseries of 10 Hz data spanning 5 seconds would be packed into a 2D array of shape
+(5, 10). The first dimension should correspond to the 1 Hz time dimension, and the second dimension
+should correspond to the number of samples in each second. When packed like this, the second
+dimension should be named `spsNN`, where `NN` is a two-digit number representing the number of samples
+in each second, in this case `sps10`.
 
 --------------------
 External Conventions
 --------------------
 
-This standard relies heavily on the `Climate Forecast (CF) <https://cfconventions.org/>`_ and on the `Attribute Conventions for Data Discovery (ACDD) <https://wiki.esipfed.org/Attribute_Convention_for_Data_Discovery_1-3>`_. Data which are compliant with this standard should also comply with ``CF-1.9`` and ``ACDD-1.3``. 
+This standard relies heavily on the `Climate Forecast (CF) <https://cfconventions.org/>`_ 
+and on the `Attribute Conventions for Data Discovery (ACDD) <https://wiki.esipfed.org/Attribute_Convention_for_Data_Discovery_1-3>`_. 
+Data which are compliant with this standard should also comply with ``CF-[1.9<=x.y<2.0]`` and 
+``ACDD-1.3``. 
 
-CF standard names should be used wherever possible. No particular release of the CF standard names table is required, however the release used should be specified in the ``standard_name_vocabulary`` metadata attribute.
+CF standard names should be used wherever possible. No particular release of the CF standard
+names table is required, however the release used should be specified in the 
+``standard_name_vocabulary`` metadata attribute.
 
-A comma-separated list of keywords should be provided for each data product in the ``keywords`` metadata attribute. These should be derived from the `Global Master Change Directory (GCMD) <https://earthdata.nasa.gov/earth-observation-data/find-data/idn/gcmd-keywords>`_ vocabulary, and this should be noted in the ``keywords_vocabulary`` metadata attribute.
+A comma-separated list of keywords should be provided for each data product in the 
+``keywords`` metadata attribute. These should be derived from the 
+`Global Master Change Directory (GCMD) <https://earthdata.nasa.gov/earth-observation-data/find-data/idn/gcmd-keywords>`_
+vocabulary, and this should be noted in the ``keywords_vocabulary`` metadata attribute.
+
+-------------------
+Standard Versioning
+-------------------
+
+This standand has major and minor versions, which are incremented using the following rules:
+
+* Major version: Incremented when a change is made that is not backwards compatible. This includes:
+
+    * The introdiction of a new required metadata attribute
+    * Changing an existing required metadata attribute in a way that would require a change to the data file
+    * Changing an optonal metadata attribute in a way that would require a change to the data file
+    * Making an optonal metadata attribute required
+
+* Minor version: Incremented when a change is made that is backwards compatible. This includes:
+
+    * Adding a new optional metadata attribute
+    * Changing an existing optional metadata attribute in a way that would not require a change to the data file
+    * Making a required metadata attribute optional
+
+.. warning::
+    
+    A major version of 0 indicates pre-release. At version 0.x, breaking changes may be made 
+    without incrementing the major version.
+
+-------------------
+Compliance Checking
+-------------------
+
+FAAM use standard and product definitons in a format understood by the
+`Vocal <https://github.com/FAAM-146/vocal>` tool. This tool can be used to:
+
+* Check that a file is compliant with the standard and product definitions
+* Create 'example' netCDF files that are compliant with the standard and product definitions
+* Create empty netCDF files for a given product definition which the data producer can populate
+
+The tool is available as a python package, and can be installed using pip:
+
+.. code-block:: bash
+
+    pip install git+https://github.com/FAAM-146/vocal.git
+
+Files may then be checked against the project and product definitions provided in the `faam-data` repository
+found at https://github.com/FAAM-146/faam-data. For example:
+
+.. code-block:: bash
+
+    vocal check --project $PWD/faam-data/faam_data --definition $PWD/faam-data/products/latest/my_product_definition.json my_file.nc
 
 ------------------------------
 Citable Documentation and Code
 ------------------------------
 
-FAAM have started using `Zenodo <https://zenodo.org>`_ to provide `Digital Object Identifiers (DOIs) <https://doi.org>`_ to documentation, processing code, and calibration information. DOIs provide persistent identifiers to digital assets, and may be used to reference information in journals.
+FAAM have started using `Zenodo <https://zenodo.org>`_ to provide `Digital Object Identifiers (DOIs) <https://doi.org>`_ to documentation, processing code, and calibration information. DOIs provide persistent identifiers to digital assets, and may be used to reference information in journal publications.
 
 FAAM assets can be found through the `FAAM Community Portal <https://zenodo.org/communities/faam-146>`_ on Zenodo.
 
