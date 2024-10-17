@@ -1,14 +1,20 @@
 {
   "meta": {
-    "file_pattern": "faam-wxrx_[0-9]{8}_r[0-9]+_[c-z][0-9]{3}_l0.nc",
-    "short_name": "wxrx-raw",
+    "file_pattern": "wxrx_faam_{date}_v001_r{revision}_{flight_number}.nc",
+    "short_name": "wxrx-arinc",
     "long_name": "FAAM Weather Radar ARINC708 conversion",
-    "description": "This data is a netCDF representation of the raw weather data from the ARINC 708 databus on the FAAM aircraft. Some minor processing has taken place to decode scan angle, tilt, range and gain.",
+    "description": "This data is a netCDF representation of the raw weather data from the ARINC 708 databus on the FAAM aircraft. Some minor processing has taken place to decode scan angle, tilt, range and gain, and latitude, longitude and altitude have been added from the core data.",
     "references": [
-      [
-        "FAAM WxRx Processing documentation",
-        "https://faam.ac.uk/sphinx/rdr4b_wxrx/"
-      ]
+      {
+        "title": "FAAM WxRx Processing documentation",
+        "web": "https://faam.ac.uk/sphinx/rdr4b_wxrx/",
+        "doi": "10.5281/zenodo.7944511"
+      },
+      {
+        "title": "FAAM WxRx Processing software",
+        "web": "https://github.com/FAAM-146/faam-wxrx/",
+        "doi": "10.5281/zenodo.7944619"
+      }
     ]
   },
   "attributes": {
@@ -97,6 +103,61 @@
         "long_name": "Time of scan line estimated from data size",
         "units": "seconds since 1970-01-01 00:00:00",
         "calendar": "gregorian"
+      }
+    },
+    {
+      "meta": {
+        "name": "latitude",
+        "datatype": "<float32>"
+      },
+      "dimensions": [
+        "time"
+      ],
+      "attributes": {
+        "_FillValue": -9999.0,
+        "coverage_content_type": "physicalMeasurement",
+        "frequency": 0,
+        "long_name": "Latitude derived from FAAM core data",
+        "units": "degree_north",
+        "valid_min": -90.0,
+        "valid_max": 90.0,
+        "standard_name": "latitude"
+      }
+    },
+    {
+      "meta": {
+        "name": "longitude",
+        "datatype": "<float32>"
+      },
+      "dimensions": [
+        "time"
+      ],
+      "attributes": {
+        "_FillValue": -9999.0,
+        "coverage_content_type": "physicalMeasurement",
+        "frequency": 0,
+        "long_name": "Longitude derived from FAAM core data",
+        "units": "degree_east",
+        "valid_min": -180.0,
+        "valid_max": 180.0,
+        "standard_name": "longitude"
+      }
+    },
+    {
+      "meta": {
+        "name": "altitude",
+        "datatype": "<float32>"
+      },
+      "dimensions": [
+        "time"
+      ],
+      "attributes": {
+        "_FillValue": -9999.0,
+        "coverage_content_type": "physicalMeasurement",
+        "frequency": 0,
+        "long_name": "GPS Altitude derived from FAAM core data",
+        "units": "m",
+        "standard_name": "altitude"
       }
     },
     {
