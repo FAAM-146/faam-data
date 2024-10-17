@@ -1,7 +1,7 @@
 import glob
 import json
 import shutil
-from typing import Mapping
+from typing import Mapping, Any
 import os
 import sys
 sys.path.insert(0, '../../')
@@ -77,53 +77,19 @@ def attr_text(attr: str, properties: Mapping) -> str:
     return txt
 
 
-def make_global_attrs_rst() -> None:
+def make_attrs_rst(schema: dict[str,Any], required_tag, optional_tag: str) -> None:
     """
     Create the global attributes section of the metadata.rst file
     """
 
-    with open(os.path.join(dynamic_dir, 'metadata.rst'), 'r') as global_template:
-        text = global_template.read()
-
-    req_glob_text = ''
-    opt_glob_text = ''
-
-    properties = global_schema['properties']
-    required = global_schema['required']
-
-    # Loop through the properties and create the text for each attribute
-    for attr in properties:
-        if attr in required:
-            req_glob_text += attr_text(attr, properties)
-        else:
-            opt_glob_text += attr_text(attr, properties)
-
-    # Replace the tags in the template with the generated text
-    text = text.replace('TAG_REQUIRED_GLOBAL_ATTRIBUTES', req_glob_text)
-    text = text.replace('TAG_OPTIONAL_GLOBAL_ATTRIBUTES', opt_glob_text)
-
-    # Write the updated text to the metadata.rst file
-    with open(os.path.join(dynamic_dir, 'metadata.rst'), 'w') as f:
-        f.write(text)
-
-
-def make_group_attrs_rst() -> None:
-    """
-    Create the group attributes section of the metadata.rst file
-    """
-
-    with open(os.path.join(dynamic_dir, 'metadata.rst'), 'r') as template:
-        text = template.read()
+    with open(os.path.join(dynamic_dir, 'metadata.rst'), 'r') as _template:
+        text = _template.read()
 
     req_text = ''
     opt_text = ''
 
-    properties = group_schema['properties']
-
-    try:
-        required = group_schema['required']
-    except KeyError:
-        required = []
+    properties = schema['properties']
+    required = schema['required']
 
     # Loop through the properties and create the text for each attribute
     for attr in properties:
@@ -133,46 +99,13 @@ def make_group_attrs_rst() -> None:
             opt_text += attr_text(attr, properties)
 
     # Replace the tags in the template with the generated text
-    text = text.replace('TAG_REQUIRED_GROUP_ATTRIBUTES', req_text)
-    text = text.replace('TAG_OPTIONAL_GROUP_ATTRIBUTES', opt_text)
+    text = text.replace(required_tag, req_text)
+    text = text.replace(optional_tag, opt_text)
 
     # Write the updated text to the metadata.rst file
     with open(os.path.join(dynamic_dir, 'metadata.rst'), 'w') as f:
         f.write(text)
 
-
-def make_variable_attrs_rst() -> None:
-    """
-    Create the variable attributes section of the metadata.rst file
-    """
-
-    with open(os.path.join(dynamic_dir, 'metadata.rst'), 'r') as template:
-        text = template.read()
-
-    req_text = ''
-    opt_text = ''
-
-    properties = variable_schema['properties']
-
-    try:
-        required = variable_schema['required']
-    except KeyError:
-        required = []
-
-    # Loop through the properties and create the text for each attribute
-    for attr in properties:
-        if attr in required:
-            req_text += attr_text(attr, properties)
-        else:
-            opt_text += attr_text(attr, properties)
-
-    # Replace the tags in the template with the generated text
-    text = text.replace('TAG_REQUIRED_VARIABLE_ATTRIBUTES', req_text)
-    text = text.replace('TAG_OPTIONAL_VARIABLE_ATTRIBUTES', opt_text)
-
-    # Write the updated text to the metadata.rst file
-    with open(os.path.join(dynamic_dir, 'metadata.rst'), 'w') as f:
-        f.write(text)
 
 def delete_dynamic_metadata() -> None:
     """
@@ -199,11 +132,23 @@ def make_metadata_section() -> None:
     Create the metadata section of the documentation
     """
 
+    # Define the tags to replace in the metadata.rst template
+    tags = [
+        ['TAG_REQUIRED_GLOBAL_ATTRIBUTES', 'TAG_OPTIONAL_GLOBAL_ATTRIBUTES'],
+        ['TAG_REQUIRED_GROUP_ATTRIBUTES',  'TAG_OPTIONAL_GROUP_ATTRIBUTES'],
+        ['TAG_REQUIRED_VARIABLE_ATTRIBUTES', 'TAG_OPTIONAL_VARIABLE_ATTRIBUTES']
+    ]
+
+    # Define the schemas to use for the metadata
+    schemas = (global_schema, group_schema, variable_schema)
+
+    # Clean up the dynamic content directory
     delete_dynamic_metadata()
     copy_metadata_template()
-    make_global_attrs_rst()
-    make_group_attrs_rst()
-    make_variable_attrs_rst()
+
+    # Create the metadata section for each schema
+    for schema, tags in zip(schemas, tags):
+        make_attrs_rst(schema, *tags)
 
 
 def get_references(references: list[list[str,str]|dict], build_target:str=BUILD_TARGET) -> str:
@@ -222,7 +167,7 @@ def get_references(references: list[list[str,str]|dict], build_target:str=BUILD_
     Returns:
         str: A string of references in rst format
     """
-    
+
     try:
         ref1 = references[0]
     except IndexError:
@@ -247,7 +192,14 @@ def get_references(references: list[list[str,str]|dict], build_target:str=BUILD_
     return ' | '.join(build_refs)
             
 
-def add_product(definition):
+def add_product(definition: str) -> None:
+    """
+    Add a product to the products.rst file
+
+    Args:
+        definition: The path to the product definition file
+    """
+
     with open(definition, 'r') as f:
         data = json.load(f)
 
@@ -268,8 +220,15 @@ def add_product(definition):
         f.write('\n\n')
 
 
-def make_products_section() -> None:
-    TITLE = 'FAAM Data Products'
+def make_products_section(title: str) -> None:
+    """
+    Build the products section of the documentation. This adds a small
+    information block for each product in the products directory.
+
+    Args:
+        title: The title of the section
+    """
+
     definition_dir = '../../../products'
     files = [
         i for i in
@@ -278,16 +237,15 @@ def make_products_section() -> None:
     ]
 
     with open(os.path.join(dynamic_dir, 'products.rst'), 'w') as f:
-        f.write(f'{"="*len(TITLE)}\n')
-        f.write(f'{TITLE}\n')
-        f.write(f'{"="*len(TITLE)}\n\n')
+        f.write(f'{"="*len(title)}\n')
+        f.write(f'{title}\n')
+        f.write(f'{"="*len(title)}\n\n')
 
     for f in files:
         add_product(f)
 
 
-
 if __name__ == '__main__':
     make_metadata_section()
-    make_products_section()
+    make_products_section('FAAM Data Products')
 
