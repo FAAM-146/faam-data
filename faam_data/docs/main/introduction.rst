@@ -107,7 +107,7 @@ Several factors continue to govern choices of how the FAAM data are represented 
 * There is no single source of truth for some measurements, because of different performance characteristics. Data from different sources are therefore presented together to facilitate this choice being made by a user.
 * Other international airborne facilities pursued the same approach, and FAAM seeks to retain commonality as far as possible with their user communities, enabling code to be shared and re-used.
 
-Timseries Packing
+Timeseries Packing
 -----------------
 
 One of the major differences between the FAAM data standard (following the RAL conventions) and the
