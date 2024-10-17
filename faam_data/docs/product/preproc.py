@@ -20,6 +20,10 @@ dynamic_dir = os.path.join(
 if not os.path.exists(dynamic_dir):
     os.makedirs(dynamic_dir)
 
+# Expected to be 'html' or 'latexpdf'
+BUILD_TARGET = sys.argv[1]
+
+
 def init() -> None:
     for f in os.listdir(dynamic_dir):
         os.remove(f)
@@ -30,6 +34,47 @@ def copy_introduction() -> None:
         os.path.join(dynamic_dir, 'introduction.rst'),
     )
 
+def get_references(references: list[list[str,str]|dict], build_target:str=BUILD_TARGET) -> str:
+    """
+    Get a string of references in rst format for inclusion in the documentation.
+
+    References should be a list of lists, where each inner list contains a title and a URL,
+    or a dictionary with keys `title` and `doi` and/or `web`. When compiling
+    to html, the `web` key will be preferred over the `doi` key, when compiling
+    to pdf, the `doi` key will be preferred over the `web` key.
+
+    Args:
+        references: A list of references
+        build_target: The target format to build the references for. Can be `html` or `latexpdf`
+
+    Returns:
+        str: A string of references in rst format
+    """
+
+    try:
+        ref1 = references[0]
+    except IndexError:
+        return 'None provided'
+    
+    if isinstance(ref1, list):
+        return ' | '.join([f'`{i[0]} <{i[1]}>`_' for i in references])
+    
+    build_refs = []
+    for ref in references:
+        if build_target == 'html':
+            try:
+                build_refs.append(f'`{ref["title"]} <{ref["web"]}>`_')
+            except KeyError:
+                build_refs.append(f'`{ref["title"]} <{ref["doi"]}>`_')
+        else:
+            try:
+                build_refs.append(f'`{ref["title"]} <{ref["web"]}>`_')
+            except KeyError:
+                build_refs.append(f'`{ref["title"]} <{ref["doi"]}>`_')
+            
+    return ' | '.join(build_refs)
+
+
 def populate_introduction(definition) -> None:
     with open(definition, 'r') as f:
         data = json.load(f)
@@ -39,7 +84,7 @@ def populate_introduction(definition) -> None:
     pattern = data['meta']['file_pattern']
     references = data['meta']['references']
 
-    references = ' | '.join([f'`{i[0]} <{i[1]}>`_' for i in references])
+    references = get_references(references)
 
     with open(os.path.join(dynamic_dir, 'introduction.rst'), 'r') as f:
         rst = f.read()

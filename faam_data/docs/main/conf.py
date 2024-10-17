@@ -18,7 +18,7 @@ import datetime
 
 #print(sys.path[0])
 #from faam_data import __version__
-__version__ = 0.3
+__version__ = 0.4
 
 def setup(app):
     app.add_css_file('faam.css')
