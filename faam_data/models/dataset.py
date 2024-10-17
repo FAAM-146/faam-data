@@ -13,6 +13,27 @@ from .dimension import Dimension
 from .group import Group
 from .variable import Variable
 
+class FAAMDataReference(BaseModel):
+    model_config = ConfigDict(
+        title = 'FAAM Data Reference Schema'
+    )
+
+    title: str = Field(
+        description='A brief title for the reference',
+        example='Some paper',
+    )
+
+    doi: Optional[str] = Field(
+        description='The DOI of the reference',
+        example='10.1234/5678',
+        default=None
+    )
+
+    web: Optional[str] = Field(
+        description='A URL for the reference',
+        example='https://www.example.com',
+        default=None
+    )
 
 class DatasetMeta(BaseModel):
     file_pattern: str = Field(description='Canonical filename pattern for this dataset')
@@ -28,7 +49,7 @@ class DatasetMeta(BaseModel):
         description='Description of the dataset',
         default=None
     )
-    references: Optional[list[tuple[str, str]]] = Field(
+    references: Optional[list[FAAMDataReference]|tuple[str,str]] = Field(
         description='References for this dataset',
         default=None
     )
