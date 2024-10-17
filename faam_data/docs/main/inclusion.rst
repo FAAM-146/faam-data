@@ -41,7 +41,7 @@ all required metadata in this standard. The definition should take the following
     groups: # optional
         # nested groups, following the same structure as the root group above
 
-Attributes can be specified as literals, or it may bi indicated that they are
+Attributes can be specified as literals, or it may be indicated that they are
 going to be generated on-the-fly during data processing. In this case, the
 attribute should be specified using a `derived_from_file` indicator. For example:
 
