@@ -24,6 +24,9 @@ dynamic_dir = os.path.join(
 if not os.path.exists(dynamic_dir):
     os.makedirs(dynamic_dir)
 
+BUILD_TARGET = sys.argv[1]
+
+
 def attr_text(attr: str, properties: Mapping) -> str:
     txt = f'* ``{attr}`` - '
 
@@ -157,6 +160,47 @@ def make_metadata_section() -> None:
     make_group_attrs_rst()
     make_variable_attrs_rst()
 
+
+def get_references(references: list[list[str,str]|dict], build_target:str=BUILD_TARGET) -> str:
+    """
+    Get a string of references in rst format for inclusion in the documentation.
+
+    References should be a list of lists, where each inner list contains a title and a URL,
+    or a dictionary with keys `title` and `doi` and/or `web`. When compiling
+    to html, the `web` key will be preferred over the `doi` key, when compiling
+    to pdf, the `doi` key will be preferred over the `web` key.
+
+    Args:
+        references: A list of references
+        build_target: The target format to build the references for. Can be `html` or `latexpdf`
+
+    Returns:
+        str: A string of references in rst format
+    """
+    try:
+        ref1 = references[0]
+    except IndexError:
+        return 'None provided'
+    
+    if isinstance(ref1, list):
+        return ' | '.join([f'`{i[0]} <{i[1]}>`_' for i in references])
+    
+    build_refs = []
+    for ref in references:
+        if build_target == 'html':
+            try:
+                build_refs.append(f'`{ref["title"]} <{ref["web"]}>`_')
+            except KeyError:
+                build_refs.append(f'`{ref["title"]} <{ref["doi"]}>`_')
+        else:
+            try:
+                build_refs.append(f'`{ref["title"]} <{ref["web"]}>`_')
+            except KeyError:
+                build_refs.append(f'`{ref["title"]} <{ref["doi"]}>`_')
+            
+    return ' | '.join(build_refs)
+            
+
 def add_product(definition):
     with open(definition, 'r') as f:
         data = json.load(f)
@@ -170,7 +214,7 @@ def add_product(definition):
         f.write(':Pattern: ``' + data['meta']['file_pattern'] + '``\n')
         f.write(':Description: ' + data['meta']['description'] + '\n')
         f.write(':References: ')
-        f.write(' | '.join([f'`{i[0]} <{i[1]}>`_' for i in data['meta']['references']]))
+        f.write(get_references(data['meta']['references']))
         f.write('\n')
         f.write(':Details: ' + f'`{name} <https://www.faam.ac.uk/sphinx/data/product/{def_name}>`_\n')
         f.write(':Definition: ' + f'`{def_name}.json <https://github.com/FAAM-146/faam-data/tree/main/products/latest/{def_name}.json>`_ [on Github]\n')
