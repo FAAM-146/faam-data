@@ -89,7 +89,10 @@ def make_attrs_rst(schema: dict[str,Any], required_tag, optional_tag: str) -> No
     opt_text = ''
 
     properties = schema['properties']
-    required = schema['required']
+    try:
+        required = schema['required']
+    except KeyError:
+        required = []
 
     # Loop through the properties and create the text for each attribute
     for attr in properties:
