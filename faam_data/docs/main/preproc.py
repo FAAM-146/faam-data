@@ -11,7 +11,7 @@ global_schema = GlobalAttributes.model_json_schema()
 group_schema = GroupAttributes.model_json_schema()
 variable_schema = VariableAttributes.model_json_schema()
 
-
+# Define the directories for the templates and dynamic(generated) content
 template_dir = os.path.join(
     os.path.dirname(__file__),
     'templates'
@@ -24,10 +24,21 @@ dynamic_dir = os.path.join(
 if not os.path.exists(dynamic_dir):
     os.makedirs(dynamic_dir)
 
+# Expected to be 'html' or 'latexpdf'
 BUILD_TARGET = sys.argv[1]
 
 
 def attr_text(attr: str, properties: Mapping) -> str:
+    """
+    Create a string of text for an attribute in the metadata schema.
+
+    Args:
+        attr: The attribute name
+        properties: The schema properties of the object
+
+    Returns:
+        str: A string of text for the attribute in rst format
+    """
     txt = f'* ``{attr}`` - '
 
     _type = None
@@ -65,7 +76,12 @@ def attr_text(attr: str, properties: Mapping) -> str:
 
     return txt
 
+
 def make_global_attrs_rst() -> None:
+    """
+    Create the global attributes section of the metadata.rst file
+    """
+
     with open(os.path.join(dynamic_dir, 'metadata.rst'), 'r') as global_template:
         text = global_template.read()
 
@@ -75,20 +91,27 @@ def make_global_attrs_rst() -> None:
     properties = global_schema['properties']
     required = global_schema['required']
 
+    # Loop through the properties and create the text for each attribute
     for attr in properties:
         if attr in required:
             req_glob_text += attr_text(attr, properties)
         else:
             opt_glob_text += attr_text(attr, properties)
 
-
+    # Replace the tags in the template with the generated text
     text = text.replace('TAG_REQUIRED_GLOBAL_ATTRIBUTES', req_glob_text)
     text = text.replace('TAG_OPTIONAL_GLOBAL_ATTRIBUTES', opt_glob_text)
 
+    # Write the updated text to the metadata.rst file
     with open(os.path.join(dynamic_dir, 'metadata.rst'), 'w') as f:
         f.write(text)
 
+
 def make_group_attrs_rst() -> None:
+    """
+    Create the group attributes section of the metadata.rst file
+    """
+
     with open(os.path.join(dynamic_dir, 'metadata.rst'), 'r') as template:
         text = template.read()
 
@@ -102,19 +125,27 @@ def make_group_attrs_rst() -> None:
     except KeyError:
         required = []
 
+    # Loop through the properties and create the text for each attribute
     for attr in properties:
         if attr in required:
             req_text += attr_text(attr, properties)
         else:
             opt_text += attr_text(attr, properties)
 
+    # Replace the tags in the template with the generated text
     text = text.replace('TAG_REQUIRED_GROUP_ATTRIBUTES', req_text)
     text = text.replace('TAG_OPTIONAL_GROUP_ATTRIBUTES', opt_text)
 
+    # Write the updated text to the metadata.rst file
     with open(os.path.join(dynamic_dir, 'metadata.rst'), 'w') as f:
         f.write(text)
 
+
 def make_variable_attrs_rst() -> None:
+    """
+    Create the variable attributes section of the metadata.rst file
+    """
+
     with open(os.path.join(dynamic_dir, 'metadata.rst'), 'r') as template:
         text = template.read()
 
@@ -128,25 +159,35 @@ def make_variable_attrs_rst() -> None:
     except KeyError:
         required = []
 
+    # Loop through the properties and create the text for each attribute
     for attr in properties:
         if attr in required:
             req_text += attr_text(attr, properties)
         else:
             opt_text += attr_text(attr, properties)
 
+    # Replace the tags in the template with the generated text
     text = text.replace('TAG_REQUIRED_VARIABLE_ATTRIBUTES', req_text)
     text = text.replace('TAG_OPTIONAL_VARIABLE_ATTRIBUTES', opt_text)
 
+    # Write the updated text to the metadata.rst file
     with open(os.path.join(dynamic_dir, 'metadata.rst'), 'w') as f:
         f.write(text)
 
 def delete_dynamic_metadata() -> None:
+    """
+    Delete the dynamic metadata.rst file if it exists
+    """
     try:
         os.remove(os.path.join(dynamic_dir, 'metadata.rst'))
     except Exception:
         pass
 
+
 def copy_metadata_template() -> None:
+    """
+    Copy the metadata.rst template to the dynamic_content directory
+    """
     shutil.copy2(
         os.path.join(template_dir, 'metadata.rst'),
         os.path.join(dynamic_dir, 'metadata.rst'),
@@ -154,6 +195,10 @@ def copy_metadata_template() -> None:
 
 
 def make_metadata_section() -> None:
+    """
+    Create the metadata section of the documentation
+    """
+
     delete_dynamic_metadata()
     copy_metadata_template()
     make_global_attrs_rst()
@@ -177,6 +222,7 @@ def get_references(references: list[list[str,str]|dict], build_target:str=BUILD_
     Returns:
         str: A string of references in rst format
     """
+    
     try:
         ref1 = references[0]
     except IndexError:
