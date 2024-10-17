@@ -65,12 +65,12 @@ def get_references(references: list[list[str,str]|dict], build_target:str=BUILD_
             try:
                 build_refs.append(f'`{ref["title"]} <{ref["web"]}>`_')
             except KeyError:
-                build_refs.append(f'`{ref["title"]} <{ref["doi"]}>`_')
+                build_refs.append(f'`{ref["title"]} <https://doi.org/{ref["doi"]}>`_')
         else:
             try:
-                build_refs.append(f'`{ref["title"]} <{ref["web"]}>`_')
+                build_refs.append(f'`{ref["title"]} <https://doi.org/{ref["doi"]}>`_')
             except KeyError:
-                build_refs.append(f'`{ref["title"]} <{ref["doi"]}>`_')
+                build_refs.append(f'`{ref["title"]} <{ref["web"]}>`_')
             
     return ' | '.join(build_refs)
 
