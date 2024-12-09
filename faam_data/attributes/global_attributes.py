@@ -173,7 +173,7 @@ class GlobalAttributes(BaseModel):
 
     platform_type: str = Field(
         description='Platform type: aircraft',
-        example='aircraft'
+        example=PLATFORM_TYPE
     )
 
     project: str = Field(
@@ -457,6 +457,7 @@ class GlobalAttributes(BaseModel):
     _validate_license = field_validator('license')(default_value(LICENSE))
     _validate_naming_authority = field_validator('naming_authority')(default_value(NAMING_AUTHORITY))
     _validate_platform = field_validator('platform')(default_value(PLATFORM))
+    _validate_platform_type = field_validator('platform_type')(default_value(PLATFORM_TYPE))
     _validate_publisher_type = field_validator('publisher_type')(default_value(PUBLISHER_TYPE))
     _validate_publisher_institution = field_validator('publisher_institution')(default_value(PUBLISHER_INSTITUTION))
     _validate_publisher_url = field_validator('publisher_url')(default_value(PUBLISHER_URL))
