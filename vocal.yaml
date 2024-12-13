@@ -1,0 +1,4 @@
+vocal:
+    project_directory: faam_data
+    products_directory: products
+    conventions: FAAM-[].[]

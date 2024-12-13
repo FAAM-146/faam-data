@@ -6,11 +6,11 @@ filecodec: dict[str, dict[str, str|Callable|None]] = {
         'factory': lambda x: x.strftime('%Y%m%d')
     },
     'revision': {
-        'regex': '[0-9]{3}',
+        'regex': '[0-9]+',
         'factory': lambda x: f'{x:1d}'
     },
     'flight_number': {
-        'regex': '[0-9]{3}',
+        'regex': '[a-z][0-9]{3}',
         'factory': lambda x: x.lower()
     },
 }
