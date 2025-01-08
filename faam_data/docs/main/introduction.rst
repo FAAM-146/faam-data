@@ -108,7 +108,7 @@ Several factors continue to govern choices of how the FAAM data are represented 
 * Other international airborne facilities pursued the same approach, and FAAM seeks to retain commonality as far as possible with their user communities, enabling code to be shared and re-used.
 
 Timeseries Packing
------------------
+------------------
 
 One of the major differences between the FAAM data standard (following the RAL conventions) and the
 other NCAS data standards is the use of timseseries packing. This is where timeseries data at a
