@@ -9,7 +9,7 @@ all required metadata in this standard. The definition should take the following
 .. code-block:: yaml
 
     meta: 
-        file_pattern: "some_pattern_c[0-9]{3}.nc"
+        file_pattern: "some_pattern_{date}_{flight_number}.nc"
         long_name: "Some data product"
         short_name: "some_data_product"
         description: "A longer description of the data product"
