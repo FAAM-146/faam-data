@@ -4,7 +4,8 @@ import shutil
 from typing import Mapping, Any
 import os
 import sys
-sys.path.insert(0, '../../')
+
+sys.path.insert(0, "../../")
 from attributes import GlobalAttributes, GroupAttributes, VariableAttributes
 
 global_schema = GlobalAttributes.model_json_schema()
@@ -12,14 +13,8 @@ group_schema = GroupAttributes.model_json_schema()
 variable_schema = VariableAttributes.model_json_schema()
 
 # Define the directories for the templates and dynamic(generated) content
-template_dir = os.path.join(
-    os.path.dirname(__file__),
-    'templates'
-)
-dynamic_dir = os.path.join(
-    os.path.dirname(__file__),
-    'dynamic_content'
-)
+template_dir = os.path.join(os.path.dirname(__file__), "templates")
+dynamic_dir = os.path.join(os.path.dirname(__file__), "dynamic_content")
 
 if not os.path.exists(dynamic_dir):
     os.makedirs(dynamic_dir)
@@ -39,58 +34,58 @@ def attr_text(attr: str, properties: Mapping) -> str:
     Returns:
         str: A string of text for the attribute in rst format
     """
-    txt = f'* ``{attr}`` - '
+    txt = f"* ``{attr}`` - "
 
     _type = None
     _example = None
 
     try:
-        _type = properties[attr]['type']
+        _type = properties[attr]["type"]
     except KeyError:
         pass
 
     try:
-        _example = properties[attr]['example']
+        _example = properties[attr]["example"]
     except KeyError:
         pass
 
     try:
-        _type = properties[attr]['anyOf']
-        _type = '|'.join([i['type'] for i in _type])
+        _type = properties[attr]["anyOf"]
+        _type = "|".join([i["type"] for i in _type])
     except KeyError:
         pass
 
     if _type is not None:
-        txt += f'[{_type}] '
+        txt += f"[{_type}] "
 
     txt += f'{properties[attr]["description"]}'
 
-    if not txt.endswith('.'):
-        txt += '.'
-    txt += ' '
+    if not txt.endswith("."):
+        txt += "."
+    txt += " "
 
     if _example is not None:
-        txt += f'Example: {_example}'
+        txt += f"Example: {_example}"
 
-    txt += '\n'
+    txt += "\n"
 
     return txt
 
 
-def make_attrs_rst(schema: dict[str,Any], required_tag, optional_tag: str) -> None:
+def make_attrs_rst(schema: dict[str, Any], required_tag, optional_tag: str) -> None:
     """
     Create the global attributes section of the metadata.rst file
     """
 
-    with open(os.path.join(dynamic_dir, 'metadata.rst'), 'r') as _template:
+    with open(os.path.join(dynamic_dir, "metadata.rst"), "r") as _template:
         text = _template.read()
 
-    req_text = ''
-    opt_text = ''
+    req_text = ""
+    opt_text = ""
 
-    properties = schema['properties']
+    properties = schema["properties"]
     try:
-        required = schema['required']
+        required = schema["required"]
     except KeyError:
         required = []
 
@@ -106,7 +101,7 @@ def make_attrs_rst(schema: dict[str,Any], required_tag, optional_tag: str) -> No
     text = text.replace(optional_tag, opt_text)
 
     # Write the updated text to the metadata.rst file
-    with open(os.path.join(dynamic_dir, 'metadata.rst'), 'w') as f:
+    with open(os.path.join(dynamic_dir, "metadata.rst"), "w") as f:
         f.write(text)
 
 
@@ -115,7 +110,7 @@ def delete_dynamic_metadata() -> None:
     Delete the dynamic metadata.rst file if it exists
     """
     try:
-        os.remove(os.path.join(dynamic_dir, 'metadata.rst'))
+        os.remove(os.path.join(dynamic_dir, "metadata.rst"))
     except Exception:
         pass
 
@@ -125,8 +120,8 @@ def copy_metadata_template() -> None:
     Copy the metadata.rst template to the dynamic_content directory
     """
     shutil.copy2(
-        os.path.join(template_dir, 'metadata.rst'),
-        os.path.join(dynamic_dir, 'metadata.rst'),
+        os.path.join(template_dir, "metadata.rst"),
+        os.path.join(dynamic_dir, "metadata.rst"),
     )
 
 
@@ -137,9 +132,9 @@ def make_metadata_section() -> None:
 
     # Define the tags to replace in the metadata.rst template
     tags = [
-        ['TAG_REQUIRED_GLOBAL_ATTRIBUTES', 'TAG_OPTIONAL_GLOBAL_ATTRIBUTES'],
-        ['TAG_REQUIRED_GROUP_ATTRIBUTES',  'TAG_OPTIONAL_GROUP_ATTRIBUTES'],
-        ['TAG_REQUIRED_VARIABLE_ATTRIBUTES', 'TAG_OPTIONAL_VARIABLE_ATTRIBUTES']
+        ["TAG_REQUIRED_GLOBAL_ATTRIBUTES", "TAG_OPTIONAL_GLOBAL_ATTRIBUTES"],
+        ["TAG_REQUIRED_GROUP_ATTRIBUTES", "TAG_OPTIONAL_GROUP_ATTRIBUTES"],
+        ["TAG_REQUIRED_VARIABLE_ATTRIBUTES", "TAG_OPTIONAL_VARIABLE_ATTRIBUTES"],
     ]
 
     # Define the schemas to use for the metadata
@@ -154,7 +149,9 @@ def make_metadata_section() -> None:
         make_attrs_rst(schema, *tags)
 
 
-def get_references(references: list[list[str,str]|dict], build_target:str=BUILD_TARGET) -> str:
+def get_references(
+    references: list[list[str, str] | dict[str, str]], build_target: str = BUILD_TARGET
+) -> str:
     """
     Get a string of references in rst format for inclusion in the documentation.
 
@@ -174,14 +171,14 @@ def get_references(references: list[list[str,str]|dict], build_target:str=BUILD_
     try:
         ref1 = references[0]
     except IndexError:
-        return 'None provided'
-    
+        return "None provided"
+
     if isinstance(ref1, list):
-        return ' | '.join([f'`{i[0]} <{i[1]}>`_' for i in references])
-    
+        return " | ".join([f"`{i[0]} <{i[1]}>`_" for i in references])
+
     build_refs = []
     for ref in references:
-        if build_target == 'html':
+        if build_target == "html":
             try:
                 build_refs.append(f'`{ref["title"]} <{ref["web"]}>`_')
             except KeyError:
@@ -191,9 +188,9 @@ def get_references(references: list[list[str,str]|dict], build_target:str=BUILD_
                 build_refs.append(f'`{ref["title"]} <https://doi.org/{ref["doi"]}>`_')
             except KeyError:
                 build_refs.append(f'`{ref["title"]} <{ref["web"]}>`_')
-            
-    return ' | '.join(build_refs)
-            
+
+    return " | ".join(build_refs)
+
 
 def add_product(definition: str) -> None:
     """
@@ -203,24 +200,33 @@ def add_product(definition: str) -> None:
         definition: The path to the product definition file
     """
 
-    with open(definition, 'r') as f:
+    with open(definition, "r") as f:
         data = json.load(f)
 
-    with open(os.path.join(dynamic_dir, 'products.rst'), 'a') as f:
-        def_name = os.path.basename(definition.replace('.json', ''))
-        name = data['meta']['long_name']
-        f.write(name + '\n')
-        f.write('-'*len(name) + '\n\n')
-        f.write(':Name: ' + data['meta']['long_name'] + '\n')
-        f.write(':Pattern: ``' + data['meta']['file_pattern'] + '``\n')
-        f.write(':Description: ' + data['meta']['description'] + '\n')
-        f.write(':References: ')
-        f.write(get_references(data['meta']['references']))
-        f.write('\n')
-        f.write(':Details: ' + f'`{name} <https://www.faam.ac.uk/sphinx/data/product/{def_name}>`_\n')
-        f.write(':Definition: ' + f'`{def_name}.json <https://github.com/FAAM-146/faam-data/tree/main/products/latest/{def_name}.json>`_ [on Github]\n')
-        f.write(':Example data: ' + f'`{name} <https://drive.google.com/drive/folders/10jBV0odRNR6Yk7EbZHHyHGRlzvsAjFpl?usp=sharing>`_ [on Google Drive]')
-        f.write('\n\n')
+    with open(os.path.join(dynamic_dir, "products.rst"), "a") as f:
+        def_name = os.path.basename(definition.replace(".json", ""))
+        name = data["meta"]["long_name"]
+        f.write(name + "\n")
+        f.write("-" * len(name) + "\n\n")
+        f.write(":Name: " + data["meta"]["long_name"] + "\n")
+        f.write(":Pattern: ``" + data["meta"]["file_pattern"] + "``\n")
+        f.write(":Description: " + data["meta"]["description"] + "\n")
+        f.write(":References: ")
+        f.write(get_references(data["meta"]["references"]))
+        f.write("\n")
+        f.write(
+            ":Details: "
+            + f"`{name} <https://www.faam.ac.uk/sphinx/data/product/{def_name}>`_\n"
+        )
+        f.write(
+            ":Definition: "
+            + f"`{def_name}.json <https://github.com/FAAM-146/faam-data/tree/main/products/latest/{def_name}.json>`_ [on Github]\n"
+        )
+        f.write(
+            ":Example data: "
+            + f"`{name} <https://drive.google.com/drive/folders/10jBV0odRNR6Yk7EbZHHyHGRlzvsAjFpl?usp=sharing>`_ [on Google Drive]"
+        )
+        f.write("\n\n")
 
 
 def make_products_section(title: str) -> None:
@@ -232,23 +238,22 @@ def make_products_section(title: str) -> None:
         title: The title of the section
     """
 
-    definition_dir = '../../../products'
+    definition_dir = "../../../products"
     files = [
-        i for i in
-        glob.glob(os.path.join(definition_dir, 'latest', '*'))
-        if 'schema' not in i
+        i
+        for i in glob.glob(os.path.join(definition_dir, "latest", "*"))
+        if "schema" not in i
     ]
 
-    with open(os.path.join(dynamic_dir, 'products.rst'), 'w') as f:
+    with open(os.path.join(dynamic_dir, "products.rst"), "w") as f:
         f.write(f'{"="*len(title)}\n')
-        f.write(f'{title}\n')
+        f.write(f"{title}\n")
         f.write(f'{"="*len(title)}\n\n')
 
     for f in files:
         add_product(f)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     make_metadata_section()
-    make_products_section('FAAM Data Products')
-
+    make_products_section("FAAM Data Products")
