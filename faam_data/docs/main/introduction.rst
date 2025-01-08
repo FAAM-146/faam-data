@@ -10,7 +10,7 @@ This document provides a description of the FAAM data standard, and the data
 products known to be compliant with it. Data products may identify themselves
 as being compliant with this standard through the use of the ``metadata_link``
 ACDD attribute, which should point to a release of the ``faam-data`` repository,
-or though identifying with the NCAS-AIRBORNE-x.y conventions in the netCDF ``Conventions`` attribute, where the ``x.y`` corresponds to the metadata
+or though identifying with the FAAM-x.y conventions in the netCDF ``Conventions`` attribute, where the ``x.y`` corresponds to the metadata
 release.
 
 ---------------
@@ -187,11 +187,33 @@ found at https://github.com/FAAM-146/faam-data. For example:
 
     vocal check --project $PWD/faam-data/faam_data --definition $PWD/faam-data/products/latest/my_product_definition.json my_file.nc
 
+Alternatively the latest release of the standard and product definitions can be downloaded and
+installed locally using `vocal`, to simplify the process:
+
+.. code-block:: bash
+
+    vocal fetch https://github.com/faam-146/faam-data
+
+Then the check command can be run without specifying the project and definition:
+
+.. code-block:: bash
+
+    vocal check my_file.nc
+
+This will work as long as the file declares the standard in the ``Conventions`` attribute, for example:
+``Conventions: "CF-1.6 ACDD-1.3 FAAM-0.4"``.
+
+`Vocal` also offers a basic web interface, which can be started using:
+
+.. code-block:: bash
+
+    vocal web
+
 ------------------------------
 Citable Documentation and Code
 ------------------------------
 
-FAAM have started using `Zenodo <https://zenodo.org>`_ to provide `Digital Object Identifiers (DOIs) <https://doi.org>`_ to documentation, processing code, and calibration information. DOIs provide persistent identifiers to digital assets, and may be used to reference information in journal publications.
+FAAM have use `Zenodo <https://zenodo.org>`_ to provide `Digital Object Identifiers (DOIs) <https://doi.org>`_ to documentation, processing code, and calibration information. DOIs provide persistent identifiers to digital assets, and may be used to reference information in journal publications.
 
 FAAM assets can be found through the `FAAM Community Portal <https://zenodo.org/communities/faam-146>`_ on Zenodo.
 
