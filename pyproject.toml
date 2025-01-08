@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "faam-data"
+version = "0.4.0"
+description = "Specification and documentation of FAAM data products"
+authors = ["Dave Sproson <dave.sproson@faam.ac.uk>"]
+license = "Open Government Licence 3.0"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+sphinx = ">7"
+sphinx-rtd-theme = "^2"
+pydantic = "^2.10.4"
+faam-vocal = {git = "https://github.com/FAAM-146/vocal"}
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
