@@ -1472,7 +1472,7 @@ variables:
     dimensions:
       - Time
   - meta:
-      name: NV_TWC_U
+      name: NV_TWC_COL_P
       datatype: <float32>
       required: false
     attributes: !!omap
@@ -1480,24 +1480,102 @@ variables:
       - actual_range:
           - '<float32: derived_from_file>'
           - '<float32: derived_from_file>'
-      - ancillary_variables: NV_TWC_U_FLAG
+      - ancillary_variables: NV_TWC_COL_P_FLAG
       - coordinates: '<str: derived_from_file optional>'
       - coverage_content_type: physicalMeasurement
       - frequency: 1
       - instrument_manufacturer: Sky Phys Tech Inc.
       - instrument_model: '<str: derived_from_file>'
       - instrument_serial_number: '<str: derived_from_file>'
-      - long_name: Uncorrected total condensed water content from the Nevzorov probe
-      - units: gram m-3
+      - long_name: TWC collector power
+      - units: W
       - comment: '<str: derived_from_file optional>'
     dimensions:
       - Time
   - meta:
-      name: NV_TWC_U_FLAG
+      name: NV_TWC_COL_P_FLAG
       datatype: <int8>
       required: false
     attributes:
-      long_name: Data quality flag for NV_TWC_U
+      long_name: Data quality flag for NV_TWC_COL_P
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+      comment: '<str: derived_from_file optional>'
+    dimensions:
+      - Time
+  - meta:
+      name: NV_TWC_REF_P
+      datatype: <float32>
+      required: false
+    attributes: !!omap
+      - _FillValue: -9999
+      - actual_range:
+          - '<float32: derived_from_file>'
+          - '<float32: derived_from_file>'
+      - ancillary_variables: NV_TWC_REF_P_FLAG
+      - coordinates: '<str: derived_from_file optional>'
+      - coverage_content_type: physicalMeasurement
+      - frequency: 1
+      - instrument_manufacturer: Sky Phys Tech Inc.
+      - instrument_model: '<str: derived_from_file>'
+      - instrument_serial_number: '<str: derived_from_file>'
+      - long_name: TWC reference power
+      - units: W
+      - comment: '<str: derived_from_file optional>'
+    dimensions:
+      - Time
+  - meta:
+      name: NV_TWC_REF_P_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for NV_TWC_REF_P
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+      comment: '<str: derived_from_file optional>'
+    dimensions:
+      - Time
+  - meta:
+      name: NV_REF_P
+      datatype: <float32>
+      required: false
+    attributes: !!omap
+      - _FillValue: -9999
+      - actual_range:
+          - '<float32: derived_from_file>'
+          - '<float32: derived_from_file>'
+      - ancillary_variables: NV_REF_P_FLAG
+      - coordinates: '<str: derived_from_file optional>'
+      - coverage_content_type: physicalMeasurement
+      - frequency: 1
+      - instrument_manufacturer: Sky Phys Tech Inc.
+      - instrument_model: '<str: derived_from_file>'
+      - instrument_serial_number: '<str: derived_from_file>'
+      - long_name: Reference power
+      - units: W
+      - comment: '<str: derived_from_file optional>'
+    dimensions:
+      - Time
+  - meta:
+      name: NV_REF_P_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for NV_REF_P
       _FillValue: 0
       valid_range:
         - '<int8: derived_from_file>'
@@ -1551,7 +1629,7 @@ variables:
     dimensions:
       - Time
   - meta:
-      name: NV_LWC_U
+      name: NV_LWC_COL_P
       datatype: <float32>
       required: false
     attributes: !!omap
@@ -1559,24 +1637,63 @@ variables:
       - actual_range:
           - '<float32: derived_from_file>'
           - '<float32: derived_from_file>'
-      - ancillary_variables: NV_LWC_U_FLAG
+      - ancillary_variables: NV_LWC_COL_P_FLAG
       - coordinates: '<str: derived_from_file optional>'
       - coverage_content_type: physicalMeasurement
       - frequency: 1
       - instrument_manufacturer: Sky Phys Tech Inc.
       - instrument_model: '<str: derived_from_file>'
       - instrument_serial_number: '<str: derived_from_file>'
-      - long_name: Uncorrected liquid water content from the Nevzorov probe
-      - units: gram m-3
+      - long_name: LWC collector power
+      - units: W
       - comment: '<str: derived_from_file optional>'
     dimensions:
       - Time
   - meta:
-      name: NV_LWC_U_FLAG
+      name: NV_LWC_COL_P_FLAG
       datatype: <int8>
       required: false
     attributes:
-      long_name: Data quality flag for NV_LWC_U
+      long_name: Data quality flag for NV_LWC_COL_P
+      _FillValue: 0
+      valid_range:
+        - '<int8: derived_from_file>'
+        - '<int8: derived_from_file>'
+      flag_masks: '<Array[int8]: derived_from_file>'
+      flag_meanings: '<str: derived_from_file>'
+      coverage_content_type: qualityInformation
+      frequency: 1
+      units: '1'
+      comment: '<str: derived_from_file optional>'
+    dimensions:
+      - Time
+  - meta:
+      name: NV_LWC_REF_P
+      datatype: <float32>
+      required: false
+    attributes: !!omap
+      - _FillValue: -9999
+      - actual_range:
+          - '<float32: derived_from_file>'
+          - '<float32: derived_from_file>'
+      - ancillary_variables: NV_LWC_REF_P_FLAG
+      - coordinates: '<str: derived_from_file optional>'
+      - coverage_content_type: physicalMeasurement
+      - frequency: 1
+      - instrument_manufacturer: Sky Phys Tech Inc.
+      - instrument_model: '<str: derived_from_file>'
+      - instrument_serial_number: '<str: derived_from_file>'
+      - long_name: LWC reference power
+      - units: W
+      - comment: '<str: derived_from_file optional>'
+    dimensions:
+      - Time
+  - meta:
+      name: NV_LWC_REF_P_FLAG
+      datatype: <int8>
+      required: false
+    attributes:
+      long_name: Data quality flag for NV_LWC_REF_P
       _FillValue: 0
       valid_range:
         - '<int8: derived_from_file>'
@@ -1630,7 +1747,7 @@ variables:
     dimensions:
       - Time
   - meta:
-      name: NV_LWC1_U
+      name: NV_LWC1_COL_P
       datatype: <float32>
       required: false
     attributes: !!omap
@@ -1638,24 +1755,24 @@ variables:
       - actual_range:
           - '<float32: derived_from_file>'
           - '<float32: derived_from_file>'
-      - ancillary_variables: NV_LWC1_U_FLAG
+      - ancillary_variables: NV_LWC1_COL_P_FLAG
       - coordinates: '<str: derived_from_file optional>'
       - coverage_content_type: physicalMeasurement
       - frequency: 1
       - instrument_manufacturer: Sky Phys Tech Inc.
       - instrument_model: '<str: derived_from_file>'
       - instrument_serial_number: '<str: derived_from_file>'
-      - long_name: Uncorrected liquid water content from the Nevzorov probe (1st collector)
-      - units: gram m-3
+      - long_name: LWC1 collector power
+      - units: W
       - comment: '<str: derived_from_file optional>'
     dimensions:
       - Time
   - meta:
-      name: NV_LWC1_U_FLAG
+      name: NV_LWC1_COL_P_FLAG
       datatype: <int8>
       required: false
     attributes:
-      long_name: Data quality flag for NV_LWC1_U
+      long_name: Data quality flag for NV_LWC1_COL_P
       _FillValue: 0
       valid_range:
         - '<int8: derived_from_file>'
@@ -1709,7 +1826,7 @@ variables:
     dimensions:
       - Time
   - meta:
-      name: NV_LWC2_U
+      name: NV_LWC2_COL_P
       datatype: <float32>
       required: false
     attributes: !!omap
@@ -1717,24 +1834,24 @@ variables:
       - actual_range:
           - '<float32: derived_from_file>'
           - '<float32: derived_from_file>'
-      - ancillary_variables: NV_LWC2_U_FLAG
+      - ancillary_variables: NV_LWC2_COL_P_FLAG
       - coordinates: '<str: derived_from_file optional>'
       - coverage_content_type: physicalMeasurement
       - frequency: 1
       - instrument_manufacturer: Sky Phys Tech Inc.
       - instrument_model: '<str: derived_from_file>'
       - instrument_serial_number: '<str: derived_from_file>'
-      - long_name: Uncorrected liquid water content from the Nevzorov probe (2nd collector)
-      - units: gram m-3
+      - long_name: LWC2 collector power
+      - units: W
       - comment: '<str: derived_from_file optional>'
     dimensions:
       - Time
   - meta:
-      name: NV_LWC2_U_FLAG
+      name: NV_LWC2_COL_P_FLAG
       datatype: <int8>
       required: false
     attributes:
-      long_name: Data quality flag for NV_LWC2_U
+      long_name: Data quality flag for NV_LWC2_COL_P
       _FillValue: 0
       valid_range:
         - '<int8: derived_from_file>'
