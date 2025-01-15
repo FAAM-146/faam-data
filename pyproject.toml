@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "faam-data"
-version = "0.4.0"
+version = "0.5.0"
 description = "Specification and documentation of FAAM data products"
 authors = ["Dave Sproson <dave.sproson@faam.ac.uk>"]
 license = "Open Government Licence 3.0"
