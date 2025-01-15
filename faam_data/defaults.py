@@ -2,7 +2,7 @@ from .attributes.constants import *
 from vocal.types import *
 
 default_global_attrs = {
-    'Conventions': 'CF-1.9 ACDD-1.3',
+    'Conventions': DerivedString,
     'acknowledgement': ACKNOWLEDGEMENT,
     'comment': OptionalDerivedString,
     'creator_address': CREATOR_ADDRESS,

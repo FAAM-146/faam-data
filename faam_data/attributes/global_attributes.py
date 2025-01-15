@@ -18,7 +18,7 @@ class GlobalAttributes(BaseModel):
 
     Conventions: str = Field(
         description="The conventions followed by this data",
-        example='CF-1.9 ACDD-1.3'
+        example='CF-1.9 ACDD-1.3 FAAM-0.5'
     )
 
     acknowledgement: str = Field(
@@ -461,3 +461,38 @@ class GlobalAttributes(BaseModel):
     _validate_publisher_type = field_validator('publisher_type')(default_value(PUBLISHER_TYPE))
     _validate_publisher_institution = field_validator('publisher_institution')(default_value(PUBLISHER_INSTITUTION))
     _validate_publisher_url = field_validator('publisher_url')(default_value(PUBLISHER_URL))
+
+    @field_validator('Conventions')
+    def _validate_conventions(cls, conventions: str) -> str:
+        if ',' in conventions:
+            raise ValueError('Conventions should be space separated')
+        
+        errors: list[str] = []
+
+        conventions_list = conventions.split()
+
+        # Must identify with ACDD-1.3
+        if 'ACDD-1.3' not in conventions_list:
+            errors.append('Dataset must comply with the Attribute Convention for Dataset Discovery 1.3 (ACDD-1.3)')
+        
+        # Must identify with CF-1.9 or later, but not CF-2.0 if that becomes a thing
+        try:
+            cf_str = [c for c in conventions_list if c.startswith('CF-')][0]
+            cf_version = float(cf_str.split('-')[1])
+            if cf_version < 1.9 or cf_version >= 2.0:
+                errors.append('Dataset must comply with the CF conventions version >=1.9, <2.0')
+
+        except IndexError:
+            errors.append('Dataset must comply with a CF conventions (CF-x.y)')
+            
+        except ValueError:
+            errors.append(f'CF version {cf_str} not understood')
+
+        # Must identify with a FAAM convention
+        if not any([c.startswith('FAAM-') for c in conventions_list]):
+            errors.append('Dataset must comply with a FAAM convention (FAAM-x.y)')
+
+        if errors:
+            raise ValueError('. '.join(errors))
+
+        return conventions
