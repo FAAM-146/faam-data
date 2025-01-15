@@ -23,7 +23,7 @@
     ]
   },
   "attributes": {
-    "Conventions": "CF-1.9 ACDD-1.3",
+    "Conventions": "<str: derived_from_file>",
     "acknowledgement": "Airborne data was obtained using the BAe-146-301 Atmospheric Research Aircraft [ARA] flown by Airtask Ltd and managed by FAAM Airborne Laboratory, jointly operated by UKRI and the University of Leeds",
     "comment": "<str: derived_from_file optional>",
     "creator_address": "Building 146, Cranfield University, College Road, Cranfield, Bedford. MK43 0AL. UK.",

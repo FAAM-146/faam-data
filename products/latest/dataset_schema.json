@@ -154,7 +154,7 @@
       "properties": {
         "Conventions": {
           "description": "The conventions followed by this data",
-          "example": "CF-1.9 ACDD-1.3",
+          "example": "CF-1.9 ACDD-1.3 FAAM-0.5",
           "title": "Conventions",
           "type": "string"
         },
