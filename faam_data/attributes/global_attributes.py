@@ -5,7 +5,8 @@ from typing import Optional, Union
 from pydantic import  BaseModel, ConfigDict
 from vocal.field import Field
 from pydantic import model_validator
-from vocal.validation import validator, field_validator, substitute_placeholders, is_exact, is_in
+from vocal.validation import field_validator, substitute_placeholders, is_exact, is_in
+from faam_data.validators import validate_conventions
 
 
 from .constants import *
@@ -461,38 +462,5 @@ class GlobalAttributes(BaseModel):
     _validate_publisher_type = field_validator('publisher_type')(is_exact(PUBLISHER_TYPE))
     _validate_publisher_institution = field_validator('publisher_institution')(is_exact(PUBLISHER_INSTITUTION))
     _validate_publisher_url = field_validator('publisher_url')(is_exact(PUBLISHER_URL))
-
-    @field_validator('Conventions')
-    def _validate_conventions(cls, conventions: str) -> str:
-        if ',' in conventions:
-            raise ValueError('Conventions should be space separated')
-        
-        errors: list[str] = []
-
-        conventions_list = conventions.split()
-
-        # Must identify with ACDD-1.3
-        if 'ACDD-1.3' not in conventions_list:
-            errors.append('Dataset must comply with the Attribute Convention for Dataset Discovery 1.3 (ACDD-1.3)')
-        
-        # Must identify with CF-1.9 or later, but not CF-2.0 if that becomes a thing
-        try:
-            cf_str = [c for c in conventions_list if c.startswith('CF-')][0]
-            cf_version = float(cf_str.split('-')[1])
-            if cf_version < 1.9 or cf_version >= 2.0:
-                errors.append('Dataset must comply with the CF conventions version >=1.9, <2.0')
-
-        except IndexError:
-            errors.append('Dataset must comply with a CF conventions (CF-x.y)')
-            
-        except ValueError:
-            errors.append(f'CF version {cf_str} not understood')
-
-        # Must identify with a FAAM convention
-        if not any([c.startswith('FAAM-') for c in conventions_list]):
-            errors.append('Dataset must comply with a FAAM convention (FAAM-x.y)')
-
-        if errors:
-            raise ValueError('. '.join(errors))
-
-        return conventions
+    _validate_conventions = field_validator('Conventions')(validate_conventions)
+    
