@@ -150,7 +150,7 @@ def make_metadata_section() -> None:
 
 
 def get_references(
-    references: list[list[str, str] | dict[str, str]], build_target: str = BUILD_TARGET
+    references: list[list[str] | dict[str, str]], build_target: str = BUILD_TARGET
 ) -> str:
     """
     Get a string of references in rst format for inclusion in the documentation.
@@ -250,8 +250,8 @@ def make_products_section(title: str) -> None:
         f.write(f"{title}\n")
         f.write(f'{"="*len(title)}\n\n')
 
-    for f in files:
-        add_product(f)
+    for _f in files:
+        add_product(_f)
 
 
 if __name__ == "__main__":
