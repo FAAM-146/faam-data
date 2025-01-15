@@ -14,6 +14,9 @@ pydantic = "^2.10.4"
 faam-vocal = {git = "https://github.com/FAAM-146/vocal"}
 
 
+[tool.poetry.group.dev.dependencies]
+mypy = "^1.14.1"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"

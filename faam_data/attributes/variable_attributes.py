@@ -33,10 +33,7 @@ class VariableAttributes(BaseModel):
         example=COVERAGE_CONTENT_TYPES[2], ppodd_default='physicalMeasurement'
     )
 
-    frequency: int32 = Field(
-        description='The frequency of the data. Where this is >1, will typically correspond to an spsNN dimension',
-        example=1
-    )
+    
 
     long_name: str = Field(
         description='A longer, descriptive name for the variable',
@@ -125,6 +122,16 @@ class VariableAttributes(BaseModel):
     flag_values: Optional[Union[list[int], int]] = Field(
         description='Allowed flag values. Required for classic flags',
         example=[0, 1, 2],
+        default=None
+    )
+
+    frequency: Optional[int32] = Field(
+        description=(
+            'The frequency of the data, when it is of uniform frequency. '
+            'This attribute should be given whenever the data is of uniform frequency, and '
+            'must be given when using an "sps" dimension.'
+        ),
+        example=1,
         default=None
     )
 
