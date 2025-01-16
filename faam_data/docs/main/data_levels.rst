@@ -83,8 +83,8 @@ control.
 Quality Control levels
 ----------------------
 
-Automatic
----------
+Primary
+-------
 
 Data quality is characterised based on instrument operating envelope, for 
 example acceptable probe internal temperature; platform state, for example 
@@ -104,8 +104,8 @@ example, the static pressure may be checked against the aircraft measurement of
 the same property as well as being within some range of the standard atmosphere 
 pressure given the altitude derived from the GIN. This level of quality control
 may be carried out automatically in the processing code or may require human 
-intervention and manual flagging. At this level Automatic quality control is 
-implied.
+intervention and manual flagging. Automatic quality control must already have been 
+applied for data at this level.
 
 
 Comprehensive
@@ -114,5 +114,6 @@ Comprehensive
 An in-depth evaluation of data quality has been undertaken by an expert. 
 This may include quantitative analysis of instrument state and behaviour over 
 multiple flights. Manual QC flags are applied where data are found to be of 
-degraded quality. At this level Standard quality control is implied.
+degraded quality. Standard quality control must already have been 
+applied for data at this level.
 

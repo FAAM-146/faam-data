@@ -36,7 +36,7 @@ Once the user finds the required data, she/he needs to know how can they be acce
 
 * (Meta)data should be retreivable by their identifier using a standardised communications protocol
     * The protocol should be open, free, and universally implementable.
-    * The protocol should allow for an authentication and and authorisation procedure, where nesessary.
+    * The protocol should allow for an authentication and authorisation procedure, where necessary.
 * Metadata should be accessible, even when the data are no longer available.
 
 Interoperable
@@ -64,7 +64,7 @@ NetCDF
 
 The FAAM core data product is provided in the **netCDF** format. NetCDF (Network Common Data Form) is a set of software libraries and platform independent data formats which are designed to support the creation, access, and sharing of array-oriented scientific data. NetCDF is designed to be
 
-* **Self-describing.** A netCDF file include information about the data it contains (i.e. metadata).
+* **Self-describing.** A netCDF file includes information about the data it contains (i.e. metadata).
 * **Portable.** A netCDF file can be accessed by computers with different ways of storing integers, characters, and floating-point numbers.
 * **Scalable.** A small subset of a large dataset may be accessed efficiently.
 * **Appendable.** Data may be appended to a properly structured netCDF file without copying the dataset or redefining its structure.
@@ -78,7 +78,7 @@ NetCDF files generally consist of four components:
 * **Attributes.** Attributes are metadata which can be attached to the netCDF file itself (called global attributes), to variables, and to groups (variable attributes and groups attributes, respectively). Attributes may be textual or numeric; numeric attributes may be arrays.
 * **Groups.** Groups (available since netCDF4) provide a method to encapsulate related *dimensions,* *variables,* and *attributes.* They can be thought of as somewhat analogous to directories in a filesystem.
 * **Dimensions.** Dimensions specify the size of a single axis of a variable within a netCDF file. Common dimensions for geophysical data include time, latitude, and longitude, though they do not need to correspond to physical dimensions. There is no practical limit to the number of dimensions which may be defined in a netCDF file.
-* **Variables.** Variables are named *n*\ -dimensional (thus associated with *n* *dimensions*) arrays of a specified data type. Variables may have zero or more *attributes*, which act as metadata to describe the contents of the variable.
+* **Variables.** Variables are named *n*\ -dimensional (thus associated with *n* *dimensions*) arrays of a specified data type. Variables may have zero or more *attributes*, which act as metadata to describe the contents of the variable. Zero dimensional variables may be referred to as *scalar* variables.
 
 A minimal example of accessing a 1-dimensional variable, *data*, along with its *units* attribute and a global *title* attribute from a netCDF file, using python, is given below. Note that the netCDF library, *netCDF4*, is not included as part of the python standard library, but may be installed using your system package manager, pip, or conda.
 
@@ -126,13 +126,14 @@ External Conventions
 --------------------
 
 This standard relies heavily on the `Climate Forecast (CF) <https://cfconventions.org/>`_ 
-and on the `Attribute Conventions for Data Discovery (ACDD) <https://wiki.esipfed.org/Attribute_Convention_for_Data_Discovery_1-3>`_. 
+comventions and the `Attribute Conventions for Data Discovery (ACDD) <https://wiki.esipfed.org/Attribute_Convention_for_Data_Discovery_1-3>`_. 
 Data which are compliant with this standard should also comply with ``CF-[1.9<=x.y<2.0]`` and 
 ``ACDD-1.3``. 
 
 CF standard names should be used wherever possible. No particular release of the CF standard
 names table is required, however the release used should be specified in the 
-``standard_name_vocabulary`` metadata attribute.
+``standard_name_vocabulary`` metadata attribute. When checking for compliance, version 88
+of the CF standard names table is currently used.
 
 A comma-separated list of keywords should be provided for each data product in the 
 ``keywords`` metadata attribute. These should be derived from the 
@@ -143,7 +144,7 @@ vocabulary, and this should be noted in the ``keywords_vocabulary`` metadata att
 Standard Versioning
 -------------------
 
-This standand has major and minor versions, which are incremented using the following rules:
+This standard has major and minor versions, which are incremented using the following rules:
 
 * Major version: Incremented when a change is made that is not backwards compatible. This includes:
 
@@ -168,7 +169,7 @@ Compliance Checking
 -------------------
 
 FAAM use standard and product definitons in a format understood by the
-`Vocal <https://github.com/FAAM-146/vocal>` tool. This tool can be used to:
+`Vocal <https://github.com/FAAM-146/vocal>`_ tool. This tool can be used to:
 
 * Check that a file is compliant with the standard and product definitions
 * Create 'example' netCDF files that are compliant with the standard and product definitions
@@ -209,11 +210,24 @@ This will work as long as the file declares the standard in the ``Conventions`` 
 
     vocal web
 
+A full description of *vocal* and its use can be found at the `GitHub repository <https://github.com/FAAM-146/vocal>`_.
+Usage help on the command line can be found by running:
+
+.. code-block:: bash
+
+    vocal help
+
+or 
+
+.. code-block:: bash
+
+    vocal <command> -h
+
 ------------------------------
 Citable Documentation and Code
 ------------------------------
 
-FAAM have use `Zenodo <https://zenodo.org>`_ to provide `Digital Object Identifiers (DOIs) <https://doi.org>`_ to documentation, processing code, and calibration information. DOIs provide persistent identifiers to digital assets, and may be used to reference information in journal publications.
+FAAM use `Zenodo <https://zenodo.org>`_ to provide `Digital Object Identifiers (DOIs) <https://doi.org>`_ to documentation, processing code, and calibration information. DOIs provide persistent identifiers to digital assets, and may be used to reference information in journal publications.
 
 FAAM assets can be found through the `FAAM Community Portal <https://zenodo.org/communities/faam-146>`_ on Zenodo.
 
@@ -225,7 +239,7 @@ FAAM aim to process and make available a preliminary version of the core (DECADE
 data product within 24 hours of a flight, although this may take slightly longer
 when on detachment. The preliminary DECADES file, indicated by the postfix
 ``_prelim`` in the filename will initially be made available to registered users
-through the FAAM website, where it will also be available to visualise.
+through the `FAAM website <https://www.faam.ac.uk>`_, where it will also be available to visualise.
 
 The preliminary file is intended to be used only for initial visualisation and
 analysis while the data go through inspection and manual flagging.

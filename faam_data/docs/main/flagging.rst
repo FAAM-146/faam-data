@@ -3,13 +3,31 @@ Quality Flagging
 ----------------
 
 Variables may have associated data quality variables, known as flags. These 
-variables should be named ``<variable_name>_<qcpostfix>`` where ``<qcpostfix>``
+variables should be named ``<variable_name>_<quality-postfix>`` where ``<quality-postfix>``
 is consistent within a data product. The data quality variable should also be referenced by name in the ``ancillary_variables`` attribute of the data variable.
+
+For example, if a variable is named ``temperature`` and the quality postfix is ``flag``, then
+the associated data quality variable should be named ``temperature_flag``:
+
+.. code::
+
+    temperature: {
+        ...
+        ancillary_variables: "temperature_flag"
+        ...
+    }
+
+    temperature_flag: {
+        ...
+        coverage_content_type: "qualityInformation",
+        flag_values: [0, 1, 2],
+        flag_meanings: "data_good minor_data_quality_issue major_data_quality_issue"
+    }
 
 Flagging may be automatic, manual, or a combination of the two. Where the flagging
 is manual, further information about the reason for flagging may be added to the ``comment`` attribute of the data quality variable.
 
-Data which have been flagged should be treated with caution, and the data
+Data which have a non-zero flag should be treated with caution, and the data
 provider should be contacted if in doubt about whether data should be used.
 
 Value-based Flags
@@ -32,7 +50,7 @@ To understand the meaning of these flag values, we can look at the ``flag_values
 * ``flag_values``: ``0b 1b 2b``
 
 We can see that there are three different flag meanings and three different flag values, and can deduce that a flag value of 0 indicates the data are considered good, a flag value of 1 indicates a minor data quality issue, and a flag value of 2 indicates a major data quality issue.
-A user may choose, for example, to eliminate data with a major quality issue. To do this, they would simply mask/nan the variable whereever the flag variable has a value of 2, leaving the variable array as
+A user may choose, for example, to eliminate data with a major quality issue. To do this, they would simply mask/nan the variable wherever the flag variable has a value of 2, leaving the variable array as
 
 ``1 2 6 5 4 3 6 5 4 3 - - 4 5 6 7 7 6 5 3 2``.
 
@@ -54,11 +72,11 @@ In order to a bitmask flag it must first be unpacked. This adds to the complexit
 
 For example, consider a variable array with values
 
-``1 2 6 5 4 3 6 5 4 3 2 1 4 5 6 7 7 6 5 3 2``
+``3 2 1 2 6 5 4 3 6 5 4 3 2 1 4 5 6 7 7 6 5 3 2``
 
 and its corresponding flag with values
 
-``1 1 3 3 2 2 4 4 4 4 6 6 6 6 8 8 5 5 3 3 1``
+``0 0 1 1 3 3 2 2 4 4 4 4 6 6 6 6 8 8 5 5 3 3 1``
 
 To understand the meaning of these flag values, we can look at the ``flag_masks`` and ``flag_meanings`` attributes of the flag variable, which may look like
 
@@ -81,10 +99,10 @@ this would leave us with the following in ``unpacked``:
 .. code::
 
     {
-        aircraft_on_ground: array([1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1]),
-        flow_out_of_range: array([0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0]),
-        temp_out_of_range: array([0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0]),
-        data_out_of_bounds: array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0])
+        aircraft_on_ground: array([0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1]),
+        flow_out_of_range: array([0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0]),
+        temp_out_of_range: array([0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0]),
+        data_out_of_bounds: array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0])
     }
 
 Bitmask flags will have the same dimensions as their associated variable, and the following variable attributes:

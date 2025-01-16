@@ -15,10 +15,12 @@
 #sys.path.insert(0, os.path.abspath('../../..'))
 import sphinx_rtd_theme # type: ignore
 import datetime
+import importlib.metadata
 
-#print(sys.path[0])
-#from faam_data import __version__
-__version__ = 0.4
+@lambda _: _()
+def __version__():
+    v = importlib.metadata.version("faam_data")
+    return ".".join(v.split('.')[:2])
 
 def setup(app):
     app.add_css_file('faam.css')
