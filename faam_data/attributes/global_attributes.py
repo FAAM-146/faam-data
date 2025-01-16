@@ -48,7 +48,7 @@ class GlobalAttributes(BaseModel):
     )
 
     creator_type: str = Field(
-        description=f'The type of creator. Should be one of {", ".join(f'"CREATOR_TYPES"')}',
+        description=f'The type of creator. Should be one of {", ".join(CREATOR_TYPES)}',
         example=CREATOR_TYPES[0]
     )
 
