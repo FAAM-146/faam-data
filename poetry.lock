@@ -328,7 +328,7 @@ test = ["pytest (>=6)"]
 
 [[package]]
 name = "faam-vocal"
-version = "0.2.0"
+version = "0.2.1"
 description = "Compliance checking and metadata management"
 optional = false
 python-versions = ">=3.9"
@@ -347,7 +347,7 @@ requests = "^2.32.3"
 type = "git"
 url = "https://github.com/FAAM-146/vocal"
 reference = "HEAD"
-resolved_reference = "a8c014fca21e1c2cb0a3d26af98cfccdfbdc0fdd"
+resolved_reference = "4878bd70902b9440ff40d2cacec46ddd76a79ae4"
 
 [[package]]
 name = "fastapi"
