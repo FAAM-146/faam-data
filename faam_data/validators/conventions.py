@@ -1,6 +1,10 @@
-from vocal.validation import vocal_validator
+from vocal.validation import vocal_validator, Attribute
 
-@vocal_validator(description='Ensure that Conventions string includes ACDD-1.3, CF-1.9 or later, and a FAAM convention')
+
+@vocal_validator(
+    description="Ensure that Conventions string includes ACDD-1.3, CF-1.9 or later, and a FAAM convention",
+    bound=Attribute("Conventions")
+)
 def validate_conventions(cls, conventions: str) -> str:
     """
     This validator should be applied as a field validator to the
@@ -18,35 +22,39 @@ def validate_conventions(cls, conventions: str) -> str:
     Returns:
         str: The conventions string if it is valid
     """
-    if ',' in conventions:
-        raise ValueError('Conventions should be space separated')
-    
+    if "," in conventions:
+        raise ValueError("Conventions should be space separated")
+
     errors: list[str] = []
 
     conventions_list = conventions.split()
 
     # Must identify with ACDD-1.3
-    if 'ACDD-1.3' not in conventions_list:
-        errors.append('Dataset must comply with the Attribute Convention for Dataset Discovery 1.3 (ACDD-1.3)')
-    
+    if "ACDD-1.3" not in conventions_list:
+        errors.append(
+            "Dataset must comply with the Attribute Convention for Dataset Discovery 1.3 (ACDD-1.3)"
+        )
+
     # Must identify with CF-1.9 or later, but not CF-2.0 if that becomes a thing
     try:
-        cf_str = [c for c in conventions_list if c.startswith('CF-')][0]
-        cf_version = float(cf_str.split('-')[1])
+        cf_str = [c for c in conventions_list if c.startswith("CF-")][0]
+        cf_version = float(cf_str.split("-")[1])
         if cf_version < 1.9 or cf_version >= 2.0:
-            errors.append('Dataset must comply with the CF conventions version >=1.9, <2.0')
+            errors.append(
+                "Dataset must comply with the CF conventions version >=1.9, <2.0"
+            )
 
     except IndexError:
-        errors.append('Dataset must comply with a CF conventions (CF-x.y)')
-        
+        errors.append("Dataset must comply with a CF conventions (CF-x.y)")
+
     except ValueError:
-        errors.append(f'CF version {cf_str} not understood')
+        errors.append(f"CF version {cf_str} not understood")
 
     # Must identify with a FAAM convention
-    if not any([c.startswith('FAAM-') for c in conventions_list]):
-        errors.append('Dataset must comply with a FAAM convention (FAAM-x.y)')
+    if not any([c.startswith("FAAM-") for c in conventions_list]):
+        errors.append("Dataset must comply with a FAAM convention (FAAM-x.y)")
 
     if errors:
-        raise ValueError('. '.join(errors))
+        raise ValueError(". ".join(errors))
 
     return conventions
