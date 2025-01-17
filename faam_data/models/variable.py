@@ -3,6 +3,7 @@ from typing import List
 
 from vocal.field import Field
 from vocal.mixins import VocalVariableMixin
+from faam_data.validators import validate_frequency
 from ..attributes import VariableAttributes
 
 
@@ -17,13 +18,4 @@ class Variable(BaseModel, VocalVariableMixin):
     dimensions: List[str]
     attributes: VariableAttributes
 
-    @model_validator(mode="after")
-    @classmethod
-    def validate_frequency(cls, v):
-        frequency = v.attributes.frequency
-        has_sps_dim = any([d.startswith("sps") for d in v.dimensions])
-        if frequency is None and has_sps_dim:
-            raise ValueError(
-                '"frequency" attribute is required when using sps dimension'
-            )
-        return v
+    _validate_frequency = model_validator(mode="after")(validate_frequency)
