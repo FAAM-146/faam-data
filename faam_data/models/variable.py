@@ -1,4 +1,4 @@
-from pydantic import BaseModel, model_validator
+from pydantic import BaseModel
 from typing import List
 
 from vocal.field import Field
@@ -18,4 +18,4 @@ class Variable(BaseModel, VocalVariableMixin):
     dimensions: List[str]
     attributes: VariableAttributes
 
-    _validate_frequency = model_validator(mode="after")(validate_frequency)
+    _validate_frequency = validate_frequency
