@@ -5,13 +5,18 @@ from typing import Optional, Union
 from pydantic import  BaseModel, ConfigDict
 from vocal.field import Field
 from pydantic import model_validator
-from vocal.validation import field_validator, substitute_placeholders, is_exact, is_in
+from vocal.validation import (
+    substitute_placeholders, is_exact, is_in,
+    Attribute, validate
+)
+from vocal.mixins import VocalAttributesMixin
+
 from faam_data.validators import validate_conventions
 
 
 from .constants import *
 
-class GlobalAttributes(BaseModel):
+class GlobalAttributes(BaseModel, VocalAttributesMixin):
 
     model_config = ConfigDict(
         title = 'FAAM Global Metadata Schema'
@@ -448,19 +453,19 @@ class GlobalAttributes(BaseModel):
     # Allow the use of placeholders, which will be subbed out with examples
     subs_placeholders = model_validator(mode='before')(substitute_placeholders)
     
-    _validate_acknowledgement = field_validator('acknowledgement')(is_exact(ACKNOWLEDGEMENT))
-    _validate_creator_address = field_validator('creator_address')(is_exact(CREATOR_ADDRESS))
-    _validate_creator_institution = field_validator('creator_institution')(is_exact(CREATOR_INSTITUTION))
-    _validate_creator_type = field_validator('creator_type')(is_in(CREATOR_TYPES))
-    _validate_geospatial_vertical_units = field_validator('geospatial_vertical_units')(is_exact('m'))
-    _validate_geospatial_vertical_positive = field_validator('geospatial_vertical_positive')(is_exact('up'))
-    _validate_keywords_vocabulary = field_validator('keywords_vocabulary')(is_exact(KEYWORDS_VOCABULARY))
-    _validate_license = field_validator('license')(is_exact(LICENSE))
-    _validate_naming_authority = field_validator('naming_authority')(is_exact(NAMING_AUTHORITY))
-    _validate_platform = field_validator('platform')(is_exact(PLATFORM))
-    _validate_platform_type = field_validator('platform_type')(is_exact(PLATFORM_TYPE))
-    _validate_publisher_type = field_validator('publisher_type')(is_exact(PUBLISHER_TYPE))
-    _validate_publisher_institution = field_validator('publisher_institution')(is_exact(PUBLISHER_INSTITUTION))
-    _validate_publisher_url = field_validator('publisher_url')(is_exact(PUBLISHER_URL))
-    _validate_conventions = field_validator('Conventions')(validate_conventions)
+    _validate_acknowledgement = validate(Attribute('acknowledgement'), is_exact(ACKNOWLEDGEMENT))
+    _validate_creator_address = validate(Attribute('creator_address'), is_exact(CREATOR_ADDRESS))
+    _validate_creator_institution = validate(Attribute('creator_institution'), is_exact(CREATOR_INSTITUTION))
+    _validate_creator_type = validate(Attribute('creator_type'), is_in(CREATOR_TYPES))
+    _validate_geospatial_vertical_units = validate(Attribute('geospatial_vertical_units'), is_exact('m'))
+    _validate_geospatial_vertical_positive = validate(Attribute('geospatial_vertical_positive'), is_exact('up'))
+    _validate_keywords_vocabulary = validate(Attribute('keywords_vocabulary'), is_exact(KEYWORDS_VOCABULARY))
+    _validate_license = validate(Attribute('license'), is_exact(LICENSE))
+    _validate_naming_authority = validate(Attribute('naming_authority'), is_exact(NAMING_AUTHORITY))
+    _validate_platform = validate(Attribute('platform'), is_exact(PLATFORM))
+    _validate_platform_type = validate(Attribute('platform_type'), is_exact(PLATFORM_TYPE))
+    _validate_publisher_type = validate(Attribute('publisher_type'), is_exact(PUBLISHER_TYPE))
+    _validate_publisher_institution = validate(Attribute('publisher_institution'), is_exact(PUBLISHER_INSTITUTION))
+    _validate_publisher_url = validate(Attribute('publisher_url'), is_exact(PUBLISHER_URL))
+    _validate_conventions = validate_conventions
     

@@ -1,12 +1,15 @@
 import datetime
 
-from typing import Optional, Union, Annotated
+from typing import Optional, Union
 
 from pydantic import  BaseModel, model_validator, ConfigDict
 from vocal.field import Field
 from vocal.types import Numeric, int32
-from vocal.validation import substitute_placeholders, in_vocabulary, field_validator
+from vocal.validation import substitute_placeholders, in_vocabulary, validate, Attribute
 from vocal.vocab import CFStandardNames
+
+from faam_data.vocabularies import CoverageContentTypes
+from faam_data.validators import validate_units
 
 from .constants import *
 
@@ -248,4 +251,16 @@ class VariableAttributes(BaseModel):
     subs_placeholders = model_validator(mode='before')(substitute_placeholders)
     
     # Validate the standard_name against the CF standard names vocabulary
-    _standard_names = field_validator('standard_name')(in_vocabulary(CF_STANDARD_NAMES))
+    _validate_standard_name = validate(
+        Attribute('standard_name'),
+        in_vocabulary(CF_STANDARD_NAMES)
+    )
+
+    # Validate the coverage_content_type against the CoverageContentTypes vocabulary
+    _validate_coverage_content_type = validate(
+        Attribute('coverage_content_type'), 
+        in_vocabulary(CoverageContentTypes())
+    )
+
+    # Validate units
+    _validate_units = validate_units
