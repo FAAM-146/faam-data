@@ -1,3 +1,6 @@
+from vocal.validation import vocal_validator
+
+@vocal_validator(description='Ensure that Conventions string includes ACDD-1.3, CF-1.9 or later, and a FAAM convention')
 def validate_conventions(cls, conventions: str) -> str:
     """
     This validator should be applied as a field validator to the
