@@ -34,6 +34,11 @@ Optional Global Attributes
 
 TAG_OPTIONAL_GLOBAL_ATTRIBUTES
 
+Validations
+-----------
+
+TAG_GLOBAL_ATTRIBUTE_VALIDATIONS
+
 ----------------
 Group Attributes
 ----------------
@@ -48,6 +53,11 @@ Optional Group Attributes
 
 TAG_OPTIONAL_GROUP_ATTRIBUTES
 
+Validations
+-----------
+
+TAG_GROUP_ATTRIBUTE_VALIDATIONS
+
 -------------------
 Variable Attributes
 -------------------
@@ -61,4 +71,9 @@ Optional Variable Attributes
 ----------------------------
 
 TAG_OPTIONAL_VARIABLE_ATTRIBUTES
+
+Validations
+-----------
+
+TAG_VARIABLE_ATTRIBUTE_VALIDATIONS
 

@@ -5,6 +5,8 @@ from typing import Mapping, Any
 import os
 import sys
 
+from vocal.validation import Attribute, Validator
+
 sys.path.insert(0, "../../")
 from attributes import GlobalAttributes, GroupAttributes, VariableAttributes
 
@@ -148,6 +150,8 @@ def make_metadata_section() -> None:
     for schema, tags in zip(schemas, tags):
         make_attrs_rst(schema, *tags)
 
+    add_validator_info()
+
 
 def get_references(
     references: list[list[str] | dict[str, str]], build_target: str = BUILD_TARGET
@@ -228,6 +232,52 @@ def add_product(definition: str) -> None:
         )
         f.write("\n\n")
 
+
+def add_validator_info() -> None:
+    """
+    Add the validator information to the metadata.rst file. The validator information
+    is available if vocal validation is used in the schema.
+    """
+
+    def get_name(attr: Validator) -> str:
+        """
+        Return the name of the attribute or a composite string if a model validator
+
+        Args:
+            attr: The attribute to get the name of
+
+        Returns:
+            str: The name of the attribute
+        """
+        if isinstance(attr.binding, Attribute):
+            return f'``{attr.binding.name}``'
+        return '**Composite**'
+    
+    global_attributes = GlobalAttributes.model_construct()
+    group_attributes = GroupAttributes.model_construct()
+    variable_attributes = VariableAttributes.model_construct()
+
+    global_txt = ""
+    for attr in global_attributes.validators:
+        global_txt += f"* {get_name(attr)} - {attr.description}\n"
+
+    group_txt = ""
+    for attr in group_attributes.validators:
+        group_txt += f"* {get_name(attr)} - {attr.description}\n"
+
+    variable_txt = ""
+    for attr in variable_attributes.validators:
+        variable_txt += f"* {get_name(attr)} - {attr.description}\n"
+    
+    with open(os.path.join(dynamic_dir, "metadata.rst"), "r") as _template:
+        text = _template.read()
+
+    text = text.replace("TAG_GLOBAL_ATTRIBUTE_VALIDATIONS", global_txt or "None.")
+    text = text.replace("TAG_GROUP_ATTRIBUTE_VALIDATIONS", group_txt or "None.")
+    text = text.replace("TAG_VARIABLE_ATTRIBUTE_VALIDATIONS", variable_txt or "None.")
+
+    with open(os.path.join(dynamic_dir, "metadata.rst"), "w") as f:
+        f.write(text)
 
 def make_products_section(title: str) -> None:
     """
