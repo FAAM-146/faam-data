@@ -7,9 +7,10 @@ from vocal.field import Field
 from vocal.types import Numeric, int32
 from vocal.validation import substitute_placeholders, in_vocabulary, validate, Attribute
 from vocal.vocab import CFStandardNames
+from vocal.mixins import VocalAttributesMixin
 
 from faam_data.vocabularies import CoverageContentTypes
-from faam_data.validators import validate_units
+from faam_data.validators import validate_units, validate_units_compatible_with_name
 
 from .constants import *
 
@@ -17,7 +18,7 @@ from .constants import *
 CF_STANDARD_NAMES = CFStandardNames(version=88)
 
 
-class VariableAttributes(BaseModel):
+class VariableAttributes(BaseModel, VocalAttributesMixin):
     model_config = ConfigDict(
         # Configuration options here
         title = 'Variable Attributes',
@@ -264,3 +265,6 @@ class VariableAttributes(BaseModel):
 
     # Validate units
     _validate_units = validate_units
+
+    # Validate that units are compatible with standard name
+    _validate_units_compatible_with_name = validate_units_compatible_with_name

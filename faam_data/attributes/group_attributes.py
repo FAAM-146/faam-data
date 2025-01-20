@@ -4,8 +4,9 @@ import datetime
 from pydantic import BaseModel, model_validator, ConfigDict
 from vocal.field import Field
 from vocal.validation import substitute_placeholders
+from vocal.mixins import VocalAttributesMixin
 
-class GroupAttributes(BaseModel):
+class GroupAttributes(BaseModel, VocalAttributesMixin):
     model_config = ConfigDict(
         # Configuration options here
         title = 'FAAM Group Attributes'
