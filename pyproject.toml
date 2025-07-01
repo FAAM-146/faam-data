@@ -9,7 +9,7 @@ license = "Open Government Licence 3.0"
 dependencies = [
     "sphinx>7",
     "sphinx-rtd-theme>=2,<3",
-    "pydantic>=2.10.4,<3",
+    "pydantic>=2.10,<3",
     "faam-vocal",
 ]
 
