@@ -5,12 +5,12 @@ description = "Specification and documentation of FAAM data products"
 authors = [{ name = "Dave Sproson", email = "dave.sproson@faam.ac.uk" }]
 requires-python = "~=3.12"
 readme = "README.md"
-license = "Open Government Licence 3.0"
+license = "OGL-UK-3.0"
 dependencies = [
     "sphinx>7",
-    "sphinx-rtd-theme>=2,<3",
     "pydantic>=2.10,<3",
     "faam-vocal",
+    "sphinx-rtd-theme>=3.0.2",
 ]
 
 [dependency-groups]
