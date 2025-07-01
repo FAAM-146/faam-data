@@ -1,22 +1,26 @@
-[tool.poetry]
+[project]
 name = "faam-data"
 version = "0.5.0"
 description = "Specification and documentation of FAAM data products"
-authors = ["Dave Sproson <dave.sproson@faam.ac.uk>"]
-license = "Open Government Licence 3.0"
+authors = [{ name = "Dave Sproson", email = "dave.sproson@faam.ac.uk" }]
+requires-python = "~=3.12"
 readme = "README.md"
+license = "Open Government Licence 3.0"
+dependencies = [
+    "sphinx>7",
+    "sphinx-rtd-theme>=2,<3",
+    "pydantic>=2.10.4,<3",
+    "faam-vocal",
+]
 
-[tool.poetry.dependencies]
-python = "^3.12"
-sphinx = ">7"
-sphinx-rtd-theme = "^2"
-pydantic = "^2.10.4"
-faam-vocal = {git = "https://github.com/FAAM-146/vocal"}
+[dependency-groups]
+dev = ["mypy>=1.14.1,<2"]
 
+[tool.uv]
 
-[tool.poetry.group.dev.dependencies]
-mypy = "^1.14.1"
+[tool.uv.sources]
+faam-vocal = { git = "https://github.com/FAAM-146/vocal" }
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
